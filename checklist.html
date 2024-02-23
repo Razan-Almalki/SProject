@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist</title>
+<style>
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h2 {
+  text-align: center;
+}
+
+#task-list {
+  margin-bottom: 10px;
+}
+
+.task-item {
+  margin-bottom: 5px;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 5px;
+}
+
+.task-text-editable input {
+  width: calc(100% - 60px);
+}
+
+.edit-btn {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #0b7dda;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>My Checklist</h2>
+  <div class="progress-bar">
+    <div id="progress" class="progress"></div>
+  </div>
+  <div id="task-list">
+    <!-- Tasks will be dynamically added here -->
+  </div>
+  <input type="text" id="task-input" placeholder="Add new task">
+  <input type="date" id="task-date" placeholder="Add date for task">
+  <button onclick="addTask()">Add Task</button>
+</div>
+
+<script>
+function addTask() {
+  var taskInput = document.getElementById("task-input");
+  var taskDate = document.getElementById("task-date");
+  var taskList = document.getElementById("task-list");
+  var progress = document.getElementById("progress");
+
+  if (taskInput.value.trim() !== "") {
+    var taskItem = document.createElement("div");
+    taskItem.classList.add("task-item");
+
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.onchange = function() {
+      updateProgress();
+    };
+    taskItem.appendChild(checkbox);
+
+    var taskText = document.createElement("div");
+    taskText.classList.add("task-text");
+    taskText.innerHTML = taskInput.value;
+    taskItem.appendChild(taskText);
+
+    var taskDateText = document.createElement("div");
+    taskDateText.classList.add("task-date");
+    taskDateText.innerHTML = taskDate.value;
+    taskItem.appendChild(taskDateText);
+
+    var editBtn = document.createElement("button");
+    editBtn.innerHTML = "Edit";
+    editBtn.classList.add("edit-btn");
+    editBtn.onclick = function() {
+      var editText = prompt("Enter updated task:", taskText.innerText);
+      if (editText !== null && editText.trim() !== "") {
+        taskText.innerHTML = editText;
+      }
+      updateProgress();
+    };
+    taskItem.appendChild(editBtn);
+
+    var deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "Delete";
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.onclick = function() {
+      taskList.removeChild(taskItem);
+      updateProgress();
+    };
+    taskItem.appendChild(deleteBtn);
+
+    taskList.appendChild(taskItem);
+
+    taskInput.value = "";
+    taskDate.value = "";
+
+    updateProgress();
+  }
+}
+
+function updateProgress() {
+  var taskList = document.getElementById("task-list");
+  var progress = document.getElementById("progress");
+
+  var totalTasks = taskList.children.length;
+  var completedTasks = 0;
+  var currentDate = new Date();
+
+  for (var i = 0; i < totalTasks; i++) {
+    if (taskList.children[i].classList.contains("task-item")) {
+      var checkbox = taskList.children[i].querySelector("input[type='checkbox']");
+      var taskDateElement = taskList.children[i].querySelector(".task-date");
+      var taskDate = new Date(taskDateElement.innerHTML);
+
+      if (checkbox.checked || taskDate < currentDate) {
+        completedTasks++;
+      }
+    }
+  }
+
+  var percentComplete = (completedTasks / totalTasks) * 100;
+  progress.style.width = percentComplete + "%";
+}
+</script>
+
+</body>
+</html>
