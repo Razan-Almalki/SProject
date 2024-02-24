@@ -1,172 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checklist</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List || the big coder</title>
+    <link rel="stylesheet" href="style.css">
 <style>
-.container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #FFC107, #E91E63);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-h2 {
-  text-align: center;
-}
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      border-radius: 10px;
+    }
 
-#task-list {
-  margin-bottom: 10px;
-}
+    /*dark-mode styling*/
+    body.dark-mode {
+      background: #333;
+      color: #fff;
+    }
 
-.task-item {
-  margin-bottom: 5px;
-}
+    body.dark-mode .container {
+      background: #444;
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
 
-.delete-btn {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+    body.dark-mode li {
+      background-color: #444;
+    }
 
-.delete-btn:hover {
-  background-color: #cc0000;
-}
+    .due-date-input {
+      flex: 1;
+      padding: 8px;
+    }
 
-.progress-bar {
-  width: 100%;
-  height: 20px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
+    body.dark-mode .modal-content {
+      background-color: #444;
+      color: white;
+    }
 
-.progress {
-  height: 100%;
-  background-color: #4caf50;
-  border-radius: 5px;
-}
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-.task-text-editable input {
-  width: calc(100% - 60px);
-}
+    .input-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
 
-.edit-btn {
-  background-color: #2196F3;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+    #taskInput {
+      flex: 1;
+      padding: 8px;
+    }
 
-.edit-btn:hover {
-  background-color: #0b7dda;
-}
+    button {
+      padding: 5px 15px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-height: 40vh;
+      overflow-y: auto;
+    }
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 12px;
+      margin-right: 10px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.363);
+    }
+
+    li.completed {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Adding space after checkbox */
+    li input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+
+    /* Adding space between task item and delete button */
+    li span {
+      flex: 1;
+      margin-right: 10px;
+      font-weight: 600;
+    }
+
+    /* Filter and Sort Buttons Styling */
+
+    .filter-container,
+    .sort-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .filter-container button,
+    .sort-container button {
+      background-color: #17a2b8;
+    }
+
+    .filter-container button:hover,
+    .sort-container button:hover {
+      background-color: #138496;
+    }
+
+    /* Active Button Styling */
+
+    .filter-container button.active,
+    .sort-container button.active {
+      background-color: #0056b3;
+    }
+
+    /* Edit Task Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* priority levels styling*/
+    li.low-priority {
+      background-color: rgb(255, 255, 107);
+    }
+
+    li.medium-priority {
+      background-color: rgb(165, 255, 165);
+    }
+
+    li.high-priority {
+      background-color: rgb(255, 103, 103);
+    }
+
+    /* Responsive Styling */
+
+    @media (max-width: 558px) {
+      .input-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #taskInput {
+        width: 100%;
+      }
+
+      #dueDateInput{
+        width: 100%;
+      }
+
+      #priorityInput{
+        width: 30%;
+        padding: 10px;
+      }
+
+      .filter-container,
+      .sort-container {
+        flex-wrap: wrap;
+      }
+
+      .filter-container button,
+      .sort-container button {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width:433px) {
+
+      #taskInput {
+        width: 280px;
+      }
+
+      #dueDateInput{
+        width: 280px;
+      }
+
+      #priorityInput{
+        width: 30%;
+        padding: 10px;
+      }
+
+      .filter-container,
+      .sort-container {
+        flex-wrap: wrap;
+      }
+
+      .filter-container button,
+      .sort-container button {
+        width: 280px;
+      }
+      .dark-mode-switch{
+        margin-left: 40px;
+      }
+    }
+
 </style>
 </head>
 <body>
+    
+    <!--container div starts here-->
+  <div class="container">
 
-<div class="container">
-  <h2>My Checklist</h2>
-  <div class="progress-bar">
-    <div id="progress" class="progress"></div>
+    <!-- switch for Dark/Light Mode -->
+    <div class="dark-mode-switch">
+      <label for="darkModeToggle">Dark Mode:</label>
+      <input type="checkbox" id="darkModeToggle">
+    </div>
+
+    <h1>To-Do List</h1>
+
+    <!--input-container div starts here-->
+    <div class="input-container">
+      <input type="text" id="taskInput" placeholder="Enter task...">
+      <input type="date" id="dueDateInput" class="due-date-input">
+      <select id="priorityInput">
+        <option value="low">Low Priority</option>
+        <option value="medium">Medium Priority</option>
+        <option value="high">High Priority</option>
+      </select>
+      <button onclick="addTask()">Add</button>
+    </div>
+
+    <!--filter-container div starts here-->
+    <div class="filter-container">
+      <button onclick="filterTasks('all')">All</button>
+      <button onclick="filterTasks('active')">Active</button>
+      <button onclick="filterTasks('completed')">Completed</button>
+    </div>
+    <!--filter-container div ends here-->
+
+    <!--sort-container div starts here-->
+    <div class="sort-container">
+      <button onclick="sortTasks('name')">Sort by Name</button>
+      <button onclick="sortTasks('date')">Sort by Date</button>
+      <button onclick="sortTasks('priority')">Sort by Priority</button>
+    </div>
+    <!--sort-container div ends here-->
+
+    <!--all task item are saved here-->
+    <ul id="taskList"></ul>
   </div>
-  <div id="task-list">
-    <!-- Tasks will be dynamically added here -->
+  <!--container div ends here-->
+
+  <!-- EditTaskModal div starts here-->
+  <div id="editTaskModal" class="modal">
+    <div class="modal-content">
+      <h2>Edit Task</h2>
+      <input type="text" id="editTaskNameInput" placeholder="Edit task name...">
+      <input type="date" id="editDueDateInput" class="due-date-input">
+      <textarea id="editDescriptionInput" placeholder="Edit description..."></textarea>
+      <button onclick="saveEditedTask()">Save</button>
+      <button onclick="closeEditTaskModal()">Cancel</button>
+    </div>
   </div>
-  <input type="text" id="task-input" placeholder="Add new task">
-  <input type="date" id="task-date" placeholder="Add date for task">
-  <button onclick="addTask()">Add Task</button>
-</div>
+  <!-- EditTaskModal div ends here-->
+    
+    <script>const taskInput = document.getElementById('taskInput');
+    const dueDateInput = document.getElementById('dueDateInput');
+    const priorityInput = document.getElementById('priorityInput');
+    const taskList = document.getElementById('taskList');
+    let tasks = [];
 
-<script>
-function addTask() {
-  var taskInput = document.getElementById("task-input");
-  var taskDate = document.getElementById("task-date");
-  var taskList = document.getElementById("task-list");
-  var progress = document.getElementById("progress");
+    function addTask() {
+      const taskName = taskInput.value.trim();
+      const dueDate = dueDateInput.value;
+      const priority = priorityInput.value;
 
-  if (taskInput.value.trim() !== "") {
-    var taskItem = document.createElement("div");
-    taskItem.classList.add("task-item");
+      if (taskName === '') return;
 
-    var checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.onchange = function() {
-      updateProgress();
-    };
-    taskItem.appendChild(checkbox);
+      const task = {
+        id: Date.now(),
+        name: taskName,
+        dueDate: dueDate,
+        priority: priority,
+        completed: false
+      };
 
-    var taskText = document.createElement("div");
-    taskText.classList.add("task-text");
-    taskText.innerHTML = taskInput.value;
-    taskItem.appendChild(taskText);
+      tasks.push(task);
+      renderTask(task);
+      saveToLocalStorage();
+      taskInput.value = '';
+      dueDateInput.value = '';
+      priorityInput.value = 'low';
+    }
 
-    var taskDateText = document.createElement("div");
-    taskDateText.classList.add("task-date");
-    taskDateText.innerHTML = taskDate.value;
-    taskItem.appendChild(taskDateText);
+    function renderTask(task) {
+      const taskItem = document.createElement('li');
+      taskItem.innerHTML = `
+      <input type="checkbox" onchange="toggleComplete(${task.id})" ${task.completed ? 'checked' : ''}>
+      <span>${task.name}</span>
+      <span>Due Date: ${task.dueDate}</span>
+      <span>Priority: ${task.priority}</span>
+      <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+      <button class="edit-btn" onclick="openEditTaskModal(${task.id})">Edit</button>
+    `;
 
-    var editBtn = document.createElement("button");
-    editBtn.innerHTML = "Edit";
-    editBtn.classList.add("edit-btn");
-    editBtn.onclick = function() {
-      var editText = prompt("Enter updated task:", taskText.innerText);
-      if (editText !== null && editText.trim() !== "") {
-        taskText.innerHTML = editText;
+      if (task.priority === 'low') {
+        taskItem.classList.add('low-priority');
+      } else if (task.priority === 'medium') {
+        taskItem.classList.add('medium-priority');
+      } else if (task.priority === 'high') {
+        taskItem.classList.add('high-priority');
       }
-      updateProgress();
-    };
-    taskItem.appendChild(editBtn);
 
-    var deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = "Delete";
-    deleteBtn.classList.add("delete-btn");
-    deleteBtn.onclick = function() {
-      taskList.removeChild(taskItem);
-      updateProgress();
-    };
-    taskItem.appendChild(deleteBtn);
+      if (task.completed) {
+        taskItem.classList.add('completed');
+      }
+      taskList.appendChild(taskItem);
+    }
 
-    taskList.appendChild(taskItem);
+    function deleteTask(id) {
+      tasks = tasks.filter(task => task.id !== id);
+      saveToLocalStorage();
+      renderTasks();
+    }
 
-    taskInput.value = "";
-    taskDate.value = "";
+    function toggleComplete(id) {
+      tasks = tasks.map(task => {
+        if (task.id === id) {
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      });
+      saveToLocalStorage();
+      renderTasks();
+    }
 
-    updateProgress();
-  }
-}
+    function filterTasks(filterType) {
+      let filteredTasks = [];
+      switch (filterType) {
+        case 'all':
+          filteredTasks = tasks;
+          break;
+        case 'active':
+          filteredTasks = tasks.filter(task => !task.completed);
+          break;
+        case 'completed':
+          filteredTasks = tasks.filter(task => task.completed);
+          break;
+      }
+      renderTasks(filteredTasks);
+      const filterButtons = document.querySelectorAll('.filter-container button');
+      filterButtons.forEach(button => {
+        button.classList.toggle('active', button.innerText.toLowerCase() === filterType);
+      });
+    }
 
-function updateProgress() {
-  var taskList = document.getElementById("task-list");
-  var progress = document.getElementById("progress");
+    function sortTasks(sortBy) {
+      let sortedTasks = [];
+      switch (sortBy) {
+        case 'name':
+          sortedTasks = tasks.slice().sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case 'date':
+          sortedTasks = tasks.slice().sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+          break;
+        case 'priority': 
+          sortedTasks = tasks.slice().sort((a, b) => {
+            const priorityOrder = ['high', 'medium', 'low']; // Define the order of priorities (you can priorities according to your requirements)
+            return priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority);
+          });
+          break;
+      }
+      renderTasks(sortedTasks);
+      const sortButtons = document.querySelectorAll('.sort-container button');
+      sortButtons.forEach(button => {
+        button.classList.toggle('active', button.innerText.toLowerCase().includes(sortBy));
+      });
+    }
 
-  var totalTasks = taskList.children.length;
-  var completedTasks = 0;
-  var currentDate = new Date();
+    function renderTasks(filteredTasks = tasks) {
+      taskList.innerHTML = '';
+      filteredTasks.forEach(task => renderTask(task));
+    }
 
-  for (var i = 0; i < totalTasks; i++) {
-    if (taskList.children[i].classList.contains("task-item")) {
-      var checkbox = taskList.children[i].querySelector("input[type='checkbox']");
-      var taskDateElement = taskList.children[i].querySelector(".task-date");
-      var taskDate = new Date(taskDateElement.innerHTML);
+    function saveToLocalStorage() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
 
-      if (checkbox.checked || taskDate < currentDate) {
-        completedTasks++;
+    function loadFromLocalStorage() {
+      const storedTasks = localStorage.getItem('tasks');
+      tasks = storedTasks ? JSON.parse(storedTasks) : [];
+      renderTasks();
+    }
+
+    loadFromLocalStorage();
+
+    let editingTaskId = null;
+
+    function openEditTaskModal(taskId) {
+      editingTaskId = taskId;
+      const task = tasks.find(task => task.id === taskId);
+      if (task) {
+        const editTaskNameInput = document.getElementById('editTaskNameInput');
+        const editDueDateInput = document.getElementById('editDueDateInput');
+        const editDescriptionInput = document.getElementById('editDescriptionInput');
+
+        editTaskNameInput.value = task.name;
+        editDueDateInput.value = task.dueDate;
+        editDescriptionInput.value = task.description || '';
+
+        const modal = document.getElementById('editTaskModal');
+        modal.style.display = 'block';
       }
     }
-  }
 
-  var percentComplete = (completedTasks / totalTasks) * 100;
-  progress.style.width = percentComplete + "%";
-}
-</script>
+    function closeEditTaskModal() {
+      editingTaskId = null;
+      const modal = document.getElementById('editTaskModal');
+      modal.style.display = 'none';
+    }
 
+    function saveEditedTask() {
+      if (editingTaskId !== null) {
+        const editTaskNameInput = document.getElementById('editTaskNameInput');
+        const editDueDateInput = document.getElementById('editDueDateInput');
+        const editDescriptionInput = document.getElementById('editDescriptionInput');
+
+        const editedTask = {
+          name: editTaskNameInput.value.trim(),
+          dueDate: editDueDateInput.value,
+          description: editDescriptionInput.value.trim(),
+        };
+
+        if (editedTask.name === '') {
+          alert('Task name cannot be empty.');
+          return;
+        }
+        tasks = tasks.map(task => {
+          if (task.id === editingTaskId) {
+            return { ...task, ...editedTask };
+          }
+          return task;
+        });
+
+        saveToLocalStorage();
+        renderTasks();
+        closeEditTaskModal();
+      }
+    }
+
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      const isDarkMode = body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+    }
+
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('change', toggleDarkMode);
+
+    function applyDarkModePreference() {
+      const isDarkMode = localStorage.getItem('darkMode') === 'true';
+      const body = document.body;
+      body.classList.toggle('dark-mode', isDarkMode);
+      darkModeToggle.checked = isDarkMode;
+    }
+    applyDarkModePreference();</script>
 </body>
 </html>
