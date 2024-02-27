@@ -77,8 +77,37 @@
             <input type="checkbox" id="musician" name="musician">
             <label for="musician">Musician</label><br><br>
 
-            <button type="button">Get Recommendations</button>
+            <label for="Services">Wedding Services:</label>
+            <input type="text" id="Services" name="Services" placeholder="Enter your wedding Services"><br>
+
+            <button id="button" type="button">Get Recommendations</button>
         </form>
     </div>
+    <div id="Response"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+    <script> 
+    document.getElementById("button").addEventListener("click",function() {
+     
+        sendToChatGPT();
+    })
+    function sendToChatGPT(){
+        let value = document.getElementById("Services").value;
+        let body ={
+            "model":"gpt-3.5-turbo",
+            "messages":[{"role": "user", "content": value}],
+        };
+        let headers ={Authorization:"Bearer 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",}
+        axios.post("https://api.openai.com/v1/chat/completions", body,{headers:headers,})
+        .then((Response)=>{
+            let reply = Response.data.choices[0].message.content;
+            document.getElementById("Response").textContent=reply;
+
+        }
+        
+        
+        );
+    }
+    //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
+     </script>
 </body>
 </html>
