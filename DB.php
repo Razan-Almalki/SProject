@@ -1,9 +1,9 @@
 <?php
 // Database connection parameters
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "TestDB";
+$username = "Ruba";
+$password = "Ruba20";
+$dbname = "TestTheDB";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -78,4 +78,5 @@ if ($conn->query($sql_catering) === TRUE) {
 
 // Close connection
 $conn->close();
+
 ?>
