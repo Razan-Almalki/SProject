@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List || the big coder</title>
+    <title>To-Do List</title>
     <link rel="stylesheet" href="style.css">
 <style>
 body {
@@ -265,18 +265,20 @@ body {
     </div>
 
     <h1>To-Do List</h1>
-
+<form id="taskForm" method="post" action="save_task.php">
     <!--input-container div starts here-->
     <div class="input-container">
-      <input type="text" id="taskInput" placeholder="Enter task...">
-      <input type="date" id="dueDateInput" class="due-date-input">
-      <select id="priorityInput">
+      <input type="text" id="taskInput" name="taskName" placeholder="Enter task...">
+      <input type="date" id="dueDateInput" name="dueDate" class="due-date-input">
+      <select id="priorityInput" name="priority">
         <option value="low">Low Priority</option>
         <option value="medium">Medium Priority</option>
         <option value="high">High Priority</option>
       </select>
-      <button onclick="addTask()">Add</button>
     </div>
+<button type="submit">Add</button>
+<button type="add" onclick="addTask()">Add2</button>
+</form>
 
     <!--filter-container div starts here-->
     <div class="filter-container">
@@ -302,7 +304,7 @@ body {
   <!-- EditTaskModal div starts here-->
   <div id="editTaskModal" class="modal">
     <div class="modal-content">
-      <h2>Edit Task</h2>
+      <h2 id="edit">Edit Task</h2>
       <input type="text" id="editTaskNameInput" placeholder="Edit task name...">
       <input type="date" id="editDueDateInput" class="due-date-input">
       <textarea id="editDescriptionInput" placeholder="Edit description..."></textarea>
@@ -312,7 +314,8 @@ body {
   </div>
   <!-- EditTaskModal div ends here-->
     
-    <script>const taskInput = document.getElementById('taskInput');
+    <script>
+const taskInput = document.getElementById('taskInput');
     const dueDateInput = document.getElementById('dueDateInput');
     const priorityInput = document.getElementById('priorityInput');
     const taskList = document.getElementById('taskList');
