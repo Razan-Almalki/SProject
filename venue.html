@@ -18,6 +18,46 @@
             <li><a href="#">Contact</a></li>
         </ul>
     </nav>
+    <div>
+    <?php
+        // Database connection parameters
+        $servername = "localhost";
+        $username = "Ruba";
+        $password = "Ruba20";
+        $database = "HiThere1";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $database);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Query to fetch product data
+        $sql = "SELECT * FROM Venue";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // Output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // Generate HTML for each product using fetched data
+                echo '<article class="product">';
+                echo '<img src="' . $row["pic"] . '" alt="' . $row["name"] . '">';
+                echo '<h2>' . $row["name"] . '</h2>';
+                echo '<p>' . $row["description"] . '</p>';
+                echo '<p>$' . $row["price"] . '</p>';
+                echo '<button>Add to Cart</button>';
+                echo '</article>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+        // Close connection
+        $conn->close();
+    ?>
+    </div>
     <section class="products">
         <article class="product">
             <img src="product1.jpg" alt="Product 1">
@@ -33,7 +73,6 @@
             <p>$24.99</p>
             <button>Add to Cart</button>
         </article>
-        <!-- Add more product articles as needed -->
     </section>
     <footer>
         <p>&copy; 2024 My Shop. All rights reserved.</p>
