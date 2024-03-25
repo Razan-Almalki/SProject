@@ -57,7 +57,7 @@
 <body>
     <div class="container">
         <h1>Wedding Planner</h1>
-        <form>
+        <form method="post">
             <label for="budget">Estimated Budget:</label>
             <input type="number" id="budget" name="budget" placeholder="Enter your budget" required><br>
 
@@ -84,30 +84,41 @@
         </form>
     </div>
     <div id="Response"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
-    <script> 
-    document.getElementById("button").addEventListener("click",function() {
-     
-        sendToChatGPT();
-    })
-    function sendToChatGPT(){
-        let value = document.getElementById("Services").value;
-        let body ={
-            "model":"gpt-3.5-turbo",
-            "messages":[{"role": "user", "content": value}],
-        };
-        let headers ={Authorization:"Bearer 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",}
-        axios.post("https://api.openai.com/v1/chat/completions", body,{headers:headers,})
-        .then((Response)=>{
-            let reply = Response.data.choices[0].message.content;
-            document.getElementById("Response").textContent=reply;
-
-        }
-        
-        
-        );
-    }
-    //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
-     </script>
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Attach event listener to the button
+            document.getElementById("button").addEventListener("click", function() {
+                var budget = document.getElementById("budget").value;
+                var theme = document.getElementById("theme").value;
+                var numGuests = document.getElementById("numGuests").value;
+                var services = document.getElementById("Services").value;
+    
+                var data = {
+                    budget: budget,
+                    theme: theme,
+                    numGuests: numGuests,
+                    services: services
+                };
+    
+                fetch('/get_recommendations', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("Response").innerHTML = data.response;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+    
+    
 </body>
 </html>
