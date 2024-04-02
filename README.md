@@ -1,1 +1,0 @@
-# Connect Openai [ChatGPT] to your Website

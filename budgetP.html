@@ -57,7 +57,7 @@
 <body>
     <div class="container">
         <h1>Wedding Planner</h1>
-        <form method="post">
+        <form>
             <label for="budget">Estimated Budget:</label>
             <input type="number" id="budget" name="budget" placeholder="Enter your budget" required><br>
 
@@ -67,58 +67,68 @@
             <label for="numGuests">Number of Guests:</label>
             <input type="number" id="numGuests" name="numGuests" placeholder="Enter number of guests (default: 20)" value="20"><br>
 
-            <label>Desired Services:</label><br>
-            <input type="checkbox" id="venue" name="venue">
-            <label for="venue">Venue</label><br>
-
-            <input type="checkbox" id="catering" name="catering">
-            <label for="catering">Catering</label><br>
-
-            <input type="checkbox" id="musician" name="musician">
-            <label for="musician">Musician</label><br><br>
-
             <label for="Services">Wedding Services:</label>
             <input type="text" id="Services" name="Services" placeholder="Enter your wedding Services"><br>
 
             <button id="button" type="button">Get Recommendations</button>
         </form>
+ <div id="Response"></div>
     </div>
-    <div id="Response"></div>
-    <script>
-        // Wait for the DOM to be fully loaded
-        document.addEventListener("DOMContentLoaded", function() {
-            // Attach event listener to the button
-            document.getElementById("button").addEventListener("click", function() {
-                var budget = document.getElementById("budget").value;
-                var theme = document.getElementById("theme").value;
-                var numGuests = document.getElementById("numGuests").value;
-                var services = document.getElementById("Services").value;
-    
-                var data = {
-                    budget: budget,
-                    theme: theme,
-                    numGuests: numGuests,
-                    services: services
-                };
-    
-                fetch('/get_recommendations', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("Response").innerHTML = data.response;
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-            });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+    <script> 
+    document.getElementById("button").addEventListener("click",function() {
+        let prompt = "As a wedding planner, distribute the percentages of the budget based on these services:";
+        sendToChatGPT(prompt);
+    })
+    function sendToChatGPT(prompt){
+        let value = document.getElementById("Services").value;
+        let body ={
+            "model":"gpt-3.5-turbo",
+            "messages":[{"role": "system", "content": prompt}, {"role": "user", "content": value}],
+        };
+        let headers ={Authorization:"Bearer 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",}
+        axios.post("https://api.openai.com/v1/chat/completions", body,{headers:headers,})
+        .then((Response)=>{
+            let reply = Response.data.choices[0].message.content;
+            document.getElementById("Response").innerHTML=reply;
+            splitResponse(reply);
         });
-    </script>
+    }
     
-    
+    function splitResponse(response) {
+        // Extract percentages and service names
+        let matches = response.match(/([a-zA-Z]+): (\d+(?:\.\d+)?)%/g);
+
+        let services = {
+            venue: 0,
+            catering: 0,
+            musician: 0
+        };
+
+        let totalPercentage = 0;
+
+        if (matches) {
+            matches.forEach(match => {
+                let parts = match.split(': ');
+                let serviceName = parts[0].trim().toLowerCase();
+                let percentage = parseFloat(parts[1]);
+                services[serviceName] = percentage;
+                totalPercentage += percentage;
+            });
+
+            // Normalize percentages
+            for (let service in services) {
+                services[service] = (services[service] / totalPercentage) * 100;
+            }
+        }
+
+        // Display percentages
+        let percentages = "";
+        for (let service in services) {
+            percentages += service + ": " + services[service].toFixed(2) + "%<br>";
+        }
+        document.getElementById("Response").innerHTML += "<br>Percentage of each service:<br>" + percentages;
+    }
+     </script>
 </body>
 </html>
