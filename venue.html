@@ -3,79 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Shop</title>
+    <title>Venue Shop</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to My Shop</h1>
+        <h1>Welcome to Venue Shop</h1>
     </header>
     <nav>
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
+            <li><a href="#">Venues</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
     </nav>
-    <div>
-    <?php
-        // Database connection parameters
-        $servername = "localhost";
-        $username = "Ruba";
-        $password = "Ruba20";
-        $database = "HiThere1";
+    <section class="venues" id="venuesSection">
+        <script>
+            // Fetch data from the server
+            fetch('http://localhost/get_venue_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    const venuesSection = document.getElementById('venuesSection');
 
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $database);
+                    // Loop through the data and generate venue articles
+                    data.forEach(venue => {
+                        const article = document.createElement('article');
+                        article.classList.add('venue');
 
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+                        const img = document.createElement('img');
+                        img.src = venue.pic; // Use 'pic' property instead of 'image'
+                        img.alt = venue.name;
 
-        // Query to fetch product data
-        $sql = "SELECT * FROM Venue";
-        $result = $conn->query($sql);
+                        const h2 = document.createElement('h2');
+                        h2.textContent = venue.name;
 
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            while ($row = $result->fetch_assoc()) {
-                // Generate HTML for each product using fetched data
-                echo '<article class="product">';
-                echo '<img src="' . $row["pic"] . '" alt="' . $row["name"] . '">';
-                echo '<h2>' . $row["name"] . '</h2>';
-                echo '<p>' . $row["description"] . '</p>';
-                echo '<p>$' . $row["price"] . '</p>';
-                echo '<button>Add to Cart</button>';
-                echo '</article>';
-            }
-        } else {
-            echo "0 results";
-        }
+                        const pLocation = document.createElement('p');
+                        pLocation.textContent = 'Location: ' + venue.location;
 
-        // Close connection
-        $conn->close();
-    ?>
-    </div>
-    <section class="products">
-        <article class="product">
-            <img src="product1.jpg" alt="Product 1">
-            <h2>Product 1</h2>
-            <p>Description of Product 1</p>
-            <p>$19.99</p>
-            <button>Add to Cart</button>
-        </article>
-        <article class="product">
-            <img src="product2.jpg" alt="Product 2">
-            <h2>Product 2</h2>
-            <p>Description of Product 2</p>
-            <p>$24.99</p>
-            <button>Add to Cart</button>
-        </article>
+                        const pDescription = document.createElement('p');
+                        pDescription.textContent = venue.description;
+
+                        const pPrice = document.createElement('p');
+                        pPrice.textContent = 'Price: $' + venue.price;
+
+                        const button = document.createElement('button');
+                        button.textContent = 'Add to Cart';
+
+                        const readMoreButton = document.createElement('button');
+                        readMoreButton.textContent = 'Read More';
+                        readMoreButton.addEventListener('click', () => {
+                            // Redirect to catering_details.html page with the specific product ID
+                            window.location.href = `http://localhost/venue_details.html?id=${venue.id}`;
+                        });
+
+                        article.appendChild(img);
+                        article.appendChild(h2);
+                        article.appendChild(pLocation);
+                        article.appendChild(pDescription);
+                        article.appendChild(button);
+                        article.appendChild(readMoreButton);
+
+                        productsSection.appendChild(article);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        </script>
     </section>
+
     <footer>
-        <p>&copy; 2024 My Shop. All rights reserved.</p>
+        <p>&copy; 2024 Venue Shop. All rights reserved.</p>
     </footer>
 </body>
 </html>

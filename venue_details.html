@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Venue Details</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Venues</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <section class="details" id="detailsSection">
+        <!-- Content will be dynamically loaded here -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Venue Shop. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to extract the venue ID from the URL query parameter
+        function getVenueIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Retrieve the venue ID from the URL
+        const venueId = getVenueIdFromUrl();
+
+        // Fetch venue details based on the ID
+        fetch(`http://localhost/get_venue_data.php?id=${venueId}`)
+            .then(response => response.json())
+            .then(data => {
+                const detailsSection = document.getElementById('detailsSection');
+
+                // Create HTML elements to display venue details
+                const h2 = document.createElement('h2');
+                h2.textContent = data.name;
+
+                const pLocation = document.createElement('p');
+                pLocation.textContent = 'Location: ' + data.location;
+
+                const pDescription = document.createElement('p');
+                pDescription.textContent = 'Description: ' + data.description;
+
+                const pPrice = document.createElement('p');
+                pPrice.textContent = 'Price: $' + data.price;
+
+                // Append venue details to the section
+                detailsSection.appendChild(h2);
+                detailsSection.appendChild(pLocation);
+                detailsSection.appendChild(pDescription);
+                detailsSection.appendChild(pPrice);
+            })
+            .catch(error => console.error('Error fetching venue details:', error));
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Music Details</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Music</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <section class="details" id="detailsSection">
+        <!-- Content will be dynamically loaded here -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Music Shop. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to extract the music ID from the URL query parameter
+        function getMusicIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Retrieve the music ID from the URL
+        const musicId = getMusicIdFromUrl();
+
+        // Fetch music details based on the ID
+        fetch(`http://localhost/get_music_data.php?id=${musicId}`)
+            .then(response => response.json())
+            .then(data => {
+                const detailsSection = document.getElementById('detailsSection');
+
+                // Create HTML elements to display music details
+                const h2 = document.createElement('h2');
+                h2.textContent = data.name;
+
+                const pDescription = document.createElement('p');
+                pDescription.textContent = 'Description: ' + data.description;
+
+                const pPrice = document.createElement('p');
+                pPrice.textContent = 'Price: $' + data.price;
+
+                // Append music details to the section
+                detailsSection.appendChild(h2);
+                detailsSection.appendChild(pDescription);
+                detailsSection.appendChild(pPrice);
+            })
+            .catch(error => console.error('Error fetching music details:', error));
+    </script>
+</body>
+</html>
