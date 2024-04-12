@@ -1,65 +1,101 @@
 <!DOCTYPE html>
 <!-- Created By CodingLab - www.codinglabweb.com -->
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <title> Responsive Registration Form | CodingLab </title>
-    <link rel="stylesheet" href="style.css">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="UTF-8">
+  <title>انشاء حساب</title>
+  <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="SignUp.js"></script>
+</head>
+
 <body>
+  <header>
+    <nav class="navbar">
+        <span class="hamburger-btn material-symbols-rounded">menu</span>
+        <a href="index.html" class="logo">
+            <img src="images/SorourIcon.png" alt="logo">
+            <h2>سُرور</h2>
+        </a>
+        <ul class="links">
+            <span class="close-btn material-symbols-rounded">close</span>
+            <li>
+                <a class="nav-link" href="about.html">عن سُرور</a>
+            </li>
+            <li>
+                <a class="nav-link" href="service.html">الخدمات</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    أدوات التخطيط
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+                    <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
+                    <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+                </div>
+            </li>
+            <li>
+                <a class="nav-link" href="contact.html">تواصل معنا</a>
+            </li>
+            <li>
+                <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+            </li>
+            <li>
+                <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+            </li>
+            <li>
+                <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+  <!-- end header inner -->
   <div class="container">
-    <div class="title">Registration</div>
+    <div class="title">انشاء حساب في سُرور</div>
     <div class="content">
-      <form action="#">
+      <form action="#" id="signUpForm">
         <div class="user-details">
           <div class="input-box">
-            <span class="details">Full Name</span>
-            <input type="text" placeholder="Enter your name" required>
+            <span class="details">الأسم</span>
+            <input type="text" id="name" placeholder="ادخل اسمك" required>
+            <div class="error-message"></div>
           </div>
           <div class="input-box">
-            <span class="details">Username</span>
-            <input type="text" placeholder="Enter your username" required>
+            <span class="details">اسم المستخدم</span>
+            <input type="text" id="username" placeholder="ادخل اسم المستخدم" required>
+            <div class="error-message"></div>
           </div>
           <div class="input-box">
-            <span class="details">Email</span>
-            <input type="text" placeholder="Enter your email" required>
+            <span class="details">الايميل</span>
+            <input type="email" id="email" placeholder="ادخل الايميل" required>
+            <div class="error-message"></div>
           </div>
           <div class="input-box">
-            <span class="details">Phone Number</span>
-            <input type="text" placeholder="Enter your number" required>
+            <span class="details">رقم الهاتف</span>
+            <input type="number" id="phone" placeholder="ادخل رقم الهاتف" required>
+            <div class="error-message"></div>
           </div>
           <div class="input-box">
-            <span class="details">Password</span>
-            <input type="text" placeholder="Enter your password" required>
+            <span class="details">كلمة المرور</span>
+            <input type="password" id="password" placeholder="ادخل كلمة المرور" required>
+            <div class="error-message"></div>
           </div>
           <div class="input-box">
-            <span class="details">Confirm Password</span>
-            <input type="text" placeholder="Confirm your password" required>
-          </div>
-        </div>
-        <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
-          <input type="radio" name="gender" id="dot-3">
-          <span class="gender-title">Gender</span>
-          <div class="category">
-            <label for="dot-1">
-            <span class="dot one"></span>
-            <span class="gender">Male</span>
-          </label>
-          <label for="dot-2">
-            <span class="dot two"></span>
-            <span class="gender">Female</span>
-          </label>
+            <span class="details">تأكيد كلمة المرور</span>
+            <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+            <div class="error-message"></div>
           </div>
         </div>
         <div class="button">
-          <input type="submit" value="Register">
+          <input type="submit" value="انشاء حساب">
         </div>
       </form>
     </div>
   </div>
-
 </body>
+
 </html>
