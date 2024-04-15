@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <title>حسابي في سُرور</title>
+    <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style_up.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <span class="hamburger-btn material-symbols-rounded">menu</span>
+            <a href="index.html" class="logo">
+                <img src="images/SorourIcon.png" alt="logo">
+                <h2>سُرور</h2>
+            </a>
+            <ul class="links">
+                <span class="close-btn material-symbols-rounded">close</span>
+                <li>
+                    <a class="nav-link" href="about.html">عن سُرور</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="service.html">الخدمات</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        أدوات التخطيط
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+                        <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
+                        <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="nav-link" href="contact.html">تواصل معنا</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        حسابي
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="userProfile.html">الاعدادات</a>
+                        <a class="dropdown-item" href="#">تسجيل الخروج</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="choices-container">
+        <div class="title">اعدادات الحساب</div>
+        <ul class="choices">
+            <li><a href="#" class="choice" data-choice="info">معلوماتي</a></li>
+            <li><a href="#" class="choice" data-choice="edit">تعديل الحساب</a></li>
+            <li><a href="#" class="choice" data-choice="password">تغيير كلمة المرور</a></li>
+            <li><a href="#" class="choice" data-choice="notification">الاشعارات</a></li>
+        </ul>
+    </div>
+    <div class="info-container">
+        <div id="user-info" class="info">
+            <h2>معلومات الحساب</h2>
+            <div id="user-info">
+                <p><strong>اسم المستخدم:</strong> <span id="username"></span></p>
+                <p><strong>الايميل:</strong> <span id="email"></span></p>
+                <p><strong>رقم الجوال:</strong> <span id="phone"></span></p>
+            </div>
+        </div>
+        <div id="edit-user-info" class="info">
+            <h2>تعديل البيانات</h2>
+            <form id="edit-form">
+                <label for="new-username">اسم المستخدم الجديد:</label>
+                <input type="text" id="new-username" required>
+                <label for="new-phone">رقم الجوال الجديد:</label>
+                <input type="number" id="new-phone" required>
+                <div id="phone-error" class="error-message"></div>
+                <button type="submit" id="edit-button">حفظ</button>
+            </form>
+            <div id="verification-section">
+                <label for="verification-code">أدخل الرمز المرسل إلى هاتفك:</label>
+                <input type="text" id="verification-code" required>
+                <button id="verify-button">تحقق</button>
+            </div>
+        </div>
+        <div id="password-info" class="info">
+            <h2>تغيير كلمة المرور</h2>
+            <form id="change-password-form">
+              <label for="current-password">كلمة المرور الحالية: </label>
+              <input type="password" id="current-password" required>
+              <br>
+              <label for="new-password">كلمة المرور الجديدة: </label>
+              <input type="password" id="new-password" required>
+              <br>
+              <label for="confirm-password">تاكيد كلمة المرور الجديدة: </label>
+              <input type="password" id="confirm-password" required>
+              <span id="password-error" class="error-message"></span>
+              <button type="submit">تغيير كلمة المرور</button>
+            </form>
+          </div>
+        <div id="notification-info" class="info">
+            <h2>اعدادات الاشعارات</h2>
+            <!-- Add your content for notification settings here -->
+        </div>
+    </div>
+
+    <script src="userProfile.js"></script>
+</body>
+
+</html>

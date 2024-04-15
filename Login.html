@@ -1,75 +1,99 @@
 <!DOCTYPE html>
 <!-- Created By CodingLab - www.codinglabweb.com -->
 <html dir="rtl" lang="ar">
-  <head>
-    <meta charset="UTF-8">
-    <title>تسجيل الدخول</title>
-    <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-    <script src="Login.js"></script>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-    <header>
-      <nav class="navbar">
-          <span class="hamburger-btn material-symbols-rounded">menu</span>
-          <a href="index.html" class="logo">
-              <img src="images/SorourIcon.png" alt="logo">
-              <h2>سُرور</h2>
+
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الدخول</title>
+  <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <!-- Boxicons CSS -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="Login.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <span class="hamburger-btn material-symbols-rounded">menu</span>
+      <a href="index.html" class="logo">
+        <img src="images/SorourIcon.png" alt="logo">
+        <h2>سُرور</h2>
+      </a>
+      <ul class="links">
+        <span class="close-btn material-symbols-rounded">close</span>
+        <li>
+          <a class="nav-link" href="about.html">عن سُرور</a>
+        </li>
+        <li>
+          <a class="nav-link" href="service.html">الخدمات</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            أدوات التخطيط
           </a>
-          <ul class="links">
-              <span class="close-btn material-symbols-rounded">close</span>
-              <li>
-                  <a class="nav-link" href="about.html">عن سُرور</a>
-              </li>
-              <li>
-                  <a class="nav-link" href="service.html">الخدمات</a>
-              </li>
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      أدوات التخطيط
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
-                      <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
-                      <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-                  </div>
-              </li>
-              <li>
-                  <a class="nav-link" href="contact.html">تواصل معنا</a>
-              </li>
-              <li>
-                  <a class="nav-link" href="Login.html">تسجبل الدخول</a>
-              </li>
-              <li>
-                  <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
-              </li>
-              <li>
-                  <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
-              </li>
-          </ul>
-      </nav>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+            <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
+            <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+          </div>
+        </li>
+        <li>
+          <a class="nav-link" href="contact.html">تواصل معنا</a>
+        </li>
+        <li>
+          <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+        </li>
+        <li>
+          <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              حسابي
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="userProfile.html">الاعدادات</a>
+              <a class="dropdown-item" href="#">تسجيل الخروج</a>
+          </div>
+      </li>
+        <li>
+          <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
+        </li>
+      </ul>
+    </nav>
   </header>
 
-    <div class="container">
+  <div class="container">
+    <div class="title">تسجيل الدخول</div>
+    <div class="content">
       <form action="#" id="loginForm">
-        <div class="title">تسجيل الدخول</div>
-        <div class="input-box">
-          <input type="email" id="email" placeholder="ادخل الايميل" required>
-          <div class="error-message"></div>
-          <div class="underline"></div>
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">الايميل</span>
+            <input type="email" id="email" placeholder="ادخل الايميل" required>
+            <div class="error-message"></div>
+          </div>
+          <div class="input-box">
+            <span class="details">كلمة المرور</span>
+            <input type="password" id="password" placeholder="ادخل كلمة المرور" required>
+            <div class="error-message"></div>
+          </div>
         </div>
-        <div class="input-box">
-          <input type="password" id="password" placeholder="ادخل كلمة السر" required>
-          <div class="error-message"></div>
-          <div class="underline"></div>
+        <div class="form-link">
+          <a href="#">نسيت كلمة المرور؟</a>
         </div>
-        <div class="input-box button">
-          <input type="submit" name="" value="استمرار">
+        <div class="button">
+          <input type="submit" value="استمرار">
         </div>
       </form>
     </div>
-  </body>
+    <div class="form-link">
+      <span>ليس لديك حساب في سُرور؟ <a href="SignUp.html">انشئ حساب الآن</a></span>
+    </div>
+  </div>
+</body>
 </html>

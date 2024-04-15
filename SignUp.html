@@ -14,45 +14,55 @@
 <body>
   <header>
     <nav class="navbar">
-        <span class="hamburger-btn material-symbols-rounded">menu</span>
-        <a href="index.html" class="logo">
-            <img src="images/SorourIcon.png" alt="logo">
-            <h2>سُرور</h2>
-        </a>
-        <ul class="links">
-            <span class="close-btn material-symbols-rounded">close</span>
-            <li>
-                <a class="nav-link" href="about.html">عن سُرور</a>
-            </li>
-            <li>
-                <a class="nav-link" href="service.html">الخدمات</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    أدوات التخطيط
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
-                    <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
-                    <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-                </div>
-            </li>
-            <li>
-                <a class="nav-link" href="contact.html">تواصل معنا</a>
-            </li>
-            <li>
-                <a class="nav-link" href="Login.html">تسجبل الدخول</a>
-            </li>
-            <li>
-                <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
-            </li>
-            <li>
-                <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
-            </li>
-        </ul>
+      <span class="hamburger-btn material-symbols-rounded">menu</span>
+      <a href="index.html" class="logo">
+        <img src="images/SorourIcon.png" alt="logo">
+        <h2>سُرور</h2>
+      </a>
+      <ul class="links">
+        <span class="close-btn material-symbols-rounded">close</span>
+        <li>
+          <a class="nav-link" href="about.html">عن سُرور</a>
+        </li>
+        <li>
+          <a class="nav-link" href="service.html">الخدمات</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            أدوات التخطيط
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+            <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
+            <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+          </div>
+        </li>
+        <li>
+          <a class="nav-link" href="contact.html">تواصل معنا</a>
+        </li>
+        <li>
+          <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+        </li>
+        <li>
+          <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              حسابي
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="userProfile.html">الاعدادات</a>
+              <a class="dropdown-item" href="#">تسجيل الخروج</a>
+          </div>
+      </li>
+        <li>
+          <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
+        </li>
+      </ul>
     </nav>
-</header>
+  </header>
   <!-- end header inner -->
   <div class="container">
     <div class="title">انشاء حساب في سُرور</div>
@@ -89,6 +99,9 @@
             <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
             <div class="error-message"></div>
           </div>
+        </div>
+        <div class="form-link">
+          <span>لديك حساب بالفعل؟ <a href="Login.html">سجل الدخول</a></span>
         </div>
         <div class="button">
           <input type="submit" value="انشاء حساب">

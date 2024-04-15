@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (password === '') {
         displayError(passwordInput, 'الرجاء إدخال كلمة المرور');
       } else if (!isValidPassword(password)) {
-        displayError(passwordInput, 'الرجاء كتابة 8 حروف انجليزية على الاقل، وحرف واحد كبير على الاقل');
+        displayError(passwordInput,'كلمة المرور يجب أن تحتوي على 6 حروف، وحرف كبير واحد على الأقل');
       }
   
       if (confirmPassword === '') {
@@ -91,14 +91,14 @@ document.addEventListener("DOMContentLoaded", function() {
   
     function isValidPhoneNumber(phone) {
       // Phone number format validation using regular expression
-      const phoneRegex = /^\d{10}$/; // Assumes a 10-digit phone number format
+      const phoneRegex = /^05\d{8}$/; // Assumes a 10-digit phone number format starting with '05'
       return phoneRegex.test(phone);
     }
   
     function isValidPassword(password) {
         // Password strength validation using regular expression
-        // Requires at least 8 characters and at least one uppercase letter
-        const passwordRegex = /^(?=.*[A-Z]).{8,}$/;
+        // Requires at least 6 characters and at least one uppercase letter
+        const passwordRegex = /^(?=.*[A-Z]).{6,}$/;
         return passwordRegex.test(password);
       }
   });
