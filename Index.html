@@ -1,407 +1,200 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
-
-<head>
-   <style>
-      .counter {
-         display: flex;
-         justify-content: center;
-      }
-
-      .counter-item {
-         text-align: center;
-         margin: 0 20px;
-      }
-
-      .count {
-         font-size: 36px;
-         font-weight: bold;
-      }
-
-      .logo {
-         display: flex;
-         align-items: center;
-      }
-
-      .logo img {
-         width: 70px;
-         /* Adjust the width as needed */
-         height: auto;
-         margin-right: 10px;
-         /* Adjust the margin as needed */
-      }
-
-      .logo-text {
-         font-size: 24px;
-         /* Adjust the font size as needed */
-         font-weight: bold;
-      }
-   </style>
-   <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <!-- mobile metas -->
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-   <!-- site metas -->
-   <title>سُرور</title>
-   <meta name="keywords" content="">
-   <meta name="description" content="">
-   <meta name="author" content="">
-   <!-- bootstrap css -->
-   <link rel="stylesheet" href="css/bootstrap.min.css">
-   <!-- style css -->
-   <link rel="stylesheet" href="css/style.css">
-   <!-- Responsive-->
-   <link rel="stylesheet" href="css/responsive.css">
-   <!-- fevicon -->
-   <link rel="icon" href="images/fevicon.png" type="image/gif" />
-   <!-- Scrollbar Custom CSS -->
-   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-   <!-- Tweaks for older IEs-->
-   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-      media="screen">
-   <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-   <script src="script.js"></script>
-</head>
-<!-- body -->
-<!-- header -->
-<header class="full_bg">
-   <!-- header inner -->
-   <div class="header">
-      <div class="container">
-         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-               <div class="full">
-                  <div class="center-desk">
-                     <div class="logo">
-                        <a href="index.html">
-                           <img src="images/SorourIcon.png" alt="Logo">
-                           <span class="logo-text">سُرور</span>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-               <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
-                     aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                     <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarsExample04">
-                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                           <a class="nav-link" href="about.html">عن سُرور</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="service.html">الخدمات</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              أدوات التخطيط
-                           </a>
-                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
-                              <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
-                              <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-                           </div>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="contact.html">تواصل معنا</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="Login.html">تسجبل الدخول</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
-                        </li>
-                                <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              حسابي
+  <head>
+    <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سُرور</title>
+    <link rel="stylesheet" href="style_index.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- Navbar Section -->
+    <header>
+        <nav class="navbar">
+          <span class="hamburger-btn material-symbols-rounded">menu</span>
+          <a href="index.html" class="logo">
+            <img src="images/SorourIcon.png" alt="logo">
+            <h2>سُرور</h2>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="userProfile.html">الاعدادات</a>
-              <a class="dropdown-item" href="#">تسجيل الخروج</a>
+          <ul class="links">
+            <span class="close-btn material-symbols-rounded">close</span>
+            <li>
+              <a class="nav-link" href="about.html">عن سُرور</a>
+            </li>
+            <li>
+              <a class="nav-link" href="service.html">الخدمات</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                أدوات التخطيط
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+                <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
+                <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+              </div>
+            </li>
+            <li>
+              <a class="nav-link" href="contact.html">تواصل معنا</a>
+            </li>
+            <li>
+              <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+            </li>
+            <li>
+              <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  حسابي
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="userProfile.html">الاعدادات</a>
+                  <a class="dropdown-item" href="#">تسجيل الخروج</a>
+              </div>
+          </li>
+            <li>
+              <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!-- end header inner -->
+
+    <!-- banner Section -->
+    <div class="hero" id="home">
+      <div class="hero__container">
+        <h1 class="hero__heading">خطط لحفل زفافك مع <span>سُرور</span></h1>
+        <p class="hero__description">مرحبًا بك في موقع سُرور، الموقع الذي يقدم خدمات تنظيم حفلات الزفاف.
+            <br>نحن هنا لمساعدتك في جعل حفل زفافك لحظة لا تُنسى!.</p>
+        <button class="main__btn"><a href="budgetP.html">خطط الان</a></button>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="main" id="about">
+      <div class="main__container">
+        <div class="main__img--container">
+          <div class="main__img--card"><img src="images/blog_img2.jpg" alt="Description of the image"></div>
+        </div>
+        <div class="main__content">
+          <h2>رسالتنا</h2>
+            <p>تبسيط وتعزيز تجربة تخطيط الأعراس للأزواج في المملكة العربية السعودية. نحن نسعى لتوفير منصة سهلة
+              الاستخدام تجمع بين جميع الخدمات الأساسية للأعراس،
+              بما في ذلك قاعات الزفاف، خدمات الموسيقى، تقديم الطعام، إدارة الميزانية وإدارة قائمة الضيوف بكفاءة. من
+              خلال تقديم حل شامل وفعال، نهدف إلى تخفيف التحديات والضغوط التي يواجهها الأزواج أثناء التحضير لحفل
+              الزفاف.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="services" id="services">
+      <h1>خدماتنا</h1>
+      <div class="services__wrapper">
+        <div class="services__card">
+          <h2>تخطيط ميزانية حفل الزفاف</h2>
+          <p>أدخل المعلومات المتعلقة بالخدمات المطلوبة لحفل الزفاف لضبط الميزانية بما يتناسب مع احتياجاتك.
+            سنقوم بإنشاء النسب المئوية لكل خدمة وتقديم قائمة مخصصة من البائعين الموصى بهم مع خدماتهم.</p>
+          <div class="services__btn"><a href="budgetP.html"><button>المزيد</button></a></div>
+        </div>
+        <div class="services__card">
+          <h2>حجز الخدمات</h2>
+          <p>يوفر سرور قاعات الزفاف المختلفة، وخدمات الموسيقى، وخيارات تقديم الطعام.
+            نهدف الى تزويد الأزواج بقاعدة بيانات شاملة للموردين، مما يمكنهم من استكشاف خدماتهم المفضلة
+            ومقارنتها وحجزها بسرعة داخل الموقع.</p>
+          <div class="services__btn"><a href="service.html"><button>المزيد</button></a></div>
+        </div>
+        <div class="services__card">
+          <h2>إدارة قائمة الضيوف</h2>
+          <p>يمكن للأزواج إنشاء قائمة الضيوف، إرسال الدعوات، والرد عليها لتنظيم الحدث وإدارته بشكل أفضل عن طريق
+            إرسال رسائل واتس اب وتلقي حالتهم.</p>
+          <div class="services__btn"><a href="gm.html"><button>المزيد</button></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="main" id="sign-up">
+      <div class="main__container">
+        <div class="main__content">
+          <h2>رؤيتنا</h2>
+          <p>أن نصبح الوجهة الرئيسية عبر الإنترنت للأزواج في المملكة العربية السعودية الذين يبحثون عن تجربة سلسة
+            وممتعة في تخطيط حفل الزفاف.
+            سُرور تمكن الأزواج من تخطيط حفل زفاف الأحلام بسهولة، مع الوصول إلى مجموعة واسعة من البائعين والخدمات
+            الموثوقة، وأدوات إدارة الميزانية الشخصية،
+            وإدارة الضيوف. من خلال تكنولوجيتنا المبتكرة والتزامنا الثابت برضا العملاء، نطمح إلى إعادة تعريف مشهد
+            تخطيط حفل الزفاف، وجعله تجربة لا تُنسى وممتعة لكل زوجين.</p>
+          <button class="main__btn"><a href="about.html">المزيد عنا</a></button>
+        </div>
+        <div class="main__img--container">
+          <div class="main__img--card">
+            <img src="images/blog_img2.jpg" alt="Description of the image">
           </div>
-      </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
-                        </li>
-                     </ul>
-                  </div>
-                  <ul class="search">
-                     <li><a href="Javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                  </ul>
-               </nav>
-            </div>
-         </div>
+        </div>
       </div>
-   </div>
-   <!-- end header inner -->
-   <!-- end header -->
-   <!-- banner -->
-   <section class="banner_main">
-      <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
-         <div class="carousel-inner">
-            <div class="carousel-item active">
-               <div class="container">
-                  <div class="carousel-caption  banner_po">
-                     <div class="row">
-                        <div class="col-lg-8 col-md-9 ">
-                           <div class="build_box">
-                              <h1>خطط لحفل زفافك مع سُرور</h1>
-                              <p>مرحبًا بك في موقع سُرور، الموقع الذي يقدم خدمات تنظيم حفلات الزفاف.
-                                 <br>نحن هنا لمساعدتك في جعل حفل زفافك لحظة لا تُنسى!.
-                              </p>
-                              <a class="read_more quote_btn" href="budgetP.html" role="button">ابدأ التخطيط الآن!</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         </a>
-      </div>
-   </section>
-</header>
-<!-- end banner -->
-<!-- our Mission -->
-<div class="plane">
-   <div class="container">
-      <div class="row">
-         <div class="col-sm-12">
-            <div class="titlepage">
-               <h2>رسالتنا</h2>
-               <span>تبسيط وتعزيز تجربة تخطيط الأعراس للأزواج في المملكة العربية السعودية. نحن نسعى لتوفير منصة سهلة
-                  الاستخدام تجمع بين جميع الخدمات الأساسية للأعراس،
-                  بما في ذلك قاعات الزفاف، خدمات الموسيقى، تقديم الطعام، إدارة الميزانية وإدارة قائمة الضيوف بكفاءة. من
-                  خلال تقديم حل شامل وفعال، نهدف إلى تخفيف التحديات والضغوط التي يواجهها الأزواج أثناء التحضير لحفل
-                  الزفاف.</span>
-            </div>
-         </div>
-      </div>
-      <div class="row">
-         <div class="col-md-4">
-            <div class="plan_bax text_align_center">
-               <figure><img src="images/plan_img.jpg" alt="#" /></figure>
-               <div id="ho_plan" class="plan_text">
-                  <h3>تخطيط ميزانية حفل الزفاف</h3>
-                  <p>أدخل المعلومات المتعلقة بالخدمات المطلوبة لحفل الزفاف لضبط الميزانية بما يتناسب مع احتياجاتك.
-                     سنقوم بإنشاء النسب المئوية لكل خدمة وتقديم قائمة مخصصة من البائعين الموصى بهم مع خدماتهم.</p>
-                  <a class="read_more" href="budgetP.html">المزيد</a>
-               </div>
-            </div>
-         </div>
-         <div class="col-md-4">
-            <div class="plan_bax text_align_center">
-               <figure><img src="images/plan_img1.jpg" alt="#" /></figure>
-               <div id="ho_plan" class="plan_text">
-                  <h3>حجز الخدمات</h3>
-                  <p>يوفر سرور قاعات الزفاف المختلفة، وخدمات الموسيقى، وخيارات تقديم الطعام.
-                     نهدف الى تزويد الأزواج بقاعدة بيانات شاملة للموردين، مما يمكنهم من استكشاف خدماتهم المفضلة
-                     ومقارنتها وحجزها بسرعة داخل الموقع.</p>
-                  <a class="read_more" href="service.html">المزيد</a>
-               </div>
-            </div>
-         </div>
-         <div class="col-md-4">
-            <div class="plan_bax text_align_center">
-               <figure><img src="images/plan_img2.jpg" alt="#" /></figure>
-               <div id="ho_plan" class="plan_text">
-                  <h3>إدارة قائمة الضيوف</h3>
-                  <p>يمكن للأزواج إنشاء قائمة الضيوف، إرسال الدعوات، والرد عليها لتنظيم الحدث وإدارته بشكل أفضل عن طريق
-                     إرسال رسائل واتس اب وتلقي حالتهم.</p>
-                  <a class="read_more" href="gm.html">المزيد</a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- our Mission -->
-<!-- Vision -->
-<div class="about">
-   <div class="container ">
-      <div class="row d_flex">
-         <div class="col-md-5">
-            <div class="titlepage">
-               <h2>رؤيتنا</h2>
-               <span>أن نصبح الوجهة الرئيسية عبر الإنترنت للأزواج في المملكة العربية السعودية الذين يبحثون عن تجربة سلسة
-                  وممتعة في تخطيط حفل الزفاف.
-                  سُرور تمكن الأزواج من تخطيط حفل زفاف الأحلام بسهولة، مع الوصول إلى مجموعة واسعة من البائعين والخدمات
-                  الموثوقة، وأدوات إدارة الميزانية الشخصية،
-                  وإدارة الضيوف. من خلال تكنولوجيتنا المبتكرة والتزامنا الثابت برضا العملاء، نطمح إلى إعادة تعريف مشهد
-                  تخطيط حفل الزفاف، وجعله تجربة لا تُنسى وممتعة لكل زوجين.</span>
-               <a class="read_more" href="about.html">المزيد عنا</a>
-            </div>
-         </div>
-         <div class="col-md-7">
-            <div class="about_img">
-               <figure><img src="images/about.png" alt="#" /></figure>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- end Vision -->
-<!-- blog -->
-<div class="blog">
-   <div class="container ">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="titlepage">
-               <h2>عملائنا</h2>
-               <div class="counter">
-                  <div class="counter-item">
-                     <span class="count" id="userCount">0</span>
-                     <p>مستخدم</p>
-                  </div>
-                  <div class="counter-item">
-                     <span class="count" id="vendorCount">0</span>
-                     <p>بائع موثوق</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- end blog -->
-<!-- says -->
-<div class="says">
-   <div class="container-fluid">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="titlepage">
-               <h2>ماذا يقولون عنا؟</h2>
-            </div>
-         </div>
-      </div>
-      <div class="row">
-         <div class="col-md-12">
-            <div id="proj" class="carousel slide says_ban" data-ride="carousel">
-               <ol class="carousel-indicators">
-                  <li data-target="#proj" data-slide-to="0" class="active"></li>
-                  <li data-target="#proj" data-slide-to="1"></li>
-                  <li data-target="#proj" data-slide-to="2"></li>
-               </ol>
-               <div class="carousel-inner">
-                  <div class="carousel-item active">
-                     <div class="container">
-                        <div class="carousel-caption relative3">
-                           <div class="row">
-                              <div class="col-md-12">
-                                 <div class="readert">
-                                    <div class="readert_img text_align_center">
-                                       <figure><img src="images/saya.png" alt="#" /></figure>
-                                    </div>
-                                    <div class="readert_text">
-                                       <h3>Jacksmith sand</h3>
-                                       <p>There are many variations of passages of Lorem Ipsum available, but the <br>
-                                          majority have suffered alteration in some form</p>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                     <div class="container">
-                        <div class="carousel-caption relative3">
-                           <div class="row">
-                              <div class="col-md-12">
-                                 <div class="readert">
-                                    <div class="readert_img text_align_center">
-                                       <figure><img src="images/saya.png" alt="#" /></figure>
-                                    </div>
-                                    <div class="readert_text">
-                                       <h3>Jacksmith sand</h3>
-                                       <p>There are many variations of passages of Lorem Ipsum available, but the <br>
-                                          majority have suffered alteration in some form</p>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                     <div class="container">
-                        <div class="carousel-caption relative3">
-                           <div class="row">
-                              <div class="col-md-12">
-                                 <div class="readert">
-                                    <div class="readert_img text_align_center">
-                                       <figure><img src="images/saya.png" alt="#" /></figure>
-                                    </div>
-                                    <div class="readert_text">
-                                       <h3>Jacksmith sand</h3>
-                                       <p>There are many variations of passages of Lorem Ipsum available, but the <br>
-                                          majority have suffered alteration in some form</p>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <a class="carousel-control-prev" href="#proj" role="button" data-slide="prev">
-                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                     <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#proj" role="button" data-slide="next">
-                     <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                     <span class="sr-only">Next</span>
-                  </a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- end says -->
-   <!--  footer -->
-   <footer>
-      <div class="footer">
-         <div class="copyright">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-3">
-                     <a href="index.html"> <img class="logo_fooetr" src="images/SorourIcon.png" alt="#" /></a>
-                  </div>
-                  <div class="col-md-8 offset-md-2">
-                     <p>© كل الحقوق محفوظة. فريق سُرور.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </footer>
-   <!-- end footer -->
-   <!-- Javascript files-->
-   <script>
-      // Assuming you have the user and vendor data available
-      const userCount = 100; // Replace with the actual user count
-      const vendorCount = 50; // Replace with the actual vendor count
+    </div>
 
-      // Update the counter values
-      document.getElementById('userCount').textContent = userCount;
-      document.getElementById('vendorCount').textContent = vendorCount;
-   </script>
-   <script src="js/jquery.min.js"></script>
-   <script src="js/bootstrap.bundle.min.js"></script>
-   <script src="js/jquery-3.0.0.min.js"></script>
-   <!-- sidebar -->
-   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-   <script src="js/custom.js"></script>
-   </body>
+    <!-- Footer Section -->
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>عنا</h2>
+            <a href="/sign__up">How it works</a> <a href="/">Testimonials</a>
+            <a href="/">Careers</a> <a href="/">Terms of Service</a>
+          </div>
+          <div class="footer__link--items">
+            <h2>تواصل معنا</h2>
+            <a href="/">Contact</a> <a href="/">Support</a>
+            <a href="/">Destinations</a>
+          </div>
+        </div>
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>تابعنا</h2>
+            <a href="/">Instagram</a> <a href="/">Facebook</a>
+            <a href="/">Youtube</a> <a href="/">Twitter</a>
+          </div>
+        </div>
+      </div>
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="index.html" id="footer__logo">
+              <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
+            </a>
+            
+          </div>
+          <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
+          <div class="social__icons">
+            <a href="/" class="social__icon--link" target="_blank"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="/" class="social__icon--link"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="/" class="social__icon--link"
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <a href="/" class="social__icon--link"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a href="/" class="social__icon--link"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
+        </div>
+      </section>
+    </div>
 
+    <script src="app.js"></script>
+  </body>
 </html>
