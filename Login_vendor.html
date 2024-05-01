@@ -4,11 +4,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>انشاء حساب</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل الدخول</title>
   <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="style_vendor.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
   <!-- Boxicons CSS -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -56,54 +55,35 @@
       </ul>
     </nav>
   </header>
-  <!-- end header inner -->
   <div class="container">
-    <div class="title">انشاء حساب في سُرور</div>
+    <div class="title">اهلا بشريك سُرور، سجل الدخول</div>
     <div class="content">
-      <form action="SignUp.php" method="post" id="signUpForm">
+      <form action="Login_vendor.php" id="loginForm" method="post">
         <div class="user-details">
-          <div class="input-box">
-            <span class="details">الأسم الاول</span>
-            <input type="text" id="firstname" name="first_name" placeholder="ادخل اسمك الاول" required>
-            <div class="error-message"></div>
-          </div>
-          <div class="input-box">
-            <span class="details">اسم العائلة</span>
-            <input type="text" id="lastname" name="last_name" placeholder="ادخل اسم العائلة" required>
-            <div class="error-message"></div>
-          </div>
           <div class="input-box">
             <span class="details">الايميل</span>
             <input type="email" id="email" name="email" placeholder="ادخل الايميل" required>
-            <div class="error-message"></div>
-          </div>
-          <div class="input-box">
-            <span class="details">رقم الهاتف</span>
-            <input type="number" id="phone" name="phone" placeholder="ادخل رقم الهاتف" required>
-            <div class="error-message"></div>
+            <div class="error-message" id="emailError"></div>
           </div>
           <div class="input-box">
             <span class="details">كلمة المرور</span>
             <input type="password" id="password" name="password" placeholder="ادخل كلمة المرور" required>
-            <div class="error-message"></div>
+            <div class="error-message" id="passwordError"></div>
           </div>
-          <div class="input-box">
-          <span class="details">تأكيد كلمة المرور</span>
-          <input type="password" id="confirmPassword" name="confirm_password" placeholder="تأكيد كلمة المرور" required>
-          <div class="error-message"></div>
-        </div>
         </div>
         <div class="form-link">
-          <span>لديك حساب بالفعل؟ <a href="Login.html">سجل الدخول</a></span>
+          <a href="restorePassword.php">نسيت كلمة المرور؟</a>
         </div>
         <div id="errorMessage"></div>
         <div class="button">
-          <input type="submit" value="انشاء حساب">
+          <input type="submit" value="استمرار">
         </div>
       </form>
     </div>
+    <div class="form-link">
+      <span>لست مشتركاً في سُرور؟ <a href="SignUp_vendor.html">كن شريكاً الآن</a></span>
+    </div>
   </div>
-  <!-- end of container -->
   <br><br><br><br>
     <!-- Footer Section -->
     <footer>
@@ -157,7 +137,6 @@
       </div>
       </section>
   </footer>
-  <script src="SignUp.js"></script>
+  <script src="Login_vendor.js"></script>
 </body>
-
 </html>

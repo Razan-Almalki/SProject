@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const xhr = new XMLHttpRequest();
 
         // Open a POST request to the login.php script
-        xhr.open("POST", "Login.php", true);
+        xhr.open("POST", "Login_vendor.php", true);
 
         // Set the request header to send form data
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Successful login
                     console.log("Login successful");
                     // Redirect to the dashboard or display a success message
-                    window.location.href = 'userProfile.php';  // Redirect to the user profile page
+                    window.location.href = 'vendorProfile.php';  // Redirect to the user profile page
                 } else {
                     // Login failed
                     console.error("Login failed");

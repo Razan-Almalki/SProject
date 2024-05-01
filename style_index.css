@@ -2,10 +2,36 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Amiri';
+    font-family: 'Droid Arabic Kufi', 'sans-serif';
     scroll-behavior: smooth;
   }
+  /* list styles */
+  .container {
+    display: flex;
+    justify-content: center;
+  }
   
+  .container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .container img{
+    width: 200px;
+  }
+
+  .container h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .container p {
+    font-size: 14px;
+    line-height: 1.4;
+	max-width: 60rem;
+  
+  }
   .navbar {
     height: 80px;
     display: flex;
@@ -256,7 +282,7 @@
     background-image: url("images/about_bg.jpg");
     background-size: cover;
     background-position: center;
-    padding: 200px 0;
+    padding-top: 200px;
   }
   
   .hero__container {
@@ -319,6 +345,10 @@
     background-color: #ffffff;
     padding: 10rem 0;
   }
+
+  .main_about {
+    padding: 10rem 0;
+  }
   
   .main__container {
     display: grid;
@@ -336,6 +366,42 @@
   .main__content {
     color: #000000;
     width: 100%;
+    margin-right: 20%;
+  }
+
+  .main__content1 {
+    color: #000000;
+    width: 100%;
+    margin-right: 15%;
+    margin-top: 15%;
+  }
+
+  /* list styles */
+  .container {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .container img{
+    width: 80px;
+  }
+
+  .container h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .container p {
+    font-size: 14px;
+    line-height: 1.4;
+	max-width: 60rem;
+  
   }
   
   .main__content h1 {
@@ -350,16 +416,45 @@
     text-transform: uppercase;
     margin-bottom: 32px;
   }
+
+  .main__content1 h1 {
+    font-size: 2rem;
+    background-color: #fe3b6f;
+    background-image: linear-gradient(to top, #ff087b 0%, #ed1a52 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
   
   .main__content h2 {
     font-size: 50px;
-    background: linear-gradient(
-      to right,
-      #000000,
-      #da22ff
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(135deg, #b86ba1, #c56ba4);
     background-size: 100%;
     margin-bottom: 40px;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+
+  .main__content1 h2 {
+    font-size: 50px;
+    background: linear-gradient(135deg, #b86ba1, #c56ba4);
+    background-size: 100%;
+    margin-bottom: 40px;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+  .main__content1 h3 {
+    font-size: 30px;
+    background: linear-gradient(135deg, #b86ba1, #c56ba4);
+    background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -369,6 +464,11 @@
   .main__content p {
     margin-top: 1rem;
     font-size: 25px;
+    font-weight: 700;
+  }
+  .main__content1 p {
+    margin-top: 1rem;
+    font-size: 20px;
     font-weight: 700;
   }
   
@@ -499,27 +599,26 @@
     .main__btn {
       padding: 12px 36px;
       margin: 2.5rem 0;
+      background-image: url("images/about_bg.jpg");
     }
   }
   
   /* Services Section */
   .services {
-    background: #dcdbdb8a;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
-    padding: 6rem 0;
+    padding: 10rem;
+    padding-top: 200px;
+    background-image: url("images/about_bg.jpg");
+    background-size: cover;
   }
   
   .services h1 {
     font-size: 50px;
-    background: linear-gradient(
-      to right,
-      #000000,
-      #da22ff
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: black; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     margin-bottom: 30px;
     background-size: 100%;
     -webkit-background-clip: text;
@@ -547,32 +646,24 @@
     flex-direction: column;
     justify-content: center;
     color: #fff;
-    background-image: linear-gradient(to right, #00dbde 0%, #fc00ff 100%);
+    background-image: linear-gradient(to right, #83757e, #88617a,  #52414c);
   }
   
   .services__card:nth-child(2) {
     background: #1fa2ff; /* fallback for old browsers */
     background: -webkit-linear-gradient(
       to right,
-      #a6ffcb,
-      #12d8fa,
-      #1fa2ff
+      #b86ba1, #943f75,  #440b2f
     ); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
       to right,
-      #a6ffcb,
-      #12d8fa,
-      #1fa2ff
+      #b86ba1, #88617a,  #440b2f
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
   
   .services__card:nth-child(3) {
     background-image: linear-gradient(
-      -225deg,
-      #231557 0%,
-      #44107a 29%,
-      #ff1361 67%,
-      #fff800 100%
+      -225deg, #b86ba1, #943f75,  #440b2f
     );
   }
   
@@ -626,6 +717,14 @@
   /* Footer CSS */
   .footer__container {
     background-image: url("images/about_bg.jpg");
+    padding: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer__container1 {
+
     padding: 5rem 0;
     display: flex;
     flex-direction: column;

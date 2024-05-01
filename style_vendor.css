@@ -119,7 +119,7 @@ body{
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  background: linear-gradient(135deg, #456277, #714483);
 }
 .container{
   max-width: 700px;
@@ -282,11 +282,11 @@ footer {
 
 .footer__link--items h2 {
   margin-bottom: 16px;
-  color: #000000;
+  color: #ffffff;
 }
 
 .footer__link--items a {
-  color: #000000;
+  color: #ffffff;
   text-decoration: none;
   margin-bottom: 0.5rem;
   transition: 0.3 ease-out;
@@ -449,7 +449,3 @@ footer {
       font-size: 40px;
     }
   }
-
-
-  
-

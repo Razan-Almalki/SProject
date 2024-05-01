@@ -81,3 +81,19 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.footer__container {
+    background-image: url("images/about_bg.jpg");
+    padding: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer__links {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+  }

@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins',sans-serif;
+    scroll-behavior: smooth;
   }
 
   body{
@@ -200,6 +201,20 @@ label {
   margin-right: 10px;
 }
 
+h3 {
+  position: absolute;
+  top: calc(50% - 250px); /* Adjust the value as needed */
+  left: 50%;
+  transform: translateX(200%);
+  margin: 0;
+  padding: 5px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #9b59b6;
+  border-radius: 5px;
+  z-index: 1;
+}
 input {
   padding: 5px;
   margin-bottom: 10px;
@@ -253,4 +268,221 @@ button[type="submit"]:hover {
   color: red;
   margin-right: 10px;
   margin-bottom: 5px;
+}
+
+ /* Footer CSS */
+ footer {
+  background-color: #33333344;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer {
+color: #fff;
+text-align: center;
+padding: 10px;
+position: fixed;
+bottom: 0;
+width: 100%;
+}
+
+.footer__container {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.footer__links {
+width: 100%;
+max-width: 1000px;
+display: flex;
+justify-content: center;
+}
+
+.footer__link--wrapper {
+display: flex;
+}
+
+.footer__link--items {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+margin: 16px;
+text-align: left;
+width: 160px;
+box-sizing: border-box;
+}
+
+.footer__link--items h2 {
+margin-bottom: 16px;
+color: #000000;
+}
+
+.footer__link--items a {
+color: #000000;
+text-decoration: none;
+margin-bottom: 0.5rem;
+transition: 0.3 ease-out;
+}
+
+.footer__link--items a:hover {
+color: #000000;
+transition: 0.3 ease-out;
+}
+
+#footer__logo {
+color: #000000;
+display: flex;
+align-items: center;
+cursor: pointer;
+text-decoration: none;
+font-size: 2rem;
+}
+#footer__logo {
+margin-bottom: 2rem;
+}
+.footer__logo img {
+width: 50px; /* Adjust the width to your desired size */
+height: auto; /* Maintain aspect ratio */
+vertical-align: middle; /* Align with the text vertically */
+}
+
+.footer__text {
+display: inline-block; /* Allow the text to be inline with the logo */
+vertical-align: middle; /* Align with the logo vertically */
+margin-left: 10px; /* Adjust the margin as needed */
+font-size: 20px; /* Adjust the font size to your desired size */
+font-weight: bold; /* Apply desired font weight */
+}
+.social__media {
+max-width: 1000px;
+width: 100%;
+margin-top: -60px;
+}
+.social__media--wrap {
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 90%;
+max-width: 1000px;
+margin: 40px auto 0 auto;
+}
+.social__icons {
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 240px;
+}
+.fab {
+  font-family: "Font Awesome 5 Brands";
+  color: black;
+}
+
+@media screen and (max-width: 960px) {
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    padding: 0;
+  }
+
+  .navbar__menu {
+    display: grid;
+    grid-template-columns: auto;
+    margin: 0;
+    width: 100%;
+    position: absolute;
+    top: -1000px;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: -1;
+  }
+
+  .navbar__menu.active {
+    background: #131313;
+    top: 100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 99;
+    height: 60vh;
+    font-size: 1.6rem;
+  }
+
+  #navbar__logo {
+    padding-left: 25px;
+  }
+
+  .navbar__toggle .bar {
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background: #fff;
+  }
+
+  .navbar__item {
+    width: 100%;
+  }
+
+  .navbar__links {
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+  }
+
+  .navbar__btn {
+    padding-bottom: 2rem;
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80px;
+    margin: 0;
+  }
+
+  #mobile-menu {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    transform: translate(5%, 20%);
+  }
+
+  .navbar__toggle .bar {
+    display: block;
+    cursor: pointer;
+  }
+
+  #mobile-menu.is-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  #mobile-menu.is-active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  #mobile-menu.is-active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero__heading {
+    font-size: 60px;
+  }
+
+  .hero__description {
+    font-size: 40px;
+  }
 }
