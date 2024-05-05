@@ -1,32 +1,57 @@
 <?php
-session_start();
 // Database configuration
 $servername = "localhost"; // Change this if your database is hosted elsewhere
 $username = "Razan";
 $password = "0559945643";
-$database = "myDB";
+$database = "myDB"; 
+
 // Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Insert task into database
-$user_id = $_SESSION['user_id'];
-$taskName = $_POST["taskName"];
-$dueDate = $_POST["dueDate"];
-
-
-$sql = "INSERT INTO tasks (user_id, name, due_date, completed) VALUES ('$user_id', '$taskName', '$dueDate', 0)";
-
+// Create database
+$sql = "CREATE DATABASE IF NOT EXISTS $database";
 if ($conn->query($sql) === TRUE) {
-    $last_id = $conn->insert_id;
-    echo $last_id; // Echo the ID of the inserted task
+    echo "Database created successfully<br>";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error creating database: " . $conn->error . "<br>";
 }
 
-$conn->close();
+// Select database
+$conn->select_db($database);
+
+// Create tasks table
+$sql = "CREATE TABLE IF NOT EXISTS tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    due_date DATE,
+    priority VARCHAR(20),
+    completed BOOLEAN
+)";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Table tasks created successfully<br>";
+} else {
+    echo "Error creating table: " . $conn->error . "<br>";
+}
+
+
+// Insert task into database
+
+    $taskName =$_POST["taskName"];
+    $dueDate = $_POST["dueDate"];
+    $priority =$_POST["priority"];
+
+    $sql = "INSERT INTO tasks (name, due_date, priority, completed) VALUES ('$taskName', '$dueDate', '$priority', 0)";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+  
+}
+    $conn->close();
+
 ?>

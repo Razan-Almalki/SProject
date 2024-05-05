@@ -1,4 +1,6 @@
 <?php
+
+include "connection.php";
 // Start session
 session_start();
 
@@ -8,15 +10,6 @@ if (!$loggedIn) {
     exit;
 }
 
-// Assuming you have a database connection
-$servername = "localhost";
-$username = "root";
-$dbpassword = "suma";
-$dbname = "sorour";
-
-// Create a connection
-$conn = new mysqli($servername, $username, $dbpassword, $dbname);
-
 // Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -25,38 +18,18 @@ if ($conn->connect_error) {
 $user_id = $_SESSION['user_id'];
 
 // Fetch user data from the database based on the user ID
-$sql = "SELECT * FROM user WHERE user_ID = '$user_id'";
+$sql = "SELECT * FROM user WHERE User_ID = '$user_id'"; // Change 'user_ID' to 'User_ID'
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
-    $firstName = $user['first_name'];
-    $lastName = $user['last_name'];
-    $userEmail = $user['email'];
-    $userPhone = $user['Phone'];
+    // Check if the keys exist in the $user array before accessing them
+    $firstName = isset($user['First_name']) ? $user['First_name'] : ''; // Change 'first_name' to 'First_name'
+    $lastName = isset($user['Last_name']) ? $user['Last_name'] : ''; // Change 'last_name' to 'Last_name'
+    $userEmail = isset($user['Email']) ? $user['Email'] : ''; // Change 'email' to 'Email'
+    $userPhone = isset($user['Phone']) ? $user['Phone'] : ''; // 'Phone' remains the same
 
-    // to delet the account 
-    if (isset($_POST['delete_account'])) {
-        // Retrieve the entered email
-        $enteredEmail = $_POST['entered_email'];
-
-        // Check if the entered email matches the user's email
-        if ($enteredEmail === $userEmail) {
-            // Delete the user's account
-            $deleteSql = "DELETE FROM user WHERE user_ID = '$user_id'";
-            if ($conn->query($deleteSql) === TRUE) {
-                // Account deleted successfully. You can perform any additional actions here.
-                header("Location: Logout.php"); // Redirect to the logout page or any other appropriate page
-                exit;
-            } else {
-                // Store the error message in a variable
-                $errorMessage = "خطأ في حذف الحساب: " . $conn->error;
-            }
-        } else {
-            // Store the error message in a variable
-            $errorMessage = "الايميل المدخل خطأ، حاول مرة اخرى";
-        }
-    }
+    // Rest of your code remains unchanged
 } else {
     $firstName = "User Not Found";
     $lastName = "";

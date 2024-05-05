@@ -1,4 +1,8 @@
 <?php
+// Start session
+session_start();
+
+include "connection.php";
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,22 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Connect to the database
-    $servername = "localhost";
-    $username = "root";
-    $dbpassword = "suma";
-    $dbname = "sorour";
-
-    $conn = new mysqli($servername, $username, $dbpassword, $dbname);
-
-    if ($conn->connect_error) {
-        $response = array("success" => false, "message" => "Error: Could not connect to the database.");
-        echo json_encode($response);
-        exit;
-    }
-
     // Prepare SQL statement
-    $sql = "SELECT * FROM user WHERE email = ?";
+    $sql = "SELECT * FROM user WHERE Email = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {
@@ -69,17 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode($response);
         exit;
     } else {
-        // Start session
-        session_start();
-
         // Set session variables after successful login
-        $_SESSION["user_id"] = $user["user_ID"];
-        $_SESSION["user_name"] = $user["first_name"] . " " . $user["last_name"];
+        $_SESSION["user_id"] = $user["User_ID"];
+        $_SESSION["user_name"] = $user["First_name"] . " " . $user["Last_name"];
 
         $response = array("success" => true, "message" => "Login successful", "user_name" => $_SESSION["user_name"], "user_id" => $_SESSION["user_id"]);
         echo json_encode($response);
         exit;
     }
-    // Close the database connection
-    $conn->close();
 }
+$conn->close();
+?>

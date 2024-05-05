@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "Qazwsx12!";
-$dbname = "connect"; // This should match the existing database or the one you want to create
+$dbname = "sour"; // This should match the existing database or the one you want to create
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -54,18 +54,18 @@ if ($conn->query($sql) === TRUE) {
     // SQL to create table services
     $sql_services = "CREATE TABLE IF NOT EXISTS services (
         Service_ID INT AUTO_INCREMENT PRIMARY KEY,
-        Service_type VARCHAR(255) NOT NULL,
         vendor_id INT,
-        FOREIGN KEY (vendor_id) REFERENCES vendor(Vendor_ID),
+        Service_type VARCHAR(255) NOT NULL,
         Service_name VARCHAR(255) NOT NULL,
         Social_media VARCHAR(255),
-        Discription longtext,
+        Discription VARCHAR(255),
         Price DECIMAL(10, 2) NOT NULL,
         Deposit DECIMAL(10, 2) NOT NULL,
         Theme VARCHAR(255) NOT NULL,
         Location VARCHAR(255) NOT NULL,
-        Location longtext NOT NULL,
-        pic LONGBLOB
+        Map LONGTEXT,
+        pic longblob,
+        FOREIGN KEY (vendor_id) REFERENCES vendor(Vendor_ID)
     )"; // Specify storage engine
 
     if ($conn->query($sql_services) === TRUE) {
