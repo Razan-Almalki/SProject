@@ -14,12 +14,10 @@
     </div>
 
     <div id="form-att">
-        <p>فضلا ادخل اسمك</p>
+        <p>فضلا ادخل رمز التحقق</p>
         <hr>
         <!-- Form to search for guests -->
-        <input type="text" class="name" id="last_name" placeholder="الاسم الاخير">
-        <input type="text" class="name" id="middle_name" placeholder="الاسم الاوسط">
-        <input type="text" class="name" id="first_name" placeholder="الاسم الاول">
+        <input type="text" class="name" id="ID" placeholder="رمز التحقق">
         <div class="search-container">
             <button class="buttons" onclick="searchGuests()">ابحث</button>
         </div>
@@ -39,13 +37,11 @@
 
     <script>
         function searchGuests() {
-            var firstName = document.getElementById('first_name').value;
-            var middleName = document.getElementById('middle_name').value;
-            var lastName = document.getElementById('last_name').value;
+            var guestID = document.getElementById('ID').value;
 
             // Check if at least one field is filled
-            if (firstName.trim() === '' && middleName.trim() === '' && lastName.trim() === '') {
-                alert('يرجى ادخال حقل بحث واحد على الأقل.');
+            if (guestID.trim() === '') {
+                alert('يرجى ادخال رمز التحقق.');
                 return;
             }
 
@@ -59,7 +55,7 @@
                     document.getElementById("result").innerHTML = this.responseText;
                 }
             };
-            xhttp.open("GET", "search_guests.php?first_name=" + firstName + "&middle_name=" + middleName + "&last_name=" + lastName, true);
+            xhttp.open("GET", "search_guests.php?ID=" + guestID, true);
             xhttp.send();
         }
 

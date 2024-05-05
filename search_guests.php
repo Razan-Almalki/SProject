@@ -1,27 +1,22 @@
 <?php
+
 include 'connection.php';
 
-$searchTerms = array();
-
-// Get search terms from the request
-if(isset($_GET['first_name']) && !empty($_GET['first_name'])) {
-    $searchTerms[] = "F_Name LIKE '%" . $_GET['first_name'] . "%'";
-}
-
-if(isset($_GET['middle_name']) && !empty($_GET['middle_name'])) {
-    $searchTerms[] = "M_Name LIKE '%" . $_GET['middle_name'] . "%'";
-}
-
-if(isset($_GET['last_name']) && !empty($_GET['last_name'])) {
-    $searchTerms[] = "L_Name LIKE '%" . $_GET['last_name'] . "%'";
-}
-
-// Construct the WHERE clause of the SQL query
-$whereClause = implode(" OR ", $searchTerms);
-
-if(!empty($whereClause)) {
-    $sql = "SELECT * FROM guest WHERE $whereClause";
-    $result = $conn->query($sql);
+if(isset($_GET['ID'])) {
+    $guestID = $_GET['ID'];
+    
+    // Prepare the SQL statement to search for the guest by ID
+    $sql = "SELECT * FROM guest WHERE ID = ?";
+    
+    // Prepare and bind parameters to prevent SQL injection
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $guestID); // Assuming the ID is an integer
+    
+    // Execute the query
+    $stmt->execute();
+    
+    // Get the result
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         // Output data of each row as radio inputs
@@ -34,7 +29,7 @@ if(!empty($whereClause)) {
         }
         echo "<button class='buttons' onclick='selectGuest()'>اختر</button>";
     } else {
-        echo "لا يوجد مدعو بهذا الاسم، ربما اكت حضورك مسبقا او فضلا تأكد من كتابة اسم بشكل صحيح";
+        echo "لا يوجد مدعو بهذا الرمز.";
     }
 } 
 

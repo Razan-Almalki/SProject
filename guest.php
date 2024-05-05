@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>guest</title>
-  <link rel="stylesheet" href="Guest_style.css" />
+  <link rel="stylesheet" href="style_index.css" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
 </head>
@@ -169,19 +169,20 @@ $pending = $rowPending['Pending'];
               echo "<thead>";
               echo "<tr>";
               echo "<th style='width: 5%'></th>"; // Adjust the width as needed
-              echo "<th style='width: 35%'>$table_name</th>"; // Adjust the width as needed
-              echo "<th style='width: 30%'>حالة الحضور</th>"; // Adjust the width as needed
+              echo "<th style='width: 20%'>$table_name</th>"; // Adjust the width as needed
+              echo "<th style='width: 5%'>حالة الحضور</th>"; // Adjust the width as needed
+              echo "<th style='width: 25%'></th>";
               // Check if the group name requires a dropdown menu
-              if ($table_name != 'اقارب العروس' && $table_name != 'اقارب العريس') {
-                echo "<th style='width: 30%; position: relative;' class='dropdown'>";
+              if ($table_name != 'اقارب العروس' && $table_name != 'اقارب العريس' && $table_name != 'غير مصنف') {
+                echo "<th style='width: 10%; position: relative;' class='dropdown'>";
                 echo "<button class='dropbtn'><span>...</span></button>";
                 echo "<div class='dropdown-content'>";
-                echo "<a href=''>Rename</a>";
-                echo "<a href=''>Delete</a>";
+                echo "<a onclick='openRenameDiv({$row['ID']}, \"{$table_name}\")'>اعادة تسمية</a>";
+                echo "<a onclick='openDeleteDiv(\"{$table_name}\")'>حذف</a>";
                 echo "</div>";
                 echo "</th>";
               } else {
-                echo "<th style='width: 30%'></th>";
+                echo "<th style='width: 10%'></th>";
               }
               echo "</tr>";
               echo "</thead>";
@@ -197,11 +198,16 @@ $pending = $rowPending['Pending'];
                   echo "<td><input type='checkbox' class='guest-checkbox' data-guest-id='1' onchange='apeareanddis()'></td>";
                   echo "<td>{$guest['F_Name']} {$guest['M_Name']} {$guest['L_Name']}</td>"; // Display guest's name
                   echo "<td>{$guest['Attendance']}</td>"; // Display guest's attendance
+                  // Display the invite button only if attendance is 'معلق'
+                  if ($guest['Attendance'] == 'معلق') {
+                    echo "<td><button id='invite-group-button' type='button' onclick='sendWhatsAppInvite(\"{$guest['Phone']}\", \"{$guest['ID']}\")'><span class='material-symbols-outlined'>rsvp</span><span class='material-symbols-outlined-content'>ارسال دعوة</span></button></td>";
+                  } else {
+                    echo "<td></td>"; // Empty cell if attendance is not 'معلق'
+                  }
                   echo "<td><button class='guest-edit-button' onclick='openSideDiv({$guest['ID']})'><span class='guest-edit material-symbols-outlined'>more_horiz</span></button></td>";
                   echo "</tr>";
                 }
               }
-
               echo "</tbody>";
               echo "</table>";
               echo "</div>";
@@ -216,52 +222,52 @@ $pending = $rowPending['Pending'];
     <!-- End guests-list -->
     </main>
     <!-- End main -->
-
-    <!-- Begin Footer -->
-    <footer>
-      <div class="footer__container">
-        <div class="footer__links">
-          <div class="footer__link--wrapper">
-            <div class="footer__link--items">
-              <h2>عنا</h2>
-              <a href="">الاعدادات</a>
-              <a href="about.php">المزيد</a>
-            </div>
-            <div class="footer__link--items">
-              <h2>تواصل معنا</h2>
-              <a href="/">راسلنا </a>
-              <a href="/">الدعم</a>
-            </div>
-          </div>
-          <div class="footer__link--wrapper">
-            <div class="footer__link--items">
-              <h2>سجل معنا</h2>
-              <a href="SignUp.html">زائر جديد؟</a>
-              <a href="SignUp_vendor.html">صاحب عمل؟</a>
-            </div>
-          </div>
-        </div>
-        <section class="social__media">
-          <div class="social__media--wrap">
-            <div class="footer__logo">
-              <a href="index.php" id="footer__logo">
-                <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
-              </a>
-            </div>
-            <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
-            <div class="social__icons">
-              <a href="/" class="social__icon--link" target="_blank"><i class="fab fa-facebook"></i></a>
-              <a href="/" class="social__icon--link"><i class="fab fa-instagram"></i></a>
-              <a href="/" class="social__icon--link"><i class="fab fa-youtube"></i></a>
-              <a href="/" class="social__icon--link"><i class="fab fa-linkedin"></i></a>
-              <a href="/" class="social__icon--link"><i class="fab fa-twitter"></i></a>
-            </div>
-          </div>
-        </section>
-    </footer>
-    <!-- End Footer -->
   </div>
   <!-- End Content -->
+
+  <!-- Begin Footer -->
+  <footer>
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>عنا</h2>
+            <a href="">الاعدادات</a>
+            <a href="about.php">المزيد</a>
+          </div>
+          <div class="footer__link--items">
+            <h2>تواصل معنا</h2>
+            <a href="/">راسلنا </a>
+            <a href="/">الدعم</a>
+          </div>
+        </div>
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>سجل معنا</h2>
+            <a href="SignUp.html">زائر جديد؟</a>
+            <a href="SignUp_vendor.html">صاحب عمل؟</a>
+          </div>
+        </div>
+      </div>
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="index.php" id="footer__logo">
+              <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
+            </a>
+          </div>
+          <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
+          <div class="social__icons">
+            <a href="/" class="social__icon--link" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-instagram"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-youtube"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-linkedin"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </section>
+  </footer>
+  <!-- End Footer -->
 
   <div id="popup" class="popup" style="display: none;">
     <form action="add_guest.php" method="post">
@@ -270,22 +276,26 @@ $pending = $rowPending['Pending'];
         <button class="popup__close" onclick="closePopup()">&#10006;</button>
       </div>
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الاول" name="f_Name" id="first_name" required />
+        <input type="input" class="form__field" placeholder="الاسم الاول" name="f_Name" id="first_name"
+          oninput="validateForm()" required />
         <label for="first_name" class="form__label">الاسم الاول</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الثاني" name="m_Name" id="middle_name" required />
+        <input type="input" class="form__field" placeholder="الاسم الثاني" name="m_Name" id="middle_name"
+          oninput="validateForm()" required />
         <label for="middle_name" class="form__label">الاسم الثاني</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الاخير" name="l_Name" id="last_name" required />
+        <input type="input" class="form__field" placeholder="الاسم الاخير" name="l_Name" id="last_name"
+          oninput="validateForm()" required />
         <label for="last_name" class="form__label">الاسم الاخير</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الجوال" name="phone" id="phone" required />
+        <input type="input" class="form__field" placeholder="الجوال" name="phone" id="phone" oninput="validatePhone()"
+          required />
         <label for="phone" class="form__label">الجوال</label>
       </div>
 
@@ -313,9 +323,51 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button type="submit">إضافة</button>
+      <button type="submit" id="submitBtn">إضافة</button>
+
+      <br>
+      <div id="hint" style="color: black; display: none;">الاسم يجب أن يحتوي على كلمة واحدة فقط</div>
+
+      <br>
+      <div id="phoneHint" style="color: black; display: none;">الجوال يجب أن يبدأ بـ05 ويكون من 10 أرقام</div>
+
     </form>
   </div>
+
+  <script>
+    function validateForm() {
+      var firstName = document.getElementById("first_name").value;
+      var middleName = document.getElementById("middle_name").value;
+      var lastName = document.getElementById("last_name").value;
+      var submitBtn = document.getElementById("submitBtn");
+      var hint = document.getElementById("hint");
+
+      // Check if any input contains more than one word
+      if (firstName.split(" ").length > 1 || middleName.split(" ").length > 1 || lastName.split(" ").length > 1) {
+        submitBtn.disabled = true;
+        hint.style.display = "block";
+        return false; // Prevent form submission
+      } else {
+        hint.style.display = "none";
+      }
+    }
+
+    function validatePhone() {
+      var phone = document.getElementById("phone").value;
+      var phoneHint = document.getElementById("phoneHint");
+      var submitBtn = document.getElementById("submitBtn");
+
+      // Check if phone number is empty or matches the format
+      var phoneRegex = /^05\d{8}$/;
+      if (phone === '' || phone.match(phoneRegex)) {
+        phoneHint.style.display = "none";
+        submitBtn.disabled = false; // Enable submit button if phone is empty or matches format
+      } else {
+        phoneHint.style.display = "block";
+        submitBtn.disabled = true; // Disable submit button if phone doesn't match format
+      }
+    }
+  </script>
 
   <div id="group-popup" class="popup" style="display: none;">
     <form id="add-group-form" action="add_group.php" method="post">
@@ -391,6 +443,20 @@ $pending = $rowPending['Pending'];
   </div>
 
   <script>
+    function sendWhatsAppInvite(phoneForInvite, guestID) {
+      // If the phone number starts with "05", remove the first "0"
+      if (phoneForInvite.startsWith("05")) {
+        phoneForInvite = phoneForInvite.slice(1);
+      }
+      // Construct the WhatsApp invite link
+      var inviteLink = "https://api.whatsapp.com/send?phone=+966" + phoneForInvite + "&text=Welcome%20to%20souror,%20this%20is%20an%20invitation%20message.%20Please%20visit%20this%20page%20for%20confire%20your%20attendence%20use%20this%20code%20to%20search " + guestID + " http://localhost/SProject-5/Invitation.php%21";
+
+      // Open the WhatsApp invite link in a new tab/window
+      window.open(inviteLink, "_blank");
+    }
+  </script>
+
+  <script>
     function openRemoveGuestPopup() {
       document.getElementById("remove-guest-popup").style.display = "block";
       document.getElementById("overlay").style.display = "block";
@@ -414,7 +480,6 @@ $pending = $rowPending['Pending'];
       document.getElementById('delete_guests_names').value = guestsNames.join(', '); // Or use any other delimiter you prefer
     }
   </script>
-
 
   <!-- Hidden input to store checked guest IDs -->
   <?php
@@ -459,33 +524,33 @@ $pending = $rowPending['Pending'];
   </script>
 
   <div id="sideDiv" class="side-div">
-    <h2>Guest Information</h2>
-
-    <button class="close-button" onclick="closeSideDiv()">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+    <div class="popup__header">
+      <h2 class="popup__title">تحديث معلومات الضيف</h2>
+      <button class="popup__close" onclick="closeSideDiv()">&#10006;</button>
+    </div>
 
     <form id="updateForm" action="Update_guest_info.php" method="post">
       <div class="form__group field">
         <input type="input" class="form__field" placeholder="الاسم الاول" name="update_first_name"
-          id="update_first_name" required />
+          id="update_first_name" oninput="validateSideDivForm()" required />
         <label for="update_first_name" class="form__label">الاسم الاول</label>
       </div>
 
       <div class="form__group field">
         <input type="input" class="form__field" placeholder="الاسم الثاني" name="update_middle_name"
-          id="update_middle_name" required />
+          id="update_middle_name" oninput="validateSideDivForm()" required />
         <label for="update_middle_name" class="form__label">الاسم الثاني</label>
       </div>
 
       <div class="form__group field">
         <input type="input" class="form__field" placeholder="الاسم الاخير" name="update_last_name" id="update_last_name"
-          required />
+          oninput="validateSideDivForm()" required />
         <label for="update_last_name" class="form__label">الاسم الاخير</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الجوال" name="update_phone" id="update_phone" required />
+        <input type="input" class="form__field" placeholder="الجوال" name="update_phone" id="update_phone"
+          oninput="validateSideDivPhone()" required />
         <label for="update_phone" class="form__label">الجوال</label>
       </div>
 
@@ -515,9 +580,118 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button type="submit">Update</button>
+      <button id="updateSubmitBtn" type="submit">تحديث</button>
+
+      <br>
+      <div id="sideDivHint" style="color: black; display: none;">الاسم يجب أن يحتوي على كلمة واحدة فقط</div>
+
+      <br>
+      <div id="sideDivPhoneHint" style="color: black; display: none;">الجوال يجب أن يبدأ بـ05 ويكون من 10 أرقام</div>
     </form>
   </div>
+
+  <script>
+    function validateSideDivForm() {
+      var firstName = document.getElementById("update_first_name").value;
+      var middleName = document.getElementById("update_middle_name").value;
+      var lastName = document.getElementById("update_last_name").value;
+      var submitBtn = document.getElementById("updateSubmitBtn");
+      var hint = document.getElementById("sideDivHint");
+
+      // Check if any input contains more than one word
+      if (firstName.split(" ").length > 1 || middleName.split(" ").length > 1 || lastName.split(" ").length > 1) {
+        submitBtn.disabled = true;
+        hint.style.display = "block";
+        return false; // Prevent form submission
+      } else {
+        hint.style.display = "none";
+      }
+    }
+
+    function validateSideDivPhone() {
+      var phone = document.getElementById("update_phone").value;
+      var phoneHint = document.getElementById("sideDivPhoneHint");
+      var submitBtn = document.getElementById("updateSubmitBtn");
+
+      // Check if phone number is empty or matches the format
+      var phoneRegex = /^05\d{8}$/;
+      if (phone === '' || phone.match(phoneRegex)) {
+        phoneHint.style.display = "none";
+        submitBtn.disabled = false; // Enable submit button if phone is empty or matches format
+      } else {
+        phoneHint.style.display = "block";
+        submitBtn.disabled = true; // Disable submit button if phone doesn't match format
+      }
+    }
+  </script>
+
+  <div id="rename-group" class="popup" style="display: none;">
+    <form id="rename-group-form" action="rename_group.php" method="post">
+      <div class="popup__header">
+        <h2 class="popup__title">اعادة تسمية المجموعة</h2>
+        <button class="popup__close" onclick="closeRenameDiv()">&#10006;</button>
+      </div>
+
+      <div class="form__group field">
+        <input type="input" id="new-group-name" class="form__field" placeholder="اسم المجموعة" name="new-group-name"
+          required />
+        <label for="new-group-name" class="form__label">اسم المجموعة</label>
+      </div>
+
+      <input type="hidden" name="old_group_name" id="old_group_name" value="">
+
+      <input type="hidden" name="update_group_id" id="update_group_id" value="">
+
+      <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+
+      <br>
+      <button id="rename-group-btn" type="submit">إضافة</button>
+    </form>
+  </div>
+
+  <div id="delete-group" class="popup" style="display: none;">
+    <form id="delete-group-form" action="delete_group.php" method="post">
+      <div class="popup__header">
+        <h2 class="popup__title">حذف المجموعة</h2>
+        <button class="popup__close" onclick="closeDeleteDiv()">&#10006;</button>
+      </div>
+
+      <input type="hidden" name="delete-group-name" id="delete-group-name" value="">
+
+      <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+
+      <p>هل أنت متأكد أنك تريد حذف هذا الضيف؟</p>
+      <button type="submit" onclick="closeDeleteDiv()">نعم، حذف</button>
+      <button type="button" onclick="closeDeleteDiv()">لا، إلغاء</button>
+    </form>
+  </div>
+
+  <script>
+    function openDeleteDiv(GroupName) {
+      document.getElementById("delete-group").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("delete-group-name").value = GroupName;
+    }
+
+    function closeDeleteDiv() {
+      document.getElementById("delete-group").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
+
+  <script>
+    function openRenameDiv(ID, oldGroupName) {
+      document.getElementById("rename-group").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("update_group_id").value = ID;
+      document.getElementById("old_group_name").value = oldGroupName;
+    }
+
+    function closeRenameDiv() {
+      document.getElementById("rename-group").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
 
   <script>
     function openSideDiv(ID) {
@@ -900,9 +1074,6 @@ $pending = $rowPending['Pending'];
     window.onload = form.f.init.register
   </script>
 
-  <script>
-
-  </script>
 </body>
 
 </html>

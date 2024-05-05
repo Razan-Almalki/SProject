@@ -1,43 +1,43 @@
 <?php
-session_start(); // Start the session if not already started
+
+session_start();
+// Include connection.php to establish a database connection
+include 'connection.php';
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Include your database connection file
-    include 'connection.php';
+    // Retrieve and sanitize form data
+    $user_id = mysqli_real_escape_string($conn, $_POST['user_id']);
+    $update_guest_id = mysqli_real_escape_string($conn, $_POST['update_guest_id']); // Guest ID to be updated
+    $f_Name = mysqli_real_escape_string($conn, $_POST['update_first_name']); // Update first name
+    $m_Name = mysqli_real_escape_string($conn, $_POST['update_middle_name']); // Update middle name
+    $l_Name = mysqli_real_escape_string($conn, $_POST['update_last_name']); // Update last name
+    $phone = mysqli_real_escape_string($conn, $_POST['update_phone']); // Update phone
+    $relationship = mysqli_real_escape_string($conn, $_POST['update_group']); // Update relationship
 
-    // Get the form data
-    $update_guest_id = $_POST['update_guest_id'];
-    $update_first_name = $_POST['update_first_name'];
-    $update_middle_name = $_POST['update_middle_name'];
-    $update_last_name = $_POST['update_last_name'];
-    $update_phone = $_POST['update_phone'];
-    $update_group = $_POST['update_group'];
-    $user_id = $_POST['user_id']; // Retrieve session user ID
+    // Check if a guest with the same first name, middle name, and last name already exists for the current user
+    $sql_check_guest = "SELECT * FROM guest WHERE user_id = '$user_id' AND F_Name = '$f_Name' AND M_Name = '$m_Name' AND L_Name = '$l_Name' AND ID != '$update_guest_id'";
+    $result_check_guest = $conn->query($sql_check_guest);
 
-    
-
-    echo "Guest ID: " . $update_guest_id;
-    
-    // Construct the SQL query
-    $sql_update_guest = "UPDATE guest SET F_Name='$update_first_name', M_Name='$update_middle_name', L_Name='$update_last_name', Phone='$update_phone', Relationship='$update_group' WHERE ID=$update_guest_id AND user_id=$user_id";
-
-    echo $sql_update_guest;
-
-    // Execute the SQL query
-    if ($conn->query($sql_update_guest) === TRUE) {
-        // Redirect back to the previous page or any other desired page
-        header("Location: guest.php");
-        exit();
+    if ($result_check_guest->num_rows > 0) {
+        // If a guest with the same name exists, set an alert session variable
+        $_SESSION['alert'] = "الضيف المدخل مضاف بالفعل.";
     } else {
-        // Handle update failure
-        echo "Error updating guest information: " . $conn->error;
-    }
+        // Update data in the guest table
+        $sql_update_guest = "UPDATE guest SET F_Name = '$f_Name', M_Name = '$m_Name', L_Name = '$l_Name', Phone = '$phone', Relationship = '$relationship' WHERE ID = '$update_guest_id'";
 
-    // Close the database connection
-    $conn->close();
-} else {
-    // If the form is not submitted, redirect to an error page or display an error message
-    echo "Invalid request";
+        if (mysqli_query($conn, $sql_update_guest)) {
+            header("Location: guest.php");
+            exit;
+        } else {
+            echo "Error: " . $sql_update_guest . "<br>" . $conn->error;
+        }
+    }
 }
+
+// Close the database connection
+mysqli_close($conn);
+
+header("Location: guest.php");
+exit;
 ?>
