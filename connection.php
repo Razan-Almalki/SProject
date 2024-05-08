@@ -50,6 +50,22 @@ if ($conn->query($sql) === TRUE) {
         echo "Error creating table vendor: " . $conn->error . "\n";
     }
 
+    // SQL to create table tasks
+    $sql_tasks = "CREATE TABLE IF NOT EXISTS tasks ( 
+        id INT AUTO_INCREMENT PRIMARY KEY, 
+        user_id INT , 
+        name VARCHAR(255) NOT NULL, 
+        due_date DATE, 
+        completed BOOLEAN, 
+        FOREIGN KEY (user_id) REFERENCES user(User_ID) ON DELETE CASCADE
+    )"; 
+     
+    if ($conn->query($sql_tasks) === TRUE) { 
+        // Table tasks created successfully
+    } else { 
+        echo "Error creating table tasks: " . $conn->error . "\n"; 
+    }
+
     // SQL to create table services
     $sql_services = "CREATE TABLE IF NOT EXISTS services (
         Service_ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -64,7 +80,7 @@ if ($conn->query($sql) === TRUE) {
         Location VARCHAR(255) NOT NULL,
         Map LONGTEXT,
         pic longblob,
-        FOREIGN KEY (vendor_id) REFERENCES vendor(Vendor_ID)
+        FOREIGN KEY (vendor_id) REFERENCES vendor(Vendor_ID) ON DELETE CASCADE
     )"; // Specify storage engine
 
     if ($conn->query($sql_services) === TRUE) {
@@ -77,7 +93,7 @@ if ($conn->query($sql) === TRUE) {
     $sql_guest = "CREATE TABLE IF NOT EXISTS guest (
         ID INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT,
-        FOREIGN KEY (user_id) REFERENCES user(User_ID),
+        FOREIGN KEY (user_id) REFERENCES user(User_ID) ON DELETE CASCADE,
         F_Name VARCHAR(30) NOT NULL,
         M_Name VARCHAR(30) NOT NULL,
         L_Name VARCHAR(30) NOT NULL,
@@ -96,9 +112,10 @@ if ($conn->query($sql) === TRUE) {
     $sql_guest_tables = "CREATE TABLE IF NOT EXISTS guest_tables (
         ID INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT,
-        FOREIGN KEY (user_id) REFERENCES user(User_ID),
+        FOREIGN KEY (user_id) REFERENCES user(User_ID) ON DELETE CASCADE,
         Table_name VARCHAR(30) NOT NULL
     )"; // Specify storage engine
+    
 
     // Execute the query
     if(isset($_SESSION['user_id'])) {
@@ -106,7 +123,7 @@ if ($conn->query($sql) === TRUE) {
         $sql_guest_tables = "CREATE TABLE IF NOT EXISTS guest_tables (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             user_id INT,
-            FOREIGN KEY (user_id) REFERENCES user(User_ID),
+            FOREIGN KEY (user_id) REFERENCES user(User_ID) ON DELETE CASCADE,
             Table_name VARCHAR(30) NOT NULL
         )";
     

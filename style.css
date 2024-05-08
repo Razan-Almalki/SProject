@@ -232,17 +232,8 @@ form .input-box span.details, .input-box input{
   }
 
   /* Footer CSS */
-  footer {
-    background-color: #33333344;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
 footer {
+  background-color: #33333344;
   color: #fff;
   text-align: center;
   padding: 10px;
