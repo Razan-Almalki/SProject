@@ -1,7 +1,7 @@
 // Wait for the DOM to be ready
 document.addEventListener("DOMContentLoaded", function () {
     // Get the form element
-    var loginForm = document.getElementById("vendorLoginForm");
+    var loginForm = document.getElementById("loginForm");
 
     // Get the input fields
     const emailInput = document.getElementById('email');

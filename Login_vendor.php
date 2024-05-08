@@ -1,7 +1,4 @@
 <?php
-// Start session
-session_start();
-
 include "connection.php";
 
 // Check if form is submitted
@@ -19,17 +16,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($password)) {
-        $response = array("success" => false, "message" => "خطأ: كلمة المرور مطلوبة.");
+        $response = array("success" => false, "message" => "خطأ: كلمة المرور مطلوب.");
         echo json_encode($response);
         exit;
     }
+
 
     // Prepare SQL statement
     $sql = "SELECT * FROM vendor WHERE Email = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {
-        $response = array("success" => false, "message" => "خطأ: لم يتمكن من تحضير الاستعلام.");
+        $response = array("success" => false, "message" => "Error: Could not prepare the statement.");
         echo json_encode($response);
         exit;
     }
@@ -45,30 +43,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if user exists
     if ($result->num_rows === 0) {
-        $response = array("success" => false, "message" => " خطأ: البريد الإلكتروني '$email' غير مسجل.");
+        $response = array("success" => false, "message" => " خطأ: الايميل '$email' غير مسجل.");
         echo json_encode($response);
         exit;
     }
 
     // Fetch user data
-    $vendor = $result->fetch_assoc();
+    $user = $result->fetch_assoc();
 
     // Verify password
-    if (!password_verify($password, $vendor["Pass_word"])) {
+    if (!password_verify($password, $user["Pass_word"])) {
         $response = array("success" => false, "message" => "خطأ: كلمة المرور غير صحيحة.");
         echo json_encode($response);
         exit;
     } else {
-        // Set session variables after successful login
-        $_SESSION["Vendor_ID"] = $vendor["Vendor_ID"];
-        $_SESSION["user_name"] = $vendor["First_name"] . " " . $vendor["Last_name"];
+        // Start session
+        session_start();
 
-        $response = array("success" => true, "message" => "Login successful", "user_name" => $_SESSION["user_name"], "Vendor_ID" => $_SESSION["Vendor_ID"]);
+        // Set session variables after successful login
+        $_SESSION["vendor_id"] = $user["Vendor_ID"];
+        $_SESSION["vendor_name"] = $user["First_name"] . " " . $user["Last_name"];
+
+        $response = array("success" => true, "message" => "Login successful", "vendor_name" => $_SESSION["vendor_name"], "vendor_id" => $_SESSION["vendor_id"]);
         echo json_encode($response);
         exit;
     }
+    // Close the database connection
+    $conn->close();
 }
-
-// Close the database connection
-$conn->close();
-?>

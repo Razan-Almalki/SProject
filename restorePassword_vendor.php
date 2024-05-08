@@ -14,7 +14,7 @@ $newPassword = $_POST['new-password'];
 $confirmedPassword = $_POST['confirm-password'];
 
 // Perform a database query to check if the email exists
-$query = "SELECT * FROM user WHERE Email = '$email'";
+$query = "SELECT * FROM vendor WHERE Email = '$email'";
 $result = mysqli_query($conn, $query);
 
 // Check if a row is returned(Email exists)
@@ -25,7 +25,7 @@ if (mysqli_num_rows($result) > 0) {
       // Hash the new password
       $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
       // Update the user's password in the database
-      $sql = "UPDATE user SET Pass_word = ? WHERE Email = ?";
+      $sql = "UPDATE vendor SET Pass_word = ? WHERE Email = ?";
       $stmt = $conn->prepare($sql);
       $stmt->bind_param('ss', $hashedNewPassword, $email);
       if ($stmt->execute()) {

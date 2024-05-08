@@ -1,4 +1,7 @@
 <?php
+
+include "connection.php";
+
 // Start session
 session_start();
 
@@ -8,14 +11,6 @@ if (!$loggedIn) {
     exit;
 }
 
-// Assuming you have a database connection
-$servername = "localhost";
-$username = "root";
-$dbpassword = "suma";
-$dbname = "sorour";
-
-// Create a connection
-$conn = new mysqli($servername, $username, $dbpassword, $dbname);
 
 // Check the connection
 if ($conn->connect_error) {
@@ -25,13 +20,13 @@ if ($conn->connect_error) {
 $user_id = $_SESSION["vendor_id"];
 
 // Fetch user data from the database based on the user ID
-$sql = "SELECT * FROM vendor WHERE vendor_ID = '$user_id'";
+$sql = "SELECT * FROM vendor WHERE Vendor_ID = '$user_id'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
-    $firstName = $user['first_name'];
-    $lastName = $user['last_name'];
+    $firstName = $user['First_name'];
+    $lastName = $user['Last_name'];
     $userEmail = $user['Email'];
     $userPhone = $user['Phone'];
 
@@ -43,7 +38,7 @@ if ($result->num_rows > 0) {
         // Check if the entered email matches the user's email
         if ($enteredEmail === $userEmail) {
             // Delete the user's account
-            $deleteSql = "DELETE FROM vendor WHERE vendor_ID = '$user_id'";
+            $deleteSql = "DELETE FROM vendor WHERE Vendor_ID = '$user_id'";
             if ($conn->query($deleteSql) === TRUE) {
                 // Account deleted successfully. You can perform any additional actions here.
                 echo "<script>alert('تم حذف الحساب بنجاح!')</script>";
@@ -77,7 +72,7 @@ if (isset($_POST['edit-button'])) {
     }else{
 
     // Update vendor information in database
-    $sql = "UPDATE vendor SET first_name = ?, last_name = ?, Phone = ? WHERE vendor_ID = ?";
+    $sql = "UPDATE vendor SET First_name = ?, Last_name = ?, Phone = ? WHERE Vendor_ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('ssss', $firstName, $lastName, $phone, $_SESSION["vendor_id"]); 
     $stmt->execute();
@@ -99,7 +94,7 @@ if (isset($_POST['change_password'])) {
     $confirmPassword = $_POST['confirm-password'];
   
     // Fetch user data based on user ID (assuming you have a way to get it)
-    $sql = "SELECT Pass_word FROM vendor WHERE vendor_ID = ?";
+    $sql = "SELECT Pass_word FROM vendor WHERE Vendor_ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $_SESSION["vendor_id"]);
     $stmt->execute();
@@ -114,7 +109,7 @@ if (isset($_POST['change_password'])) {
         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
   
         // Update the user's password in the database
-        $sql = "UPDATE vendor SET Pass_word = ? WHERE vendor_ID = ?";
+        $sql = "UPDATE vendor SET Pass_word = ? WHERE Vendor_ID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si', $hashedNewPassword, $_SESSION["vendor_id"]);
         if ($stmt->execute()) {
@@ -135,6 +130,7 @@ if (isset($_POST['change_password'])) {
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <!-- Created By CodingLab - www.codinglabweb.com -->

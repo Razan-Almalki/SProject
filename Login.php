@@ -1,6 +1,4 @@
 <?php
-// Start session
-session_start();
 
 include "connection.php";
 
@@ -59,6 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode($response);
         exit;
     } else {
+        // Start session
+        session_start();
         // Set session variables after successful login
         $_SESSION["user_id"] = $user["User_ID"];
         $_SESSION["user_name"] = $user["First_name"] . " " . $user["Last_name"];

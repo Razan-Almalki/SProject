@@ -1,109 +1,132 @@
 <?php
 
-include "connection.php";
+include 'connection.php';
 // Start session
 session_start();
 
 $loggedIn = isset($_SESSION["user_id"]);
 if (!$loggedIn) {
-    header("Location: Login.html");
-    exit;
+  header("Location: Login.html");
+  exit;
 }
 
 // Check the connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  die("Connection failed: " . $conn->connect_error);
 }
 
 $user_id = $_SESSION['user_id'];
 
 // Fetch user data from the database based on the user ID
-$sql = "SELECT * FROM user WHERE User_ID = '$user_id'"; // Change 'user_ID' to 'User_ID'
+$sql = "SELECT * FROM user WHERE User_ID = '$user_id'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-    // Check if the keys exist in the $user array before accessing them
-    $firstName = isset($user['First_name']) ? $user['First_name'] : ''; // Change 'first_name' to 'First_name'
-    $lastName = isset($user['Last_name']) ? $user['Last_name'] : ''; // Change 'last_name' to 'Last_name'
-    $userEmail = isset($user['Email']) ? $user['Email'] : ''; // Change 'email' to 'Email'
-    $userPhone = isset($user['Phone']) ? $user['Phone'] : ''; // 'Phone' remains the same
+  $user = $result->fetch_assoc();
+  // Check if the keys exist in the $user array before accessing them
+  $firstName = isset($user['First_name']) ? $user['First_name'] : ''; // Change 'first_name' to 'First_name'
+  $lastName = isset($user['Last_name']) ? $user['Last_name'] : ''; // Change 'last_name' to 'Last_name'
+  $userEmail = isset($user['Email']) ? $user['Email'] : ''; // Change 'email' to 'Email'
+  $userPhone = isset($user['Phone']) ? $user['Phone'] : ''; // 'Phone' remains the same
 
-    // Rest of your code remains unchanged
+  // Rest of your code remains unchanged
 } else {
-    $firstName = "User Not Found";
-    $lastName = "";
-    $userEmail = "";
-    $userPhone = "";
+  $firstName = "User Not Found";
+  $lastName = "";
+  $userEmail = "";
+  $userPhone = "";
+}
+
+// to delet the account 
+if (isset($_POST['delete_account'])) {
+  // Retrieve the entered email
+  $enteredEmail = $_POST['entered_email'];
+
+  // Check if the entered email matches the user's email
+  if ($enteredEmail === $userEmail) {
+    // Delete the user's account
+    $deleteSql = "DELETE FROM user WHERE User_ID = '$user_id'";
+    if ($conn->query($deleteSql) === TRUE) {
+      // Account deleted successfully. You can perform any additional actions here.
+      echo "<script>alert('تم حذف الحساب بنجاح!')</script>";
+      header("Location: LogOut.php"); // Redirect to the logout page or any other appropriate page
+      exit;
+    } else {
+      // Store the error message in a variable
+      $errorMessage = "خطأ في حذف الحساب: " . $conn->error;
+    }
+  } else {
+    // Store the error message in a variable
+    $errorMessage = "الايميل المدخل خطأ، حاول مرة اخرى";
+  }
 }
 
 // Check if edining form submitted
 if (isset($_POST['edit-button'])) {
-    $firstName = $_POST['new-firstname'];
-    $lastName = $_POST['new-lastname'];
-    $phone = $_POST['new-phone'];
+  $firstName = $_POST['new-firstname'];
+  $lastName = $_POST['new-lastname'];
+  $phone = $_POST['new-phone'];
 
-    // Validate data (optional)
-    if (!preg_match("/^05\d{8}$/", $phone)) {
-        $errorMessage1 = "الرقم المدخل غير صحيح!";
-    }else{
+  // Validate data (optional)
+  if (!preg_match("/^05\d{8}$/", $phone)) {
+    $errorMessage1 = "الرقم المدخل غير صحيح!";
+  } else {
 
     // Update user information in database
     $sql = "UPDATE user SET first_name = ?, last_name = ?, Phone = ? WHERE user_ID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssss', $firstName, $lastName, $phone, $_SESSION['user_id']); // Replace with your logic to get user ID
+    $stmt->bind_param('ssss', $firstName, $lastName, $phone, $_SESSION['user_id']);
     $stmt->execute();
 
     if ($stmt->affected_rows === 1) {
-        // Store the error message in a variable
-        echo "<script>alert('تم تحديث بيانتك بنجاح!.')</script>";
-        $errorMessage1 = "تم تحديث بيانتك بنجاح!." . $conn->error;
+      // Store the error message in a variable
+      $errorMessage1 = "تم تحديث بيانتك بنجاح!." . $conn->error;
     } else {
-        $errorMessage1 = "فشل تحديث البيانات." . $conn->error;
+      $errorMessage1 = "فشل تحديث البيانات." . $conn->error;
     }
     $stmt->close();
-}
+  }
 }
 // reset the password 
 if (isset($_POST['change_password'])) {
-    $currentPassword = $_POST['current-password'];
-    $newPassword = $_POST['new-password'];
-    $confirmPassword = $_POST['confirm-password'];
-  
-    // Fetch user data based on user ID (assuming you have a way to get it)
-    $sql = "SELECT Pass_word FROM user WHERE user_ID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $_SESSION['user_id']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-  
-    // Verify current password
-    if (password_verify($currentPassword, $user['Pass_word'])) {
-      // Check if new password and confirm password match
-      if ($newPassword === $confirmPassword) {
-        // Hash the new password
-        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-  
-        // Update the user's password in the database
-        $sql = "UPDATE user SET Pass_word = ? WHERE user_ID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('si', $hashedNewPassword, $_SESSION['user_id']);
-        if ($stmt->execute()) {
-          // Password reset successful
-          echo "<script>alert('تم تغيير كلمة المرور بنجاح!')</script>";
-          $errorMessage2 = ' ' . $conn->error;
-        } else {
-          $errorMessage2 = 'فشل تغيير كلمة المرور!' . $conn->error;
-        }
-        $stmt->close();
+  $currentPassword = $_POST['current-password'];
+  $newPassword = $_POST['new-password'];
+  $confirmPassword = $_POST['confirm-password'];
+
+  // Fetch user data based on user ID
+  $sql = "SELECT Pass_word FROM user WHERE user_ID = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param('i', $_SESSION['user_id']);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $user = $result->fetch_assoc();
+
+  // Verify current password
+  if (password_verify($currentPassword, $user['Pass_word'])) {
+    // Check if new password and confirm password match
+    if ($newPassword === $confirmPassword) {
+      // Hash the new password
+      $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+      // Update the user's password in the database
+      $sql = "UPDATE user SET Pass_word = ? WHERE user_ID = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param('si', $hashedNewPassword, $_SESSION['user_id']);
+      if ($stmt->execute()) {
+        // Password reset successful
+        echo "<script>alert('تم تغيير كلمة المرور بنجاح!')</script>";
+        $errorMessage2 = ' ' . $conn->error;
       } else {
-        $errorMessage2 = 'كلمة المرور الجديدة غير متطابقة!' . $conn->error;
+        $errorMessage2 = 'فشل تغيير كلمة المرور!' . $conn->error;
       }
+      $stmt->close();
     } else {
-      $errorMessage2 ='كلمة المرور الحالية غير صحيحة!' . $conn->error;
+      $errorMessage2 = 'كلمة المرور الجديدة غير متطابقة!' . $conn->error;
     }
+  } else {
+    $errorMessage2 = 'كلمة المرور الحالية غير صحيحة!' . $conn->error;
   }
+}
 
 $conn->close();
 ?>

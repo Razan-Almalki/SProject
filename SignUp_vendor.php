@@ -1,14 +1,14 @@
 <?php
-
 include 'connection.php';
 
-// data from form 
 $firstName = $_POST['first_name'];
 $lastName = $_POST['last_name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $phone = $_POST['phone'];
 $confirmPassword = $_POST['confirm_password'];
+
+
 
 if ($conn->connect_error) {
     echo "$conn->connect_error";
@@ -76,7 +76,7 @@ if ($conn->connect_error) {
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO vendor (first_name, last_name, Email, Phone, Pass_word) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO vendor (First_name, Last_name, Email, Phone, Pass_word) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {

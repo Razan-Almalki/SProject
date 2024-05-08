@@ -34,7 +34,7 @@ if ($conn->connect_error) {
         $errors[] = "خطأ: من فضلك أدخل عنوان إلكتروني صحيح.";
     } else {
         // Check if the email already exists in the database
-        $check_email_query = "SELECT * FROM user WHERE email = ?";
+        $check_email_query = "SELECT * FROM user WHERE Email = ?";
         $check_email_stmt = $conn->prepare($check_email_query);
         $check_email_stmt->bind_param("s", $email);
         $check_email_stmt->execute();
@@ -77,7 +77,7 @@ if ($conn->connect_error) {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // the insert query
-    $sql = "INSERT INTO user (first_name, last_name, email, Pass_word, Phone) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user (First_name, Last_name, Email, Pass_word, Phone) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     
