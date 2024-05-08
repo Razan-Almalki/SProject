@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#signUpForm').submit(function(event) {
+    $('#vendorSignUpForm').submit(function(event) {
       event.preventDefault();
       validateForm();
     });
@@ -80,7 +80,7 @@ $(document).ready(function() {
     }
   
     function submitForm() {
-      var formData = $('#signUpForm').serialize();
+      var formData = $('#vendorSignUpForm').serialize();
   
       $.ajax({
         type: 'POST',

@@ -1,10 +1,10 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "suma";
-$dbname = "soso"; // Correct this if necessary
+$password = "Qazwsx12!";
+$dbname = "sour"; // This should match the existing database or the one you want to create
 
-// Create a new connection
+// Create connection
 $conn = new mysqli($servername, $username, $password);
 
 // Check connection
@@ -13,13 +13,10 @@ if ($conn->connect_error) {
 }
 
 // Create database if it doesn't exist
-$sql_create_db = "CREATE DATABASE IF NOT EXISTS $dbname";
-if ($conn->query($sql_create_db) !== TRUE) {
-    die("Error creating database: " . $conn->error);
-}
-
-// Now select the database
-$conn->select_db($dbname);
+$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
+if ($conn->query($sql) === TRUE) {
+    // Select the database
+    mysqli_select_db($conn, $dbname);
 
     // SQL to create table user
     $sql_user = "CREATE TABLE IF NOT EXISTS user (
@@ -44,7 +41,6 @@ $conn->select_db($dbname);
         Last_name VARCHAR(50) NOT NULL,
         Email VARCHAR(255) UNIQUE,
         Phone VARCHAR(255) UNIQUE,
-        IBN VARCHAR(255) UNIQUE,
         Pass_word VARCHAR(255) NOT NULL
     )";
 
@@ -143,4 +139,7 @@ $conn->select_db($dbname);
         }
     }
 
+} else {
+    echo "Error creating database: " . $conn->error . "\n";
+}
 ?>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendor Profile</title>
-    <link rel="stylesheet" href="Vendor_style.css">
+    <link rel="stylesheet" href="style_index.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
 </head>
@@ -12,7 +12,7 @@
 <?php
 session_start();
 // Check if user is authenticated
-$loggedInV = isset($_SESSION["vendor_id"]);
+$loggedInV = isset($_SESSION['Vendor_ID']);
 ?>
 
 <body>
@@ -50,7 +50,7 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                     <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
                 </li>
                 <!-- display the item based on the user's authentication status -->
-                <?php if ($loggedIn) { ?>
+                <?php if (isset($_SESSION["Vendor_id"])) { ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,60 +71,6 @@ $loggedInV = isset($_SESSION["vendor_id"]);
     </header>
     <main>
         <form>
-            <div class="main-contianer">
-                <h2 id="main-header">اعدادات الحساب</h2>
-                <div class="contianer">
-                    <div class="info">
-                        <label>البريد الالكتروني</br></br>
-                            <input type="text" name="email" value="weeedo01421@hotmail.com"
-                                data-msgerror="you have to right your name">
-                        </label>
-
-                        <p class="se-div">تغيير البريد</p>
-                    </div>
-                </div>
-                <div class="contianer">
-                    <div class="info">
-                        <label>رقم الجوال</br></br>
-                            <input type="text" name="phone" value="0545424054" data-msgerror="">
-                        </label>
-
-                        <p class="se-div">تغيير رقم الجوال</p>
-                    </div>
-                </div>
-                <div class="contianer">
-                    <div class="info">
-                        <label>كلمة المرور</br></br>
-                            <input type="text" name="email" value="" data-msgerror="you have to right your name">
-                        </label>
-
-                        <label>اعادة كلمة المرور</br></br>
-                            <input type="text" name="email" value="" data-msgerror="you have to right your name">
-                        </label>
-
-                        <p>تغيير كلمة المرور</p>
-                    </div>
-                </div>
-
-                <div class="contianer">
-                    <div class="info">
-                        <label>الحساب البنكي</br></br>
-                            <input type="text" name="email" value="" data-msgerror="you have to right your name">
-                        </label>
-
-                        <p>تغيير الحساب البنكي</p>
-                    </div>
-                </div>
-
-                <div class="contianer">
-                    <div class="info">
-                        <p>حذف الحساب</p>
-                    </div>
-                </div>
-            </div>
-
-            </br>
-
             <div id="service-setting">
                 <div class="main-contianer">
                     <h2 id="main-header">الخدمات</h2>
@@ -139,19 +85,74 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                         </button>
                     </div>
 
-                    <div class="services-contianer">
-                        <h2> // type of service </h2>
-                        <div class="services">
-                            <div class="product-image">
-                                // pic of service
-                            </div>
-                            <div class="product-info">
-                                <h5> // name of service </h5>
-                                <h6> // price of service </h6>
-                            </div>
-                        </div>
+                    <?php
+                    include "connection.php";
+
+                    // Query to retrieve services based on vendor ID
+                    $sql = "SELECT * FROM services WHERE vendor_id=" . $_SESSION['Vendor_ID'];
+                    $result = $conn->query($sql);
+
+                    // Associative array to store services categorized by service type
+                    $servicesByType = array();
+
+                    // Check if there are services available
+                    if ($result->num_rows > 0) {
+                        // Loop through each row of the result set
+                        while ($row = $result->fetch_assoc()) {
+                            // Store service details in an array
+                            $serviceDetails = array(
+                                "service_name" => $row["Service_name"],
+                                "service_type" => $row["Service_type"],
+                                "service_image" => $row["pic"]
+                            );
+
+                            // Append the service details to the array corresponding to its service type
+                            $servicesByType[$row["Service_type"]][] = $serviceDetails;
+                        }
+                    }
+                    ?>
+
+                    <!-- HTML to display services organized by service type -->
+                    <div class="services-container">
+                        <?php
+                        // Loop through each service type
+                        foreach ($servicesByType as $serviceType => $services) {
+                            // Display the service type based on the type of service
+                            switch ($serviceType) {
+                                case 'venue':
+                                    $serviceTypeName = "القاعات";
+                                    break;
+                                case 'catering':
+                                    $serviceTypeName = "خدمات تقديم الطعام";
+                                    break;
+                                case 'music':
+                                    $serviceTypeName = "الخدمات الموسيقية";
+                                    break;
+                                default:
+                                    $serviceTypeName = $serviceType; // Use the original service type if not matched
+                            }
+                            echo "<h2>$serviceTypeName</h2>"; // Display the service type as a heading
+                            echo "<div class='service-type-container'>";
+
+                            // Loop through each service of the current service type
+                            foreach ($services as $service) {
+                                echo '<div class="services">';
+                                echo '<div class="product-image">';
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($service["service_image"]) . '" width="160px" height="80px" alt="Service Image">';
+                                echo '</div>';
+                                echo '<div class="product-info">';
+                                echo "<h5>{$service['service_name']}</h5>"; // Display the service name
+                                // You can include additional information such as price here
+                                echo '</div>';
+                                echo '</div>';
+                            }
+
+                            echo "</div>"; // Close service-type-container
+                        }
+                        ?>
                     </div>
                 </div>
+            </div>
             </div>
         </form>
 
@@ -177,45 +178,74 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                                 name="serviceName" required>
                             <label for="serviceName" class="form__label">اسم الخدمة</label>
                         </div>
-                        <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي"
-                                id="socialMedia" name="socialMedia">
-                            <label for="socialMedia" class="form__label">روابط وسائل التواصل الاجتماعي</label>
+
+                        <div id="socialMedia-input">
+                            <div class="form__group field" style="width: 118%">
+                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي"
+                                    id="tiktok" name="tiktok">
+                                <label for="tiktok" class="form__label">رابط صفحتك في التيكتوك</label>
+                            </div>
+                            <div class="form__group field" style="width: 118%">
+                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي"
+                                    id="instgram" name="instgram">
+                                <label for="instgram" class="form__label">رابط صفحتك في انستجرام</label>
+                            </div>
+                            <div class="form__group field" style="width: 118%">
+                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي"
+                                    id="snapchat" name="snapchat">
+                                <label for="snapchat" class="form__label">رابط صفحتك في السناب تشات</label>
+                            </div>
                         </div>
+                        <input type="hidden" id="socialMedia" name="socialMedia" value="">
+
                         <div class="form__group field">
                             <input type="input" class="form__field" placeholder="وصف الخدمة" id="description"
                                 name="description">
                             <label for="description" class="form__label">وصف شامل للخدمة</label>
                         </div>
+
                         <div class="form__group field">
                             <input type="input" class="form__field" placeholder="السعر" id="price" name="price"
                                 required>
                             <label for="price" class="form__label">السعر</label>
                         </div>
+
                         <div class="form__group field">
                             <input type="input" class="form__field" placeholder="الوديعة" id="deposit" name="deposit"
                                 required>
                             <label for="deposit" class="form__label">العربون</label>
                         </div>
+
                         <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="الموقع" id="location" name="location"
+                            <input type="input" class="form__field" placeholder="المدينة" id="location" name="location"
                                 required>
-                            <label for="location" class="form__label">الموقع</label>
+                            <label for="location" class="form__label">المدينة</label>
                         </div>
+
+                        <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="الموقع" id="map" name="map" required>
+                            <label for="map" class="form__label">الموقع</label>
+                        </div>
+
                         <div class="form__group field">
                             <input type="file" name="image" class="form__field" accept="image/*" />
                             <label for="pic" class="form__label">صورة للخدمة</label>
                         </div>
 
                         <div id="venueFields" class="form__group field">
-                            <input type="input" class="form__field" placeholder="طابع الخدمة" id="theme" name="theme">
                             <label for="theme" class="form__label">نوع المكان</label>
+                            <select id="theme" name="theme" class="form__field">
+                                <option selected disabled value="" style="display: none">اختر نوع المكان</option>
+                                <option value="Hotel">فندق</option>
+                                <option value="Chalet">استراحه</option>
+                                <option value="Venue">قاعة</option>
+                            </select>
                         </div>
                     </div>
 
                     <input type="hidden" id="service-type" name="service-type" value="">
 
-                    <input type="hidden" id="vendorId" name="vendorId" value="<?php echo $_SESSION['vendor_id']; ?>">
+                    <input type="hidden" id="vendorId" name="vendorId" value="<?php echo $_SESSION['Vendor_ID']; ?>">
 
                     <button type="submit">إضافة</button>
                 </form>
@@ -303,6 +333,41 @@ $loggedInV = isset($_SESSION["vendor_id"]);
             });
         }
     </script>
+
+    <script>
+        // Get references to the TikTok, Instagram, and Snapchat inputs
+        var tiktokInput = document.getElementById("tiktok");
+        var instgramInput = document.getElementById("instgram");
+        var snapchatInput = document.getElementById("snapchat");
+
+        // Get reference to the socialMedia input
+        var socialMediaInput = document.getElementById("socialMedia");
+
+        // Listen for form submission
+        document.getElementById("serviceForm").addEventListener("submit", function (event) {
+            // Concatenate the values with empty lines if they are not empty
+            var socialMediaValue = "";
+
+            if (tiktokInput.value.trim() !== "") {
+                socialMediaValue += tiktokInput.value.trim() + "\n";
+            }
+
+            if (instgramInput.value.trim() !== "") {
+                socialMediaValue += instgramInput.value.trim() + "\n";
+            }
+
+            if (snapchatInput.value.trim() !== "") {
+                socialMediaValue += snapchatInput.value.trim() + "\n";
+            }
+
+            // Remove the last new line character
+            socialMediaValue = socialMediaValue.trim();
+
+            // Assign the concatenated value to the socialMedia input
+            socialMediaInput.value = socialMediaValue;
+        });
+    </script>
+
 
     <script>
         function openPopup() {

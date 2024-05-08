@@ -100,9 +100,10 @@ button span {
     font-size: 18px;
 }
 
-.services-contianer {
+.service-type-container {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 20px; /* Adjust as needed */
 }
 
 .services {
@@ -115,6 +116,19 @@ button span {
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: rgba(39, 35, 35, 0.681);
+}
+
+.services-container h2 {
+    margin-bottom: 15px;
+    margin-right: 25px;
+}
+
+.product-image {
+    flex: 1;
+}
+
+.product-info {
+    flex: 2;
 }
 
 #add-popup {

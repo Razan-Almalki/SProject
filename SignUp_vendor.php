@@ -1,19 +1,14 @@
 <?php
 
+include 'connection.php';
+
+// data from form 
 $firstName = $_POST['first_name'];
 $lastName = $_POST['last_name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $phone = $_POST['phone'];
 $confirmPassword = $_POST['confirm_password'];
-
-$servername = "localhost";
-$username = "root";
-$dbpassword = "suma";
-$dbname = "sorour";
-
-// Create connection
-$conn = new mysqli($servername, $username, $dbpassword, $dbname);
 
 if ($conn->connect_error) {
     echo "$conn->connect_error";

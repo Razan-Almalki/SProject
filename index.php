@@ -44,6 +44,7 @@ $loggedInV = isset($_SESSION["vendor_id"]);
           <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
           <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
           <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+          <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
         </div>
       </li>
       <li>

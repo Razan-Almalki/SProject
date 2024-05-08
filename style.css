@@ -113,10 +113,12 @@ header {
 
 body{
   direction: rtl;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 .container{
@@ -126,7 +128,6 @@ body{
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  margin-top: 200px;
 }
 .container .title{
   font-size: 25px;
@@ -237,7 +238,7 @@ form .input-box span.details, .input-box input{
     color: #fff;
     text-align: center;
     padding: 10px;
-    position: relative;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
@@ -246,7 +247,7 @@ footer {
   color: #fff;
   text-align: center;
   padding: 10px;
-  position: relative;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }

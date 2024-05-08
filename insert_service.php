@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $imgContent = addslashes(file_get_contents($image)); 
         }
     }
-    
     $vendorId = $_POST['vendorId']; // Vendor ID should be set in the hidden input field
     $serviceName = $_POST['serviceName'];
     $socialMedia = $_POST['socialMedia'];
@@ -31,10 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $deposit = $_POST['deposit'];
     $theme = $_POST['theme'];
     $location = $_POST['location'];
+    $map = $_POST['map'];
 
     // Construct the SQL query
-    $sql = "INSERT INTO services (Service_type, vendor_id, Service_name, Social_media, Discription, Price, Deposit, Theme, Location, pic) 
-            VALUES ('$serviceType', '$vendorId', '$serviceName', '$socialMedia', '$description', '$price', '$deposit', '$theme', '$location', '$imgContent')";
+    $sql = "INSERT INTO services (Service_type, vendor_id, Service_name, Social_media, Discription, Price, Deposit, Theme, Location, Map, pic) 
+            VALUES ('$serviceType', '$vendorId', '$serviceName', '$socialMedia', '$description', '$price', '$deposit', '$theme', '$location', '$map', '$imgContent')";
 
     // Execute the query
     if ($conn->query($sql) === TRUE) {

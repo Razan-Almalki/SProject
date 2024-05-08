@@ -1,12 +1,17 @@
 <?php
-// database connection
-include "connection.php";
+// Assuming you have a database connection
+$servername = "localhost";
+$username = "root";
+$dbpassword = "suma";
+$dbname = "sorour";
+
+// Create a connection
+$conn = new mysqli($servername, $username, $dbpassword, $dbname);
 
 // Check the connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-
 if (isset($_POST['reset_password'])) {
 // Retrieve the user's email and new password from the submitted form
 $email = $_POST['reset-email'];
@@ -14,7 +19,7 @@ $newPassword = $_POST['new-password'];
 $confirmedPassword = $_POST['confirm-password'];
 
 // Perform a database query to check if the email exists
-$query = "SELECT * FROM user WHERE Email = '$email'";
+$query = "SELECT * FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $query);
 
 // Check if a row is returned(Email exists)
@@ -25,7 +30,7 @@ if (mysqli_num_rows($result) > 0) {
       // Hash the new password
       $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
       // Update the user's password in the database
-      $sql = "UPDATE user SET Pass_word = ? WHERE Email = ?";
+      $sql = "UPDATE users SET password = ? WHERE email = ?";
       $stmt = $conn->prepare($sql);
       $stmt->bind_param('ss', $hashedNewPassword, $email);
       if ($stmt->execute()) {
@@ -182,7 +187,6 @@ function isValidPassword($password){
         </div>
       </section>
   </footer>
-  <script src="restorePassword.js"></script>
   <script>
         <?php if (isset($errorMessage)) : ?>
             // Display the error message in the 'mess' div
