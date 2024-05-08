@@ -1,0 +1,276 @@
+<style>
+button {
+      cursor: pointer;
+        border-radius: 5em;
+        color: #fff;
+        background: linear-gradient(to right, #c79ede, #f7adc6);
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 30%;
+        font-size: 13px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    }
+@use postcss-preset-env {
+  stage: 0
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  
+  & > input {
+    flex: 1 1 10ch;
+    margin: .5rem;
+    
+    &[type="email"] {
+      flex: 3 1 30ch;
+    }
+  }
+}
+
+input {
+  border: none;
+  background: hsl(0 0% 93%);
+  border-radius: .25rem;
+  padding: .75rem 1rem;
+  
+  &[type="submit"] {
+    background: hotpink;
+    color: white;
+    box-shadow: 0 .75rem .5rem -.5rem hsl(0 50% 80%);
+  }
+}
+
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #c2dcf2, #f7adc6);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+background-image: url("bg.jpg");
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      border-radius: 10px;
+    }
+
+    /*dark-mode styling*/
+    body.dark-mode {
+      background: #333;
+      color: #fff;
+    }
+
+    body.dark-mode .container {
+      background: #444;
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark-mode li {
+      background-color: #444;
+    }
+
+    .due-date-input {
+      flex: 1;
+      padding: 8px;
+    }
+
+    body.dark-mode .modal-content {
+      background-color: #444;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    #taskInput {
+      flex: 1;
+      padding: 8px;
+    }
+button{
+padding: 5px 15px;
+      background-color: #f7adc6;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;}
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-height: 40vh;
+      overflow-y: auto;
+    }
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 12px;
+      margin-right: 10px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.363);
+    }
+
+    li.completed {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Adding space after checkbox */
+    li input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+
+    /* Adding space between task item and delete button */
+    li span {
+      flex: 1;
+      margin-right: 10px;
+      font-weight: 600;
+    }
+
+    /* Filter and Sort Buttons Styling */
+
+    .filter-container,
+    .sort-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .filter-container button,
+    .sort-container button {
+      background-color: #f7adc6;
+    }
+
+    .filter-container button:hover,
+    .sort-container button:hover {
+      background-color: #138496;
+    }
+
+    /* Active Button Styling */
+
+    .filter-container button.active,
+    .sort-container button.active {
+      background-color: #0056b3;
+    }
+
+    /* Edit Task Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive Styling */
+
+    @media (max-width: 558px) {
+      .input-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #taskInput {
+        width: 100%;
+      }
+
+      #dueDateInput{
+        width: 100%;
+      }
+
+      .filter-container,
+      .sort-container {
+        flex-wrap: wrap;
+      }
+
+      .filter-container button,
+      .sort-container button {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width:433px) {
+
+      #taskInput {
+        width: 280px;
+      }
+
+      #dueDateInput{
+        width: 280px;
+      }
+
+      .filter-container,
+      .sort-container {
+        flex-wrap: wrap;
+      }
+
+      .filter-container button,
+      .sort-container button {
+        width: 280px;
+      }
+      .dark-mode-switch{
+        margin-left: 40px;
+      }
+    }
+
+</style>
