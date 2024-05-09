@@ -24,6 +24,8 @@ $user_id = $_SESSION['user_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>قائمة المهام</title>
 <link rel="stylesheet" href="checklistStyle.css"></link>
+<link rel="stylesheet" href="style_index.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
 </head>
 <body>
     <!-- Navbar Section -->
@@ -47,7 +49,7 @@ $user_id = $_SESSION['user_id'];
           أدوات التخطيط
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+          <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
           <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
           <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
           <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
