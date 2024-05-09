@@ -1,9 +1,11 @@
 <?php
+
+session_start();
 // Database connection parameters
 $servername = "localhost";
 $username = "Ruba";
 $password = "Ruba20";
-$dbname = "hithere1"; 
+$dbname = "wedding_planning";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,8 +15,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL query to fetch data from the "Venue" table
-$sql = "SELECT * FROM venue";
+// Fetch venue data with service_type = 'Venue'
+$sql = "SELECT * FROM services WHERE Service_type = 'Venue'";
 $result = $conn->query($sql);
 
 // Check if there are any rows returned
@@ -23,21 +25,21 @@ if ($result->num_rows > 0) {
     $data = array();
 
     // Fetch data row by row
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
+
+        // Extract the file extension from the filename
+        $pic_extension = pathinfo($row['pic'], PATHINFO_EXTENSION);
+
         // Add each row to the data array
         $data[] = array(
-            'pic' => $row['pic'],
-            'name' => $row['name'],
-            'price' => $row['price'],
-            'location' => $row['location'],
-            'description' => $row['description'],
-            'type' => $row['type'],
-            'rate' => $row['rate'],
-            'num_rates' => $row['num_rates'],
-            'num_guests' => $row['num_guests'],
-            'num_views' => $row['num_views'],
-            'vendor_info' => $row['vendor_info'],
-            'vendor_rating' => $row['vendor_rating']
+            'id' => $row['Service_ID'],
+            'pic' => base64_encode($row['pic']),
+            'pic_type' => $pic_extension, // Set the pic_type to the extracted file extension
+            'name' => $row['Service_name'],
+            'price' => $row['Price'],
+            'deposit' => $row['Deposit'],
+            'description' => $row['Discription'],
+            'type' => $row['Service_type']
         );
     }
 

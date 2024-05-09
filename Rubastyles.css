@@ -1,0 +1,656 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff1f1;
+}
+
+header {
+    background-color: #e1c6c6;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    background-color: #e1c6c6;
+    text-align: center;
+    padding: 10px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.introductionImge img {
+    width: 100%;
+    height: auto;
+    position: relative;
+
+}
+
+.introductionImge {
+    position: relative;
+}
+
+.introductionImge span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    transition: font-size 0.3s ease;
+    /* Add transition for smoother effect */
+}
+
+.introductionImge h1 {
+    margin: 0;
+    text-align: center;
+    color: #2b2626;
+    transition: font-size 0.3s ease;
+    /* Add transition for smoother effect */
+}
+
+.introductionImge:hover img {
+    filter: blur(5px);
+    /* Apply blur filter on hover */
+}
+
+.services-panels {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    position: relative;
+    /* Set the parent div as a positioning context */ 
+}
+
+.services-panels div {
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 10px;
+    /*border-radius: 5px;*/
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    max-width: 435px;
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+    /* Set the parent div as a positioning context */
+}
+
+.services-panels figure {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.services-panels figure img {
+    width: 100%;
+    /* Adjust width to fit container */
+    height: 100%;
+    /* Adjust height to fit container */
+    object-fit: cover;
+    /* Maintain aspect ratio and cover container */
+    /*border-radius: 5px;*/
+    max-width: 410px;
+    /* Set max width for uniformity */
+    max-height: 250px;
+    /* Set max height for uniformity */
+}
+
+.services-panels figure img:hover {
+    filter: brightness(80%);
+}
+
+.services-panels h3 {
+    padding: 10px;
+    text-align: center;
+}
+
+.services-panels p {
+    padding: 10px;
+    text-align: center;
+    direction: rtl;
+}
+
+.services-panels button {
+    background-color: #F3D0D7;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    /* Position the button */
+    left: 50%;
+    /* Move the button to the center horizontally */
+    bottom: 40px;
+    /* Adjust the distance from the bottom */
+    transform: translateX(-50%);
+    /* Center the button horizontally */
+}
+
+.services-panels button:hover {
+    background-color: #BC7FCD;
+}
+
+/*////////////////////////////////////////////////// Styles for show item //////////////////////////////////////////////////*/
+.showItem-panels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    direction: rtl;
+}
+
+.showItem-panels article {
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #fff;
+    width: 400px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    /* Adjust the width as needed */
+    margin-bottom: 20px;
+    /* Adjust margin between items */
+    border: 1px solid #ccc;
+    /* Add border for item container */
+    box-sizing: border-box;
+    /* Include padding and border in the width */
+}
+
+.showItem-panels img {
+    width: 100%;
+    height: 100%;
+    max-width: 410px;
+    max-height: 250px;
+}
+
+.showItem-panels h2 {
+    margin-top: 10px;
+    /* Adjust spacing */
+    text-align: center;
+}
+
+.showItem-panels p {
+    margin-top: 5px;
+    /* Adjust spacing */
+    direction: rtl;
+}
+
+.showItem-panels div {
+    margin-top: 5px;
+    /* Adjust spacing */
+    direction: ltr;
+}
+
+.showItem-panels button {
+    background-color: #F3D0D7;
+    color: #FFFFFF;
+    border: none;
+    margin-top: 15px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    margin-right:140px ;
+    /* Adjust spacing */
+    padding: 10px 20px;
+    /* Adjust padding */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.showItem-panels button:hover {
+    background-color: #BC7FCD;
+    /* Button background color on hover */
+}
+
+/*////////////////////////////////////////////////// Styles for detailed item //////////////////////////////////////////////////*/
+
+.showDetailsItem-panels {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Align items vertically */
+    align-items: flex-start; /* Align items to the start of the column */
+    direction: rtl; /* Right-to-left direction */
+}
+
+.showDetailsItem-panels img {
+    width: 50%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    max-height: 400px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
+
+.showDetailsItem-panels div {
+    width: 93.6%; 
+    padding: 50px;
+    border: 1px solid #ccc;
+    background-color: #948989;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    direction: rtl;
+    margin-top: 2px;
+    margin-right: 20px;
+    margin-bottom: 2px;
+    text-align: center;
+    font-size: 40px;
+    border-radius: 5px 5px 0 0;
+}
+
+.showDetailsItem-panels .info {
+    width: 40%; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #a0929f;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    direction: rtl;
+    margin-top: 2px;
+    margin-right: 20px;
+    margin-bottom: 1px;
+    text-align: center;
+    font-size: 40px;
+    border-radius: 5px 5px 0 0;
+    position: absolute;
+    top: 16%;
+    left: 5%;
+}
+
+.showDetailsItem-panels .name {
+    margin: 0;
+    margin-right: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* Reduced padding */
+    width: 40%; /* Adjusted width */
+    direction: rtl;
+    position: absolute;
+    top: 27%;
+    left: 5%;
+}
+
+.showDetailsItem-panels .description {
+    margin: 0;
+    margin-right: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* Reduced padding */
+    width: 40%; /* Adjusted width */
+    direction: rtl;
+    position: absolute;
+    top: 33%;
+    left: 5%;
+}
+
+.showDetailsItem-panels .price {
+    margin: 0;
+    margin-right: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* Reduced padding */
+    width: 40%; /* Adjusted width */
+    direction: rtl;
+    position: absolute;
+    top: 39%;
+    left: 5%;
+}
+
+.showDetailsItem-panels .deposit {
+    margin: 0;
+    margin-right: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* Reduced padding */
+    width: 40%; /* Adjusted width */
+    direction: rtl;
+    position: absolute;
+    top: 45%;
+    left: 5%;
+}
+
+.showDetailsItem-panels .social-media {
+    margin: 0;
+    margin-right: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* Reduced padding */
+    width: 40%; /* Adjusted width */
+    direction: rtl;
+    position: absolute;
+    top: 51%;
+    left: 5%;
+}
+
+.showDetailsItem-panels .theme {
+    margin: 0;
+    margin-right: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* Reduced padding */
+    width: 40%; /* Adjusted width */
+    direction: rtl;
+    position: absolute;
+    top: 57%;
+    left: 5%;
+}
+.showDetailsItem-panels .detailedStars {
+    background-color: #a0929f;
+    border-radius: 0 0 5px 5px;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.review-form {
+    margin-top: 80px;
+}
+
+.showDetailsItem-panels button {
+    background-color: #F3D0D7;
+    color: #333333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.showDetailsItem-panels button:hover {
+    background-color: #BC7FCD;
+    color: #FFFFFF;
+}
+
+.pageSections{
+    padding: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #e0a7b2, #88b5d5, #0c7a71); /* Use linear gradient */
+    /*border: 1px solid #201e1e;*/
+    color: #ffffff;
+    font-size: 80px;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.starsANDcomm{
+    width: 80%;
+    height: 50;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    direction: rtl;
+    margin: 15px auto;
+    padding: 12px 12px;
+}
+
+/*/////////////////////////////////////////////////////// CSS styling for the Map ///////////////////////////////////////////////////////*/
+.map{
+    text-align: center;
+}
+
+/*/////////////////////////////////////////////////////// CSS styling for the Rating ///////////////////////////////////////////////////////*/
+.rating-box {
+    position: relative;
+    background: linear-gradient(135deg, #e0a7b2, #88b5d5, #0c7a71); /* Use linear gradient */
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    width: 20%;
+    height: 20%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+/* Style for rating stars */
+.rating-box .stars i {
+    font-size: 20px;
+    cursor: pointer;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Style for display-only stars */
+.show-rating .stars i {
+    font-size: 20px;
+    color: rgb(251, 225, 80);
+}
+
+.stars i {
+    color: #e6e6e6;
+    font-size: 35px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.stars i.active {
+    color: rgb(251, 225, 80);
+}
+
+/*/////////////////////////////////////////////////////// Style for the comments section ///////////////////////////////////////////////////////*/
+
+.comments-section {
+    position: relative;
+    background: #fff;
+    padding: 25px 50px 35px;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    direction: rtl;
+}
+
+/* Style for individual comments */
+.comment {
+    width: 80%;
+    height: 100px;
+    /*max-width: 200px;
+    max-height: 80px;*/
+    margin: 15px auto;
+    padding: 12px 12px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 20px;
+    direction: rtl;
+}
+
+/* Style for comment text */
+.comment-text {
+    margin-bottom: 5px;
+    font-size: 18px;
+    direction: rtl;
+    /* Align comments from right to left */
+}
+
+/* Style for comment author */
+.comment-author {
+    font-style: italic;
+    color: #666;
+    direction: rtl;
+    /* Align comments from right to left */
+}
+
+/* Style for comment date */
+.comment-date {
+    font-size: 12px;
+    color: #888;
+    direction: rtl;
+    /* Align comments from right to left */
+}
+
+.comment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* Align items to the right */
+    text-align: right;
+    /* Align text to the right */
+}
+
+.commentForm{
+    direction: rtl;
+}
+
+.commentHeader {
+    margin-bottom: 20px;
+    font-size: 20px;
+    direction: rtl;
+}
+
+textarea {
+    width: 80%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+    direction: rtl;
+    align-items: center;
+}
+
+.submitForm  {
+    background-color: #F3D0D7;
+    color: #FFFFFF;
+    border: none;
+    margin-top: 15px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    margin-right: 40px ;
+    /* Adjust spacing */
+    padding: 10px 20px;
+    /* Adjust padding */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submitForm:hover {
+    background-color: #BC7FCD;
+    /* Button background color on hover */
+}
+
+/*/////////////////////////////////////////////////////// CSS styling for the calendar ///////////////////////////////////////////////////////*/
+#calendar {
+    max-width: 500px;
+    margin: 20px auto 0;
+    font-size: 20px;
+    /*position: absolute;*/
+    top: 70%;
+    left: 15%;
+    background-color: #ffffff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+
+.calendar-day {
+    padding: 5px 10px;
+    border: 1px solid #777777;
+    text-align: center;
+    cursor: pointer;
+    width: 100px;
+    height: 90px;
+    font-size: 14px;
+}
+
+/* Additional styling */
+.reserved {
+    background-color: #ccc;
+}
+
+.selected {
+    background-color: #c9c9c9;
+}
+
+/* Style for reserved dates */
+.reserved-date {
+    background-color: lightgray;
+    color: darkgray;
+    pointer-events: none;
+}
+
+/* Style for selected date */
+.selected-date {
+    background-color: rgb(241, 215, 250);
+    color: black;
+}
+
+.calendarButton {
+    background-color: #F3D0D7;
+    color: #FFFFFF;
+    border: none;
+    margin-top: 15px;
+    margin-left: 45%;
+    margin-bottom: 10px;
+    margin-right: 40px ;
+    /* Adjust spacing */
+    padding: 10px 20px;
+    /* Adjust padding */
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+}
+
+.calendarButton:hover {
+    background-color: #BC7FCD;
+    /* Button background color on hover */
+}
+
+ /* Style for the header */
+ .fc-toolbar.fc-header-toolbar {
+    color: #333; /* Change the text color */
+    padding-top: 20px; /* Adjust padding as needed */
+    padding-bottom: 10px; /* Adjust padding as needed */
+    padding-left: 20px; /* Adjust padding as needed */
+}
+
+#whatsappLink {
+    position: fixed; /* Set the position to fixed so it's positioned relative to the browser window */
+    bottom: 20px; /* Adjust the distance from the bottom of the window */
+    right: 20px; /* Adjust the distance from the right of the window */
+    z-index: 9999; /* Ensure it appears above other content */
+}
+
+
+footer {
+    background-color: #e1c6c6;
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+    width: 100%;
+}

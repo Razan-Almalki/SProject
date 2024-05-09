@@ -1,6 +1,5 @@
 <?php
-
-session_start(); 
+session_start();
 
 // Database connection parameters
 $servername = "localhost";
@@ -16,12 +15,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if the venue ID is provided in the URL
-if (isset($_GET['id'])) {
-    $venueId = $_GET['id'];
+// Check if the user ID is provided in the URL
+if (isset($_SESSION['User_ID'])) {
+    $userId = $_SESSION['User_ID'];
 
-    // SQL query to fetch data for the specified venue ID
-    $sql = "SELECT * FROM services WHERE Service_ID = $venueId";
+    // SQL query to fetch data for the specified user ID from the cart table
+    $sql = "SELECT * FROM Cart WHERE user_id = $userId";
     $result = $conn->query($sql);
 
     if ($result) {
@@ -29,26 +28,23 @@ if (isset($_GET['id'])) {
             // Array to store the fetched data
             $data = array();
 
-            // Fetch data row by row
             while ($row = $result->fetch_assoc()) {
 
                 // Extract the file extension from the filename
-                $pic_extension = pathinfo($row['pic'], PATHINFO_EXTENSION);
+                $pic_extension = pathinfo($row['item_pic'], PATHINFO_EXTENSION);
+
 
                 // Add each row to the data array
-                $data = array(
-                    'id' => $row['Service_ID'],
-                    'pic' => base64_encode($row['pic']),
+                $data[] = array(
+                    'id'=> $row['id'],
+                    'item_id' => $row['item_id'],
+                    'item_name' => $row['item_name'],
+                    'item_price' => $row['item_price'],
+                    'deposit' => $row['deposit'],
+                    'user_id' => $row['user_id'],
+                    'item_pic' => $row['item_pic'],
+                    'date' => $row['date'],
                     'pic_type' => $pic_extension, // Set the pic_type to the extracted file extension
-                    'name' => $row['Service_name'],
-                    'price' => $row['Price'],
-                    'deposit' => $row['Deposit'],
-                    'description' => $row['Discription'],
-                    'type' => $row['Service_type'],
-                    'social_media' => $row['Social_media'],
-                    'theme' => $row['Theme'],
-                    'map' => $row['Map'],
-                    'location' => $row['Location']
                 );
             }
 
@@ -56,18 +52,19 @@ if (isset($_GET['id'])) {
             header('Content-Type: application/json');
             echo json_encode($data);
         } else {
-            // Venue not found
-            echo json_encode(array('message' => 'Venue not found'));
+            // Cart is empty
+            echo json_encode(array('message' => 'Cart is empty for user ID ' . $userId));
         }
-
     } else {
         // SQL query error
         echo json_encode(array('message' => 'Error executing query: ' . $conn->error));
     }
+
 } else {
-    // No venue ID provided
-    echo json_encode(array('message' => 'No venue ID provided'));
+    // No user ID provided
+    echo json_encode(array('message' => 'User ID not set in the session'));
 }
+
 // Close the database connection
 $conn->close();
 ?>

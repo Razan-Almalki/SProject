@@ -1,9 +1,11 @@
 <?php
+ 
+session_start(); 
 // Database connection parameters
 $servername = "localhost";
 $username = "Ruba";
 $password = "Ruba20";
-$dbname = "hithere1"; // Your database name
+$dbname = "wedding_planning";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,8 +15,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch all catering data
-$sql = "SELECT * FROM Catering";
+// Fetch catering data with service_type = 'Catering'
+$sql = "SELECT * FROM services WHERE Service_type = 'Catering'";
 $result = $conn->query($sql);
 
 // Check if there are any rows returned
@@ -23,17 +25,22 @@ if ($result->num_rows > 0) {
     $data = array();
 
     // Fetch data row by row
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
+
+        // Extract the file extension from the filename
+        $pic_extension = pathinfo($row['pic'], PATHINFO_EXTENSION);
+
         // Add each row to the data array
         $data[] = array(
-            'id' => $row['id'],
-            'pic' => $row['pic'],
-            'name' => $row['name'],
-            'price' => $row['price'],
-            'description' => $row['description'],
-            'type' => $row['type'],
-            'rate' => $row['rate'],
-            'num_rates' => $row['num_rates']
+            'id' => $row['Service_ID'],
+            'pic' => base64_encode($row['pic']),
+            'pic_type' => $pic_extension, // Set the pic_type to the extracted file <extension></extension>
+            /*'pic' => 'data:image/jpeg;base64,' + $row['pic'],*/
+            'name' => $row['Service_name'],
+            'price' => $row['Price'],
+            'deposit' => $row['Deposit'],
+            'description' => $row['Discription'],
+            'type' => $row['Service_type']
         );
     }
 
