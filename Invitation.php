@@ -10,9 +10,7 @@
 
 <body>
     <div id="invitation">
-        <div id="invitation-card">
-            
-        </div>
+        <!-- Display retrieved invitation here -->
     </div>
 
     <div id="form-att">
@@ -83,6 +81,16 @@
                 }
             };
             xhttp.open("GET", "get_guest_details.php?guest_id=" + guestId, true);
+            xhttp.send();
+
+            // Send AJAX request to get guest details
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("invitation").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "get_invitation.php?guest_id=" + guestId, true);
             xhttp.send();
         }
 
