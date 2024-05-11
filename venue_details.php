@@ -1,41 +1,96 @@
 <?php
 session_start();
 
+include 'connection.php';
 // Check if User_ID is set in the session
-if (isset($_SESSION['User_ID'])) {
-    $userId = $_SESSION['User_ID'];
-    
-} else {
-    // Handle case when User_ID is not set
-    echo "User ID is not set in the session.";
-}
+$userId = $_SESSION['user_id'];
+
+$loggedIn = isset($_SESSION["user_id"]);
+if (!$loggedIn) {
+    header("Location: Login.html");
+    exit;
+  }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html dir="rtl" lang="ar">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venue Details</title>
-    <link rel="stylesheet" href="Rubastyles.css">
+    <title>تفاصيل الخدمة</title>
+    <link rel="stylesheet" href="Rstyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.11/index.global.min.js"></script>
 </head>
 
 <body>
-    <header>
-        <h1>Venue Details</h1>
-    </header>
+<!-- Navbar Section -->
+<header>
+  <nav class="navbar">
+    <span class="hamburger-btn material-symbols-rounded">menu</span>
+    <a href="index.php" class="logo">
+      <img src="images/SorourIcon.png" alt="logo">
+      <h2>سُرور</h2>
+    </a>
+    <ul class="links">
+      <span class="close-btn material-symbols-rounded">close</span>
+      <li>
+        <a class="nav-link" href="about.php">عن سُرور</a>
+      </li>
+      <li>
+        <a class="nav-link" href="service.php">الخدمات</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          أدوات التخطيط
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
+          <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
+          <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
+          <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+        </div>
+      </li>
+      <li>
+        <a class="nav-link" href="cart.php">السلة</a>
+      </li>
+      <li>
+        <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+      </li>
+      <li>
+        <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+      </li>
 
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Venues</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
+      <?php if ($loggedIn) { ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            حسابي
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="userProfile.php">الاعدادات</a>
+            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+          </div>
+        </li>
+      <?php } else if ($loggedInV) { ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            حسابي
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+          </div>
+        </li>
+      <?php } ?>
+
+      <li>
+        <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+  <!-- end header inner -->
 
     <section class="showDetailsItem-panels" id="detailsSection">
         <!-- Content will be dynamically loaded here -->
@@ -387,6 +442,7 @@ if (isset($_SESSION['User_ID'])) {
                     if (response.ok) {
                         console.log('Service reserved successfully!');
                         // Reload the page after reserving the service
+                        alert('تم الحجز بنجاح!');
                         window.location.reload();
                     } else {
                         throw new Error('Failed to reserve service');
@@ -603,9 +659,48 @@ if (isset($_SESSION['User_ID'])) {
 
     </script>
 
-    <footer>
-        <p>&copy; 2024 Venue Shop. All rights reserved.</p>
-    </footer>
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>عنا</h2>
+            <a href="">الاعدادات</a>
+            <a href="about.php">المزيد</a>
+          </div>
+          <div class="footer__link--items">
+            <h2>تواصل معنا</h2>
+            <a href="/">راسلنا </a>
+            <a href="/">الدعم</a>
+          </div>
+        </div>
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>سجل معنا</h2>
+            <a href="SignUp.html">زائر جديد؟</a>
+            <a href="SignUp_vendor.html">صاحب عمل؟</a>
+          </div>
+        </div>
+      </div>
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="index.php" id="footer__logo">
+              <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
+            </a>
+          </div>
+          <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
+          <div class="social__icons">
+            <a href="/" class="social__icon--link" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-instagram"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-youtube"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-linkedin"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </section>
+  </footer>
 
 </body>
 

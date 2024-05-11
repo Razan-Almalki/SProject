@@ -1,16 +1,15 @@
 <?php
 session_start();
+$loggedIn = isset($_SESSION["user_id"]);
+if (!$loggedIn) {
+    header("Location: Login.html");
+    exit;
+  }
 // Database connection parameters
-$servername = "localhost";
-$username = "Ruba";
-$password = "Ruba20";
-$dbname = "wedding_planning"; // Your database name
+include 'connection.php';
 
 // Debug: Log received POST data
 file_put_contents('php://stderr', print_r($_POST, TRUE));
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
@@ -19,7 +18,7 @@ if ($conn->connect_error) {
 
 // Get the user_id from the session or authentication system
 // Replace this with your actual implementation
-$user_id = $_SESSION['User_ID'];
+$user_id = $_SESSION['user_id'];
 
 // Get the rating, comment, and service_id from the POST data
 $service_id = $_POST['service_id']; // Assuming service_id is submitted from the form

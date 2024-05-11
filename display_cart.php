@@ -1,14 +1,8 @@
 <?php
 session_start();
 
-// Database connection parameters
-$servername = "localhost";
-$username = "Ruba";
-$password = "Ruba20";
-$dbname = "wedding_planning";
+include 'connection.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
@@ -16,8 +10,8 @@ if ($conn->connect_error) {
 }
 
 // Check if the user ID is provided in the URL
-if (isset($_SESSION['User_ID'])) {
-    $userId = $_SESSION['User_ID'];
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
 
     // SQL query to fetch data for the specified user ID from the cart table
     $sql = "SELECT * FROM Cart WHERE user_id = $userId";

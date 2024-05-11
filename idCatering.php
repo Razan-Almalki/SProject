@@ -1,16 +1,8 @@
 <?php
 
 session_start(); 
-
+include 'connection.php';
 // Database connection parameters
-$servername = "localhost";
-$username = "Ruba";
-$password = "Ruba20";
-$dbname = "wedding_planning";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -32,14 +24,11 @@ if (isset($_GET['id'])) {
             // Fetch data row by row
             while ($row = $result->fetch_assoc()) {
 
-                // Extract the file extension from the filename
-                $pic_extension = pathinfo($row['pic'], PATHINFO_EXTENSION);
-
                 // Add each row to the data array
                 $data = array(
                     'id' => $row['Service_ID'],
                     'pic' => base64_encode($row['pic']),
-                    'pic_type' => $pic_extension, // Set the pic_type to the extracted file extension
+                    'pic_type' => 'jpeg', 
                     'name' => $row['Service_name'],
                     'price' => $row['Price'],
                     'deposit' => $row['Deposit'],

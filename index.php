@@ -34,21 +34,21 @@ $loggedInV = isset($_SESSION["vendor_id"]);
         <a class="nav-link" href="about.php">عن سُرور</a>
       </li>
       <li>
-        <a class="nav-link" href="service.html">الخدمات</a>
+        <a class="nav-link" href="service.php">الخدمات</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           أدوات التخطيط
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+          <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
           <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
           <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-          <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
+          <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
         </div>
       </li>
       <li>
-        <a class="nav-link" href="contact.html">تواصل معنا</a>
+      <a class="nav-link" href="cart.php">السلة</a>
       </li>
       <li>
         <a class="nav-link" href="Login.html">تسجبل الدخول</a>
@@ -94,7 +94,7 @@ $loggedInV = isset($_SESSION["vendor_id"]);
       <p class="hero__description">مرحبًا بك في موقع سُرور، الموقع الذي يقدم خدمات تنظيم حفلات الزفاف.
         <br>نحن هنا لمساعدتك في جعل حفل زفافك لحظة لا تُنسى!.
       </p>
-      <button class="main__btn"><a href="budgetP.html">خطط الان</a></button>
+      <button class="main__btn"><a href="busplitFINAL.php">خطط الان</a></button>
     </div>
   </div>
 
@@ -102,7 +102,7 @@ $loggedInV = isset($_SESSION["vendor_id"]);
   <div class="main" id="about">
     <div class="main__container">
       <div class="main__img--container">
-        <div class="main__img--card"><img src="images/blog_img2.jpg" alt="Description of the image"></div>
+        <div class="main__img--card"><img src="images/blog_img1.jpg" alt="Description of the image"></div>
       </div>
       <div class="main__content">
         <h2>رسالتنا</h2>
@@ -123,20 +123,20 @@ $loggedInV = isset($_SESSION["vendor_id"]);
         <h2>تخطيط ميزانية حفل الزفاف</h2>
         <p>أدخل المعلومات المتعلقة بالخدمات المطلوبة لحفل الزفاف لضبط الميزانية بما يتناسب مع احتياجاتك.
           سنقوم بإنشاء النسب المئوية لكل خدمة وتقديم قائمة مخصصة من البائعين الموصى بهم مع خدماتهم.</p>
-        <div class="services__btn"><a href="budgetP.html"><button>المزيد</button></a></div>
+        <div class="services__btn"><a href="busplitFINAL.php"><button>المزيد</button></a></div>
       </div>
       <div class="services__card">
         <h2>حجز الخدمات</h2>
         <p>يوفر سرور قاعات الزفاف المختلفة، وخدمات الموسيقى، وخيارات تقديم الطعام.
           نهدف الى تزويد الأزواج بقاعدة بيانات شاملة للموردين، مما يمكنهم من استكشاف خدماتهم المفضلة
           ومقارنتها وحجزها بسرعة داخل الموقع.</p>
-        <div class="services__btn"><a href="service.html"><button>المزيد</button></a></div>
+        <div class="services__btn"><a href="service.php"><button>المزيد</button></a></div>
       </div>
       <div class="services__card">
         <h2>إدارة قائمة الضيوف</h2>
         <p>يمكن للأزواج إنشاء قائمة الضيوف، إرسال الدعوات، والرد عليها لتنظيم الحدث وإدارته بشكل أفضل عن طريق
           إرسال رسائل واتس اب وتلقي حالتهم.</p>
-        <div class="services__btn"><a href="gm.html"><button>المزيد</button></a></div>
+        <div class="services__btn"><a href="guest.php"><button>المزيد</button></a></div>
       </div>
     </div>
   </div>
@@ -152,7 +152,7 @@ $loggedInV = isset($_SESSION["vendor_id"]);
           الموثوقة، وأدوات إدارة الميزانية الشخصية،
           وإدارة الضيوف. من خلال تكنولوجيتنا المبتكرة والتزامنا الثابت برضا العملاء، نطمح إلى إعادة تعريف مشهد
           تخطيط حفل الزفاف، وجعله تجربة لا تُنسى وممتعة لكل زوجين.</p>
-        <button class="main__btn"><a href="about.html">المزيد عنا</a></button>
+        <button class="main__btn"><a href="about.php">المزيد عنا</a></button>
       </div>
       <div class="main__img--container">
         <div class="main__img--card">

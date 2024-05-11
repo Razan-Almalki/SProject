@@ -41,9 +41,98 @@ if ($result->num_rows > 0) {
 if (isset($_POST['delete_account'])) {
   // Retrieve the entered email
   $enteredEmail = $_POST['entered_email'];
-
   // Check if the entered email matches the user's email
   if ($enteredEmail === $userEmail) {
+    // Check if there are related records in the guest_tables table
+    $sql_check_guest_tables = "SELECT COUNT(*) AS count FROM guest_tables WHERE user_id = $user_id";
+    $result_check_guest_tables = $conn->query($sql_check_guest_tables);
+    if ($result_check_guest_tables) {
+      $row = $result_check_guest_tables->fetch_assoc();
+      $guest_tables_count = $row['count'];
+      // Delete related records in the guest_tables table
+      if ($guest_tables_count > 0) {
+        $sql_delete_guest_tables = "DELETE FROM guest_tables WHERE user_id = $user_id";
+        if ($conn->query($sql_delete_guest_tables) === TRUE) {
+          // Related records deleted successfully
+        } else {
+          echo "Error deleting related records from guest_tables: " . $conn->error . "\n";
+        }
+      }
+    } else {
+      echo "Error checking guest_tables: " . $conn->error . "\n";
+    }
+    // Check if there are related records in the guest table
+    $sql_check_guest_tables = "SELECT COUNT(*) AS count FROM guest WHERE user_id = $user_id";
+    $result_check_guest_tables = $conn->query($sql_check_guest_tables);
+    if ($result_check_guest_tables) {
+      $row = $result_check_guest_tables->fetch_assoc();
+      $guest_tables_count = $row['count'];
+      // Delete related records in the guest_tables table
+      if ($guest_tables_count > 0) {
+        $sql_delete_guest_tables = "DELETE FROM guest WHERE user_id = $user_id";
+        if ($conn->query($sql_delete_guest_tables) === TRUE) {
+          // Related records deleted successfully
+        } else {
+          echo "Error deleting related records from guest: " . $conn->error . "\n";
+        }
+      }
+    } else {
+      echo "Error checking guest_tables: " . $conn->error . "\n";
+    }
+    // Check if there are related records in the tasks table
+    $sql_check_guest_tables = "SELECT COUNT(*) AS count FROM tasks WHERE user_id = $user_id";
+    $result_check_guest_tables = $conn->query($sql_check_guest_tables);
+    if ($result_check_guest_tables) {
+      $row = $result_check_guest_tables->fetch_assoc();
+      $guest_tables_count = $row['count'];
+      // Delete related records in the tasks table
+      if ($guest_tables_count > 0) {
+        $sql_delete_guest_tables = "DELETE FROM tasks WHERE user_id = $user_id";
+        if ($conn->query($sql_delete_guest_tables) === TRUE) {
+          // Related records deleted successfully
+        } else {
+          echo "Error deleting related records from tasks: " . $conn->error . "\n";
+        }
+      }
+    } else {
+      echo "Error checking tasks: " . $conn->error . "\n";
+    }
+    // Check if there are related records in the cart table
+    $sql_check_guest_tables = "SELECT COUNT(*) AS count FROM cart WHERE user_id = $user_id";
+    $result_check_guest_tables = $conn->query($sql_check_guest_tables);
+    if ($result_check_guest_tables) {
+      $row = $result_check_guest_tables->fetch_assoc();
+      $guest_tables_count = $row['count'];
+      // Delete related records in the tasks table
+      if ($guest_tables_count > 0) {
+        $sql_delete_guest_tables = "DELETE FROM cart WHERE user_id = $user_id";
+        if ($conn->query($sql_delete_guest_tables) === TRUE) {
+          // Related records deleted successfully
+        } else {
+          echo "Error deleting related records from cart: " . $conn->error . "\n";
+        }
+      }
+    } else {
+      echo "Error checking tasks: " . $conn->error . "\n";
+    }
+        // Check if there are related records in the reservation table
+        $sql_check_guest_tables = "SELECT COUNT(*) AS count FROM reservation WHERE user_id = $user_id";
+        $result_check_guest_tables = $conn->query($sql_check_guest_tables);
+        if ($result_check_guest_tables) {
+          $row = $result_check_guest_tables->fetch_assoc();
+          $guest_tables_count = $row['count'];
+          // Delete related records in the tasks table
+          if ($guest_tables_count > 0) {
+            $sql_delete_guest_tables = "DELETE FROM reservation WHERE user_id = $user_id";
+            if ($conn->query($sql_delete_guest_tables) === TRUE) {
+              // Related records deleted successfully
+            } else {
+              echo "Error deleting related records from reservation: " . $conn->error . "\n";
+            }
+          }
+        } else {
+          echo "Error checking tasks: " . $conn->error . "\n";
+        }
     // Delete the user's account
     $deleteSql = "DELETE FROM user WHERE User_ID = '$user_id'";
     if ($conn->query($deleteSql) === TRUE) {
@@ -148,33 +237,35 @@ $conn->close();
 </head>
 
 <body>
+  <!-- Navbar Section -->
   <header>
     <nav class="navbar">
+      <span class="hamburger-btn material-symbols-rounded">menu</span>
       <a href="index.php" class="logo">
         <img src="images/SorourIcon.png" alt="logo">
         <h2>سُرور</h2>
       </a>
       <ul class="links">
+        <span class="close-btn material-symbols-rounded">close</span>
         <li>
           <a class="nav-link" href="about.php">عن سُرور</a>
         </li>
         <li>
-          <a class="nav-link" href="service.html">الخدمات</a>
+          <a class="nav-link" href="service.php">الخدمات</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             أدوات التخطيط
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+            <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
-            <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
+            <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
+            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
           </div>
         </li>
         <li>
-          <a class="nav-link" href="contact.html">تواصل معنا</a>
+          <a class="nav-link" href="cart.php">السلة</a>
         </li>
         <li>
           <a class="nav-link" href="Login.html">تسجبل الدخول</a>
@@ -182,11 +273,10 @@ $conn->close();
         <li>
           <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
         </li>
-        <!-- display the item based on the user's authentication status -->
+
         <?php if ($loggedIn) { ?>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               حسابي
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -194,14 +284,25 @@ $conn->close();
               <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
             </div>
           </li>
-        <?php } else {
-        } ?>
+        <?php } else if ($loggedInV) { ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              حسابي
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+              <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+            </div>
+          </li>
+        <?php } ?>
+
         <li>
           <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
         </li>
       </ul>
     </nav>
   </header>
+  <!-- end header inner -->
 
   <div class="choices-container">
     <div class="title">اعدادات الحساب</div>
@@ -217,11 +318,11 @@ $conn->close();
     <div id="user-info" class="info">
       <h2>معلومات الحساب</h2>
       <div id="user-info">
-        <?php if ($firstName !== "User Not Found"): ?>
+        <?php if ($firstName !== "User Not Found") : ?>
           <p>الاسم: <?php echo $firstName, " ", $lastName; ?></p>
           <p>الايميل: <?php echo $userEmail; ?></p>
           <p>رقم الجوال: <?php echo $userPhone; ?></p>
-        <?php else: ?>
+        <?php else : ?>
           <p>User information not found.</p>
         <?php endif; ?>
       </div>
@@ -310,17 +411,17 @@ $conn->close();
       </section>
   </footer>
   <script>
-    <?php if (isset($errorMessage)): ?>
+    <?php if (isset($errorMessage)) : ?>
       // Display the error message in the 'mess' div
       var messDiv = document.getElementById('mess');
       messDiv.innerHTML = '<?php echo $errorMessage; ?>';
     <?php endif; ?>
-    <?php if (isset($errorMessage1)): ?>
+    <?php if (isset($errorMessage1)) : ?>
       // Display the error message in the 'mess' div
       var messDiv1 = document.getElementById('mess1');
       messDiv1.innerHTML = '<?php echo $errorMessage1; ?>';
     <?php endif; ?>
-    <?php if (isset($errorMessage2)): ?>
+    <?php if (isset($errorMessage2)) : ?>
       // Display the error message in the 'mess' div
       var messDiv2 = document.getElementById('mess2');
       messDiv2.innerHTML = '<?php echo $errorMessage2; ?>';

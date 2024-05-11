@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>guest</title>
+  <title>ادارة قائمة الضيوف</title>
   <link rel="stylesheet" href="waad_style.css" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
 </head>
 
 <?php
@@ -17,8 +16,8 @@ session_start();
 
 $loggedIn = isset($_SESSION['user_id']);
 if (!$loggedIn) {
-    header("Location: Login.html");
-    exit;
+  header("Location: Login.html");
+  exit;
 }
 ?>
 
@@ -62,22 +61,21 @@ $pending = $rowPending['Pending'];
           <a class="nav-link" href="about.php">عن سُرور</a>
         </li>
         <li>
-          <a class="nav-link" href="service.html">الخدمات</a>
+          <a class="nav-link" href="service.php">الخدمات</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             أدوات التخطيط
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+            <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
-            <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
+            <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
+            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
           </div>
         </li>
         <li>
-          <a class="nav-link" href="contact.html">تواصل معنا</a>
+        <a class="nav-link" href="cart.php">السلة</a>
         </li>
         <li>
           <a class="nav-link" href="Login.html">تسجيل الدخول</a>
@@ -88,8 +86,7 @@ $pending = $rowPending['Pending'];
         <!-- display the item based on the user's authentication status -->
         <?php if ($loggedIn) { ?>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               حسابي
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -150,12 +147,10 @@ $pending = $rowPending['Pending'];
             </label>
           </div>
           <div id="additional-buttons">
-            <button id="switch-group-button" class="main-button-style" type="button" onclick="openMoveGroupPopup()"> <span
-                class="material-symbols-outlined">
+            <button id="switch-group-button" class="main-button-style" type="button" onclick="openMoveGroupPopup()"> <span class="material-symbols-outlined">
                 sync_alt
               </span> تبديل مجموعة</button>
-            <button id="remove-button" class="main-button-style" type="button" onclick="openRemoveGuestPopup()"> <span
-                class="material-symbols-outlined">
+            <button id="remove-button" class="main-button-style" type="button" onclick="openRemoveGuestPopup()"> <span class="material-symbols-outlined">
                 delete
               </span> حذف</button>
           </div>
@@ -282,26 +277,22 @@ $pending = $rowPending['Pending'];
         <button class="popup__close main-button-style" onclick="closePopup()">&#10006;</button>
       </div>
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الاول" name="f_Name" id="first_name"
-          oninput="validateForm()" required />
+        <input type="input" class="form__field" placeholder="الاسم الاول" name="f_Name" id="first_name" oninput="validateForm()" required />
         <label for="first_name" class="form__label">الاسم الاول</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الثاني" name="m_Name" id="middle_name"
-          oninput="validateForm()" required />
+        <input type="input" class="form__field" placeholder="الاسم الثاني" name="m_Name" id="middle_name" oninput="validateForm()" required />
         <label for="middle_name" class="form__label">الاسم الثاني</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الاخير" name="l_Name" id="last_name"
-          oninput="validateForm()" required />
+        <input type="input" class="form__field" placeholder="الاسم الاخير" name="l_Name" id="last_name" oninput="validateForm()" required />
         <label for="last_name" class="form__label">الاسم الاخير</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الجوال" name="phone" id="phone" oninput="validatePhone()"
-          required />
+        <input type="input" class="form__field" placeholder="الجوال" name="phone" id="phone" oninput="validatePhone()" required />
         <label for="phone" class="form__label">الجوال</label>
       </div>
 
@@ -479,7 +470,7 @@ $pending = $rowPending['Pending'];
       var guestsNames = [];
 
       // Extract names of checked guests
-      checkedGuests.forEach(function (guest) {
+      checkedGuests.forEach(function(guest) {
         guestsNames.push(guest.parentNode.nextElementSibling.textContent.trim());
       });
 
@@ -522,10 +513,10 @@ $pending = $rowPending['Pending'];
 
   <script>
     // Check if alert message is set in the session and display it
-    <?php if (isset($_SESSION['alert'])): ?>
+    <?php if (isset($_SESSION['alert'])) : ?>
       alert('<?php echo $_SESSION['alert']; ?>');
       <?php // Unset the alert message
-        unset($_SESSION['alert']); ?>
+      unset($_SESSION['alert']); ?>
     <?php endif; ?>
   </script>
 
@@ -537,26 +528,22 @@ $pending = $rowPending['Pending'];
 
     <form id="updateForm" action="guest_page_action.php" method="post">
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الاول" name="update_first_name"
-          id="update_first_name" oninput="validateSideDivForm()" required />
+        <input type="input" class="form__field" placeholder="الاسم الاول" name="update_first_name" id="update_first_name" oninput="validateSideDivForm()" required />
         <label for="update_first_name" class="form__label">الاسم الاول</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الثاني" name="update_middle_name"
-          id="update_middle_name" oninput="validateSideDivForm()" required />
+        <input type="input" class="form__field" placeholder="الاسم الثاني" name="update_middle_name" id="update_middle_name" oninput="validateSideDivForm()" required />
         <label for="update_middle_name" class="form__label">الاسم الثاني</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الاسم الاخير" name="update_last_name" id="update_last_name"
-          oninput="validateSideDivForm()" required />
+        <input type="input" class="form__field" placeholder="الاسم الاخير" name="update_last_name" id="update_last_name" oninput="validateSideDivForm()" required />
         <label for="update_last_name" class="form__label">الاسم الاخير</label>
       </div>
 
       <div class="form__group field">
-        <input type="input" class="form__field" placeholder="الجوال" name="update_phone" id="update_phone"
-          oninput="validateSideDivPhone()" required />
+        <input type="input" class="form__field" placeholder="الجوال" name="update_phone" id="update_phone" oninput="validateSideDivPhone()" required />
         <label for="update_phone" class="form__label">الجوال</label>
       </div>
 
@@ -639,8 +626,7 @@ $pending = $rowPending['Pending'];
       </div>
 
       <div class="form__group field">
-        <input type="input" id="new-group-name" class="form__field" placeholder="اسم المجموعة" name="new-group-name"
-          required />
+        <input type="input" id="new-group-name" class="form__field" placeholder="اسم المجموعة" name="new-group-name" required />
         <label for="new-group-name" class="form__label">اسم المجموعة</label>
       </div>
 
@@ -852,7 +838,7 @@ $pending = $rowPending['Pending'];
       var selectedGroup = document.querySelector('input[name="new_group"]:checked').value;
 
       // Extract names of checked guests
-      checkedGuests.forEach(function (guest) {
+      checkedGuests.forEach(function(guest) {
         guestsNames.push(guest.parentNode.nextElementSibling.textContent.trim());
       });
 
@@ -864,77 +850,77 @@ $pending = $rowPending['Pending'];
 
   <script>
     var util = {
-      f: {
-        addStyle: function (elem, prop, val, vendors) {
-          var i, ii, property, value
-          if (!util.f.isElem(elem)) {
-            elem = document.getElementById(elem)
-          }
-          if (!util.f.isArray(prop)) {
-            prop = [prop]
-            val = [val]
-          }
-          for (i = 0; i < prop.length; i += 1) {
-            var thisProp = String(prop[i]),
-              thisVal = String(val[i])
-            if (typeof vendors !== "undefined") {
-              if (!util.f.isArray(vendors)) {
-                vendors.toLowerCase() == "all" ? vendors = ["webkit", "moz", "ms", "o"] : vendors = [vendors]
-              }
-              for (ii = 0; ii < vendors.length; ii += 1) {
-                elem.style[vendors[i] + thisProp] = thisVal
-              }
+        f: {
+          addStyle: function(elem, prop, val, vendors) {
+            var i, ii, property, value
+            if (!util.f.isElem(elem)) {
+              elem = document.getElementById(elem)
             }
-            thisProp = thisProp.charAt(0).toLowerCase() + thisProp.slice(1)
-            elem.style[thisProp] = thisVal
-          }
-        },
-        cssLoaded: function (event) {
-          var child = util.f.getTrg(event)
-          child.setAttribute("media", "all")
-        },
-        events: {
-          cancel: function (event) {
-            util.f.events.prevent(event)
-            util.f.events.stop(event)
+            if (!util.f.isArray(prop)) {
+              prop = [prop]
+              val = [val]
+            }
+            for (i = 0; i < prop.length; i += 1) {
+              var thisProp = String(prop[i]),
+                thisVal = String(val[i])
+              if (typeof vendors !== "undefined") {
+                if (!util.f.isArray(vendors)) {
+                  vendors.toLowerCase() == "all" ? vendors = ["webkit", "moz", "ms", "o"] : vendors = [vendors]
+                }
+                for (ii = 0; ii < vendors.length; ii += 1) {
+                  elem.style[vendors[i] + thisProp] = thisVal
+                }
+              }
+              thisProp = thisProp.charAt(0).toLowerCase() + thisProp.slice(1)
+              elem.style[thisProp] = thisVal
+            }
           },
-          prevent: function (event) {
-            event = event || window.event
-            event.preventDefault()
+          cssLoaded: function(event) {
+            var child = util.f.getTrg(event)
+            child.setAttribute("media", "all")
           },
-          stop: function (event) {
+          events: {
+            cancel: function(event) {
+              util.f.events.prevent(event)
+              util.f.events.stop(event)
+            },
+            prevent: function(event) {
+              event = event || window.event
+              event.preventDefault()
+            },
+            stop: function(event) {
+              event = event || window.event
+              event.stopPropagation()
+            }
+          },
+          getSize: function(elem, prop) {
+            return parseInt(elem.getBoundingClientRect()[prop], 10)
+          },
+          getTrg: function(event) {
             event = event || window.event
-            event.stopPropagation()
+            if (event.srcElement) {
+              return event.srcElement
+            } else {
+              return event.target
+            }
+          },
+          isElem: function(elem) {
+            return (util.f.isNode(elem) && elem.nodeType == 1)
+          },
+          isArray: function(v) {
+            return (v.constructor === Array)
+          },
+          isNode: function(elem) {
+            return (typeof Node === "object" ? elem instanceof Node : elem && typeof elem === "object" && typeof elem.nodeType === "number" && typeof elem.nodeName === "string" && elem.nodeType !== 3)
+          },
+          isObj: function(v) {
+            return (typeof v == "object")
+          },
+          replaceAt: function(str, index, char) {
+            return str.substr(0, index) + char + str.substr(index + char.length);
           }
-        },
-        getSize: function (elem, prop) {
-          return parseInt(elem.getBoundingClientRect()[prop], 10)
-        },
-        getTrg: function (event) {
-          event = event || window.event
-          if (event.srcElement) {
-            return event.srcElement
-          } else {
-            return event.target
-          }
-        },
-        isElem: function (elem) {
-          return (util.f.isNode(elem) && elem.nodeType == 1)
-        },
-        isArray: function (v) {
-          return (v.constructor === Array)
-        },
-        isNode: function (elem) {
-          return (typeof Node === "object" ? elem instanceof Node : elem && typeof elem === "object" && typeof elem.nodeType === "number" && typeof elem.nodeName === "string" && elem.nodeType !== 3)
-        },
-        isObj: function (v) {
-          return (typeof v == "object")
-        },
-        replaceAt: function (str, index, char) {
-          return str.substr(0, index) + char + str.substr(index + char.length);
         }
-      }
-    },
+      },
       //////////////////////////////////////
       // ok that's all the utilities      //
       // onto the select box / form stuff //
@@ -942,9 +928,10 @@ $pending = $rowPending['Pending'];
       form = {
         f: {
           init: {
-            register: function () {
-              console.clear()// just cuz codepen
-              var child, children = document.getElementsByClassName("field"), i
+            register: function() {
+              console.clear() // just cuz codepen
+              var child, children = document.getElementsByClassName("field"),
+                i
               for (i = 0; i < children.length; i += 1) {
                 child = children[i]
                 util.f.addStyle(child, "Opacity", 1)
@@ -955,15 +942,16 @@ $pending = $rowPending['Pending'];
                 child.addEventListener("click", form.f.select.toggle)
               }
             },
-            unregister: function () {
+            unregister: function() {
               //just here as a formallity
               //call this to stop all ongoing timeouts are ready the page for some sort of json re-route
             }
           },
           select: {
-            blur: function (field) {
+            blur: function(field) {
               field.classList.remove("focused")
-              var child, children = field.childNodes, i, ii, nested_child, nested_children
+              var child, children = field.childNodes,
+                i, ii, nested_child, nested_children
               for (i = 0; i < children.length; i += 1) {
                 child = children[i]
                 if (util.f.isElem(child)) {
@@ -991,9 +979,11 @@ $pending = $rowPending['Pending'];
                 }
               }
             },
-            focus: function (field) {
+            focus: function(field) {
               field.classList.add("focused")
-              var bool = false, child, children = field.childNodes, i, ii, iii, nested_child, nested_children, nested_nested_child, nested_nested_children, size = 0
+              var bool = false,
+                child, children = field.childNodes,
+                i, ii, iii, nested_child, nested_children, nested_nested_child, nested_nested_children, size = 0
               for (i = 0; i < children.length; i += 1) {
                 child = children[i]
                 util.f.isElem(child) && child.classList.contains("deselect") ? bool = true : null
@@ -1026,8 +1016,10 @@ $pending = $rowPending['Pending'];
                 }
               }
             },
-            selection: function (child, parent) {
-              var children = parent.childNodes, i, ii, nested_child, nested_children, time = 0, value
+            selection: function(child, parent) {
+              var children = parent.childNodes,
+                i, ii, nested_child, nested_children, time = 0,
+                value
               if (util.f.isElem(child) && util.f.isElem(parent)) {
                 parent.dataset.value = child.dataset.value
                 value = child.innerHTML
@@ -1044,7 +1036,7 @@ $pending = $rowPending['Pending'];
                           time = 1E2
                           util.f.addStyle(nested_child, ["Opacity", "Transform"], [0, "translateY(24px)"], "all")
                         }
-                        setTimeout(function (c, v) {
+                        setTimeout(function(c, v) {
                           c.innerHTML = v
                           util.f.addStyle(c, ["Opacity", "Transform", "TransitionDuration"], [1, "translateY(0px)", ".1s"], "all")
                         }, time, nested_child, value)
@@ -1056,9 +1048,10 @@ $pending = $rowPending['Pending'];
                 }
               }
             },
-            toggle: function (event) {
+            toggle: function(event) {
               util.f.events.stop(event)
-              var child = util.f.getTrg(event), children, i, parent
+              var child = util.f.getTrg(event),
+                children, i, parent
               switch (true) {
                 case (child.classList.contains("psuedo_select")):
                 case (child.classList.contains("deselect")):

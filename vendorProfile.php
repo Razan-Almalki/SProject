@@ -1,12 +1,11 @@
 <?php
 
-include "connection.php";
+include 'connection.php';
 
 // Start session
 session_start();
-
-$loggedIn = isset($_SESSION["vendor_id"]);
-if (!$loggedIn) {
+$loggedInV = isset($_SESSION["vendor_id"]);
+if (!$loggedInV) {
     header("Location: Login_vendor.html");
     exit;
 }
@@ -25,18 +24,44 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
-    $firstName = $user['First_name'];
-    $lastName = $user['Last_name'];
-    $userEmail = $user['Email'];
-    $userPhone = $user['Phone'];
+    // Check if the keys exist in the $user array before accessing them
+    $firstName = isset($user['First_name']) ? $user['First_name'] : ''; // Change 'first_name' to 'First_name'
+    $lastName = isset($user['Last_name']) ? $user['Last_name'] : ''; // Change 'last_name' to 'Last_name'
+    $userEmail = isset($user['Email']) ? $user['Email'] : ''; // Change 'email' to 'Email'
+    $userPhone = isset($user['Phone']) ? $user['Phone'] : ''; // 'Phone' remains the same
+  
+    // Rest of your code remains unchanged
+  } else {
+    $firstName = "User Not Found";
+    $lastName = "";
+    $userEmail = "";
+    $userPhone = "";
+  }
 
     // to delet the account 
     if (isset($_POST['delete_account'])) {
         // Retrieve the entered email
         $enteredEmail = $_POST['entered_email'];
-
         // Check if the entered email matches the user's email
         if ($enteredEmail === $userEmail) {
+                      // Check if there are related records in the services table
+                      $sql_check_guest_tables = "SELECT COUNT(*) AS count FROM services WHERE vendor_id = $user_id";
+                      $result_check_guest_tables = $conn->query($sql_check_guest_tables);
+                      if ($result_check_guest_tables) {
+                          $row = $result_check_guest_tables->fetch_assoc();
+                          $guest_tables_count = $row['count'];
+                          // Delete related records in the services table
+                          if ($guest_tables_count > 0) {
+                              $sql_delete_guest_tables = "DELETE FROM services WHERE vendor_id = $user_id";
+                              if ($conn->query($sql_delete_guest_tables) === TRUE) {
+                                  // Related records deleted successfully
+                              } else {
+                                  echo "Error deleting related records from services: " . $conn->error . "\n";
+                              }
+                          }
+                      } else {
+                          echo "Error checking services: " . $conn->error . "\n";
+                      }
             // Delete the user's account
             $deleteSql = "DELETE FROM vendor WHERE Vendor_ID = '$user_id'";
             if ($conn->query($deleteSql) === TRUE) {
@@ -53,12 +78,6 @@ if ($result->num_rows > 0) {
             $errorMessage = "الايميل المدخل خطأ، حاول مرة اخرى";
         }
     }
-} else {
-    $firstName = "User Not Found";
-    $lastName = "";
-    $userEmail = "";
-    $userPhone = "";
-}
 
 // Check if edining form submitted
 if (isset($_POST['edit-button'])) {
@@ -69,30 +88,30 @@ if (isset($_POST['edit-button'])) {
     // Validate data (optional)
     if (!preg_match("/^05\d{8}$/", $phone)) {
         $errorMessage1 = "الرقم المدخل غير صحيح!";
+    }else{
+
+    // Update vendor information in database
+    $sql = "UPDATE vendor SET First_name = ?, Last_name = ?, Phone = ? WHERE Vendor_ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ssss', $firstName, $lastName, $phone, $_SESSION["vendor_id"]); 
+    $stmt->execute();
+
+    if ($stmt->affected_rows === 1) {
+        // Store the error message in a variable
+        echo "<script>alert('تم تحديث بيانتك بنجاح!.')</script>";
+        $errorMessage1 = "تم تحديث بيانتك بنجاح!." . $conn->error;
     } else {
-
-        // Update vendor information in database
-        $sql = "UPDATE vendor SET First_name = ?, Last_name = ?, Phone = ? WHERE Vendor_ID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ssss', $firstName, $lastName, $phone, $_SESSION["vendor_id"]);
-        $stmt->execute();
-
-        if ($stmt->affected_rows === 1) {
-            // Store the error message in a variable
-            echo "<script>alert('تم تحديث بيانتك بنجاح!.')</script>";
-            $errorMessage1 = "تم تحديث بيانتك بنجاح!." . $conn->error;
-        } else {
-            $errorMessage1 = "فشل تحديث البيانات." . $conn->error;
-        }
-        $stmt->close();
+        $errorMessage1 = "فشل تحديث البيانات." . $conn->error;
     }
+    $stmt->close();
+}
 }
 // reset the password 
 if (isset($_POST['change_password'])) {
     $currentPassword = $_POST['current-password'];
     $newPassword = $_POST['new-password'];
     $confirmPassword = $_POST['confirm-password'];
-
+  
     // Fetch user data based on user ID (assuming you have a way to get it)
     $sql = "SELECT Pass_word FROM vendor WHERE Vendor_ID = ?";
     $stmt = $conn->prepare($sql);
@@ -100,33 +119,33 @@ if (isset($_POST['change_password'])) {
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
-
+  
     // Verify current password
     if (password_verify($currentPassword, $user['Pass_word'])) {
-        // Check if new password and confirm password match
-        if ($newPassword === $confirmPassword) {
-            // Hash the new password
-            $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
-            // Update the user's password in the database
-            $sql = "UPDATE vendor SET Pass_word = ? WHERE Vendor_ID = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('si', $hashedNewPassword, $_SESSION["vendor_id"]);
-            if ($stmt->execute()) {
-                // Password reset successful
-                echo "<script>alert('تم تغيير كلمة المرور بنجاح!')</script>";
-                $errorMessage2 = ' ' . $conn->error;
-            } else {
-                $errorMessage2 = 'فشل تغيير كلمة المرور!' . $conn->error;
-            }
-            $stmt->close();
+      // Check if new password and confirm password match
+      if ($newPassword === $confirmPassword) {
+        // Hash the new password
+        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+  
+        // Update the user's password in the database
+        $sql = "UPDATE vendor SET Pass_word = ? WHERE Vendor_ID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si', $hashedNewPassword, $_SESSION["vendor_id"]);
+        if ($stmt->execute()) {
+          // Password reset successful
+          echo "<script>alert('تم تغيير كلمة المرور بنجاح!')</script>";
+          $errorMessage2 = ' ' . $conn->error;
         } else {
-            $errorMessage2 = 'كلمة المرور الجديدة غير متطابقة!' . $conn->error;
+          $errorMessage2 = 'فشل تغيير كلمة المرور!' . $conn->error;
         }
+        $stmt->close();
+      } else {
+        $errorMessage2 = 'كلمة المرور الجديدة غير متطابقة!' . $conn->error;
+      }
     } else {
-        $errorMessage2 = 'كلمة المرور الحالية غير صحيحة!' . $conn->error;
+      $errorMessage2 ='كلمة المرور الحالية غير صحيحة!' . $conn->error;
     }
-}
+  }
 
 $conn->close();
 ?>
@@ -139,71 +158,72 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>حسابي في سُرور</title>
-    <link rel="stylesheet" href="style_vendorProfile.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-    <!-- Boxicons CSS -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style_vendorProofile.css" />
+  <!-- Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style_vendorProfile.css" />
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="index.php" class="logo">
-                <img src="images/SorourIcon.png" alt="logo">
-                <h2>سُرور</h2>
-            </a>
-            <ul class="links">
-                <li>
-                    <a class="nav-link" href="about.php">عن سُرور</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="service.html">الخدمات</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        أدوات التخطيط
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
-                        <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
-                        <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-                        <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
-                    </div>
-                </li>
-                <li>
-                    <a class="nav-link" href="contact.html">تواصل معنا</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="Login.html">تسجبل الدخول</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
-                </li>
-                <!-- display the item based on the user's authentication status -->
-                <?php if ($loggedIn) { ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            حسابي
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
-                            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-                        </div>
-                    </li>
-                <?php } else {
-                } ?>
-                <li>
-                    <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Navbar Section -->
+  <header>
+  <nav class="navbar">
+    <span class="hamburger-btn material-symbols-rounded">menu</span>
+    <a href="index.php" class="logo">
+      <img src="images/SorourIcon.png" alt="logo">
+      <h2>سُرور</h2>
+    </a>
+    <ul class="links">
+      <span class="close-btn material-symbols-rounded">close</span>
+      <li>
+        <a class="nav-link" href="about.php">عن سُرور</a>
+      </li>
+      <li>
+        <a class="nav-link" href="service.php">الخدمات</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          أدوات التخطيط
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
+          <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
+          <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
+          <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+        </div>
+      </li>
+      <li>
+      <a class="nav-link" href="cart.php">السلة</a>
+      </li>
+      <li>
+        <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+      </li>
+      <li>
+        <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+      </li>
+
+      <?php if ($loggedInV) { ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            حسابي
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+          </div>
+        </li>
+      <?php } ?>
+
+      <li>
+        <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+  <!-- end header inner -->
 
     <div class="choices-container">
         <div class="title">اعدادات الحساب</div>
@@ -214,16 +234,16 @@ $conn->close();
             <li><a href="#" class="choice" data-choice="delet">حذف الحساب</a></li>
         </ul>
     </div>
-    <h3>مرحباً، <?php echo $firstName; ?></h3>
+    <h3>مرحباً بشريكنا، <?php echo $firstName; ?></h3>
     <div class="info-container">
         <div id="user-info" class="info">
             <h2>معلومات الحساب</h2>
             <div id="user-info">
-                <?php if ($firstName !== "User Not Found"): ?>
+                <?php if ($firstName !== "User Not Found") : ?>
                     <p>الاسم: <?php echo $firstName, " ", $lastName; ?></p>
                     <p>الايميل: <?php echo $userEmail; ?></p>
                     <p>رقم الجوال: <?php echo $userPhone; ?></p>
-                <?php else: ?>
+                <?php else : ?>
                     <p>User information not found.</p>
                 <?php endif; ?>
             </div>
@@ -249,7 +269,7 @@ $conn->close();
                 <input type="password" id="current-password" name="current-password" required>
                 <br>
                 <label for="new-password">كلمة المرور الجديدة: </label>
-                <input type="password" id="new-password" name="new-password" required>
+                <input type="password" id="new-password" name="new-password"required>
                 <br>
                 <label for="confirm-password">تاكيد كلمة المرور الجديدة: </label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
@@ -271,58 +291,68 @@ $conn->close();
     <br><br><br><br>
     <!-- Footer Section -->
     <footer>
-        <div class="footer__container">
-            <div class="footer__links">
-                <div class="footer__link--wrapper">
-                    <div class="footer__link--items">
-                        <h2>عنا</h2>
-                        <a href="">الاعدادات</a>
-                        <a href="about.php">المزيد</a>
-                    </div>
-                    <div class="footer__link--items">
-                        <h2>تواصل معنا</h2>
-                        <a href="/">راسلنا </a>
-                        <a href="/">الدعم</a>
-                    </div>
-                </div>
-                <div class="footer__link--wrapper">
-                    <div class="footer__link--items">
-                        <h2>سجل معنا</h2>
-                        <a href="SignUp.html">زائر جديد؟</a>
-                        <a href="SignUp_vendor.html">صاحب عمل؟</a>
-                    </div>
-                </div>
+      <div class="footer__container">
+        <div class="footer__links">
+          <div class="footer__link--wrapper">
+            <div class="footer__link--items">
+              <h2>عنا</h2>
+              <a href="">الاعدادات</a>
+              <a href="about.php">المزيد</a>
             </div>
-            <section class="social__media">
-                <div class="social__media--wrap">
-                    <div class="footer__logo">
-                        <a href="index.php" id="footer__logo">
-                            <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
-                        </a>
-                    </div>
-                    <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
-                    <div class="social__icons">
-                        <a href="/" class="social__icon--link" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="/" class="social__icon--link"><i class="fab fa-instagram"></i></a>
-                        <a href="/" class="social__icon--link"><i class="fab fa-youtube"></i></a>
-                        <a href="/" class="social__icon--link"><i class="fab fa-linkedin"></i></a>
-                        <a href="/" class="social__icon--link"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </section>
-    </footer>
+            <div class="footer__link--items">
+              <h2>تواصل معنا</h2>
+              <a href="/">راسلنا </a>
+              <a href="/">الدعم</a>
+            </div>
+          </div>
+          <div class="footer__link--wrapper">
+            <div class="footer__link--items">
+              <h2>سجل معنا</h2>
+              <a href="SignUp.html">زائر جديد؟</a>
+              <a href="SignUp_vendor.html">صاحب عمل؟</a>
+            </div>
+          </div>
+        </div>
+        <section class="social__media">
+          <div class="social__media--wrap">
+        <div class="footer__logo">
+          <a href="index.php" id="footer__logo">
+            <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
+          </a>
+        </div>
+      <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
+      <div class="social__icons">
+        <a href="/" class="social__icon--link" target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="/" class="social__icon--link"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="/" class="social__icon--link"
+          ><i class="fab fa-youtube"></i
+        ></a>
+        <a href="/" class="social__icon--link"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="/" class="social__icon--link"
+          ><i class="fab fa-twitter"></i
+        ></a>
+      </div>
+      </div>
+      </section>
+  </footer>
     <script>
-        <?php if (isset($errorMessage)): ?>
+        <?php if (isset($errorMessage)) : ?>
             // Display the error message in the 'mess' div
             var messDiv = document.getElementById('mess');
             messDiv.innerHTML = '<?php echo $errorMessage; ?>';
         <?php endif; ?>
-        <?php if (isset($errorMessage1)): ?>
+        <?php if (isset($errorMessage1)) : ?>
             // Display the error message in the 'mess' div
             var messDiv1 = document.getElementById('mess1');
             messDiv1.innerHTML = '<?php echo $errorMessage1; ?>';
         <?php endif; ?>
-        <?php if (isset($errorMessage2)): ?>
+        <?php if (isset($errorMessage2)) : ?>
             // Display the error message in the 'mess' div
             var messDiv2 = document.getElementById('mess2');
             messDiv2.innerHTML = '<?php echo $errorMessage2; ?>';

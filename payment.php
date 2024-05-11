@@ -35,21 +35,21 @@ $loggedInV = isset($_SESSION["vendor_id"]);
           <a class="nav-link" href="about.html">عن سُرور</a>
         </li>
         <li>
-          <a class="nav-link" href="service.html">الخدمات</a>
+          <a class="nav-link" href="service.php">الخدمات</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             أدوات التخطيط
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+          <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
-            <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
+            <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
+            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
           </div>
         </li>
         <li>
-          <a class="nav-link" href="contact.html">تواصل معنا</a>
+        <a class="nav-link" href="cart.php">السلة</a>
         </li>
         <li>
           <a class="nav-link" href="Login.html">تسجبل الدخول</a>

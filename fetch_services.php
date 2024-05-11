@@ -1,5 +1,8 @@
 <?php
-session_start();?>
+session_start();
+include 'connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +12,7 @@ session_start();?>
 <style>
 body {
      
-background-image: url("bg.jpg");
+background-image: url("images/bg.jpg");
       background-size: cover;
     }
 button {
@@ -101,14 +104,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cateringBudget = $_POST["catering_budget"];
     $musicianBudget = $_POST["musician_budget"];
     $theme = $_POST["theme"]; // Retrieve the selected theme
-
-    // Establish a database connection
-    $servername = "localhost"; // Change this if your database is hosted elsewhere
-    $username = "Razan";
-    $password = "0559945643";
-    $dbname = "myDB";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
     // Check connection
     if ($conn->connect_error) {

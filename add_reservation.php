@@ -1,15 +1,14 @@
 <?php
 session_start(); 
+include 'connection.php';
 
-// Database connection parameters
-$servername = "localhost";
-$username = "Ruba";
-$password = "Ruba20";
-$database = "wedding_planning";
+$loggedIn = isset($_SESSION["user_id"]);
+if (!$loggedIn) {
+    header("Location: Login.html");
+    exit;
+  }
 
 try {
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $database);
 
     // Check connection
     if ($conn->connect_error) {

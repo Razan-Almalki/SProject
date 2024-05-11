@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>invitation</title>
+    <title>الدعوة</title>
     <link rel="stylesheet" href="inv.css">
 </head>
 
 <body>
     <div id="invitation">
-        <!-- Display retrieved invitation here -->
+        <div id="invitation-card">
+            
+        </div>
     </div>
 
     <div id="form-att">
@@ -81,16 +83,6 @@
                 }
             };
             xhttp.open("GET", "get_guest_details.php?guest_id=" + guestId, true);
-            xhttp.send();
-
-            // Send AJAX request to get guest details
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("invitation").innerHTML = this.responseText;
-                }
-            };
-            xhttp.open("GET", "get_invitation.php?guest_id=" + guestId, true);
             xhttp.send();
         }
 

@@ -68,7 +68,6 @@ function isValidPassword($password){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
   <!-- Boxicons CSS -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -90,21 +89,21 @@ function isValidPassword($password){
           <a class="nav-link" href="about.php">عن سُرور</a>
         </li>
         <li>
-          <a class="nav-link" href="service.html">الخدمات</a>
+          <a class="nav-link" href="service.php">الخدمات</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             أدوات التخطيط
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+          <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
-            <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
+            <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
+            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
           </div>
         </li>
         <li>
-          <a class="nav-link" href="contact.html">تواصل معنا</a>
+        <a class="nav-link" href="cart.php">السلة</a>
         </li>
         <li>
           <a class="nav-link" href="Login.html">تسجبل الدخول</a>

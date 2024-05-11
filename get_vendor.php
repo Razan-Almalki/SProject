@@ -1,12 +1,6 @@
 <?php
-// Database connection parameters
-$servername = "localhost";
-$username = "Ruba";
-$password = "Ruba20";
-$dbname = "wedding_planning"; // Your database name
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+session_start(); 
+include 'connection.php';
 
 // Check connection
 if ($conn->connect_error) {

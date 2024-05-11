@@ -24,7 +24,6 @@ $user_id = $_SESSION['user_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>قائمة المهام</title>
 <link rel="stylesheet" href="checklistStyle.css"></link>
-<link rel="stylesheet" href="style_index.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
 </head>
 <body>
@@ -42,7 +41,7 @@ $user_id = $_SESSION['user_id'];
         <a class="nav-link" href="about.php">عن سُرور</a>
       </li>
       <li>
-        <a class="nav-link" href="service.html">الخدمات</a>
+        <a class="nav-link" href="service.php">الخدمات</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,7 +55,7 @@ $user_id = $_SESSION['user_id'];
         </div>
       </li>
       <li>
-        <a class="nav-link" href="contact.html">تواصل معنا</a>
+      <a class="nav-link" href="cart.php">السلة</a>
       </li>
       <li>
         <a class="nav-link" href="Login.html">تسجبل الدخول</a>

@@ -10,28 +10,93 @@ body {
 }
 
 header {
-    background-color: #e1c6c6;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-nav ul {
-    list-style-type: none;
-    background-color: #e1c6c6;
-    text-align: center;
-    padding: 10px;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    padding: 0 10px;
+  }
+  .navbar {
+    display: flex;
+    padding: 22px 0;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+  .navbar .hamburger-btn {
+    display: none;
     color: #000000;
-}
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+  
+  .navbar .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-left: auto; 
+  }
+  .navbar .logo img {
+    width: 70px;
+    /* Adjust the width as needed */
+    height: auto;
+    margin-right: 10px;
+  }
+  .navbar .logo h2 {
+    font-family: 'Arial', sans-serif;
+    color: #000000;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+  .navbar .links {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+    align-items: center;
+  }
+  .navbar .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    display: none;
+    color: #000;
+    cursor: pointer;
+  }
+  .navbar .links a {
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.1s ease;
+  }
+  .navbar .links a:hover {
+    color: #000000;
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #5755555f;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-menu a {
+    color: #333333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #9b59b6;
+  }
+  
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+  }
 
 .introductionImge img {
     width: 100%;
@@ -146,6 +211,55 @@ nav ul li a {
     background-color: #BC7FCD;
 }
 
+/* Hero Section */
+.hero {
+    background-image: url("images/about_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    padding-top: 200px;
+  }
+  
+  .hero__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 90%;
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .hero__heading {
+    font-size: 60px;
+    margin-bottom: 24px;
+    color: #272727;
+  }
+  
+  .hero__heading span {
+    background: linear-gradient(135deg, #b86ba1, #c56ba4);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -mo-text-fill-color: transparent;
+  }
+  
+  .hero__description {
+    font-size: 30px;
+    background: linear-gradient(to right,
+        #302f30,
+        #da22ff);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+
 /*////////////////////////////////////////////////// Styles for show item //////////////////////////////////////////////////*/
 .showItem-panels {
     display: flex;
@@ -156,7 +270,7 @@ nav ul li a {
 }
 
 .showItem-panels article {
-    margin-top: 20px;
+    margin-top: 200px;
     margin-right: 20px;
     margin-left: 20px;
     padding: 10px;
@@ -233,7 +347,7 @@ nav ul li a {
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     max-height: 400px;
-    margin-top: 20px;
+    margin-top: 150px;
     margin-right: 20px;
     margin-bottom: 30px;
 }
@@ -646,11 +760,108 @@ textarea {
 }
 
 
-footer {
-    background-color: #e1c6c6;
+  /* Footer CSS */
+  footer {
+    background-color: #33333344;
     color: #fff;
     text-align: center;
-    padding: 30px;
-    margin-top: 50px;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
     width: 100%;
-}
+    margin-top: 700px;
+  }
+  
+  .footer__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer__links {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .footer__link--wrapper {
+    display: flex;
+  }
+  
+  .footer__link--items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 16px;
+    text-align: left;
+    width: 160px;
+    box-sizing: border-box;
+  }
+  
+  .footer__link--items h2 {
+    margin-bottom: 16px;
+    color: #000000;
+  }
+  
+  .footer__link--items a {
+    color: #000000;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: 0.3 ease-out;
+  }
+  
+  .footer__link--items a:hover {
+    color: #000000;
+    transition: 0.3 ease-out;
+  }
+  
+  #footer__logo {
+    color: #000000;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+  }
+  #footer__logo {
+    margin-bottom: 2rem;
+  }
+  .footer__logo img {
+    width: 50px; /* Adjust the width to your desired size */
+    height: auto; /* Maintain aspect ratio */
+    vertical-align: middle; /* Align with the text vertically */
+  }
+  
+  .footer__text {
+    display: inline-block; /* Allow the text to be inline with the logo */
+    vertical-align: middle; /* Align with the logo vertically */
+    margin-left: 10px; /* Adjust the margin as needed */
+    font-size: 20px; /* Adjust the font size to your desired size */
+    font-weight: bold; /* Apply desired font weight */
+  }
+  .social__media {
+    max-width: 1000px;
+    width: 100%;
+    margin-top: -60px;
+  }
+  .social__media--wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto 0 auto;
+  }
+  .social__icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 240px;
+  }
+  
+  .fab {
+    font-family: "Font Awesome 5 Brands";
+    color: black;
+  }

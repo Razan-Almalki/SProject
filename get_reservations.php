@@ -1,11 +1,7 @@
 <?php
-session_start(); 
 
-// Database connection parameters
-$servername = "localhost";
-$username = "Ruba";
-$password = "Ruba20";
-$database = "wedding_planning";
+session_start(); 
+include 'connection.php';
 
 // Check if service_id is provided in the URL
 if (!isset($_GET['service_id'])) {
@@ -16,8 +12,6 @@ if (!isset($_GET['service_id'])) {
 // Get the service ID from the URL parameter
 $serviceId = $_GET['service_id'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
 
 // Check connection
 if ($conn->connect_error) {
