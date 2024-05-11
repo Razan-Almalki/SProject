@@ -16,7 +16,8 @@ $loggedInV = isset($_SESSION["vendor_id"]);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>عن سُرور</title>
     <link rel="stylesheet" href="style_index.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -37,13 +38,15 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                     <a class="nav-link" href="service.html">الخدمات</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         أدوات التخطيط
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
                         <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
                         <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+                        <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
                     </div>
                 </li>
                 <li>
@@ -58,7 +61,8 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                 <!-- display the item based on the user's authentication status -->
                 <?php if ($loggedIn) { ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             حسابي
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -67,15 +71,16 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                         </div>
                     </li>
                 <?php } else if ($loggedInV) { ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            حسابي
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
-                            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-                        </div>
-                    </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                حسابي
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+                                <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+                            </div>
+                        </li>
                 <?php } ?>
                 <li>
                     <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
@@ -90,7 +95,8 @@ $loggedInV = isset($_SESSION["vendor_id"]);
         <div class="hero__container">
             <h1 class="hero__heading">حول <span>سُرور</span></h1>
             <p class="hero__description">نسعى في سُرور لتبسيط تجربة تخطيط حفل الزفاف للجميع في المملكة العربية السعودية.
-                <br> من خلال توفير منصة سهلة الاستخدام تجمع بين قاعات ومشغلي المطاعم والموسيقيين، نهدف إلى جعل عملية التخطيط انسيابية وإزالة الضغوطات التي يواجهها الأزواج خلال فترة التحضير.
+                <br> من خلال توفير منصة سهلة الاستخدام تجمع بين قاعات ومشغلي المطاعم والموسيقيين، نهدف إلى جعل عملية
+                التخطيط انسيابية وإزالة الضغوطات التي يواجهها الأزواج خلال فترة التحضير.
             </p>
         </div>
 
@@ -102,14 +108,16 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                     <img src="images/1.png" alt="Image 1" id="image1">
                     <div>
                         <h3>تصفح الخدمات</h3>
-                        <p>تصفّحوا بين تشكيلة واسعة من قاعات الأفراح والمطاعم والموسيقيين، قارنوا الأسعار والخدمات المقدمة</p>
+                        <p>تصفّحوا بين تشكيلة واسعة من قاعات الأفراح والمطاعم والموسيقيين، قارنوا الأسعار والخدمات
+                            المقدمة</p>
                     </div>
                 </li>
                 <li class="container">
                     <img src="images/2.png" alt="Image 2" id="image2">
                     <div>
                         <h3>استخدم اداة تخطيط الميزانية</h3>
-                        <p>استفيدوا من أداة تخطيط الميزانية الذكية التي تساعدكم على تخصيص ميزانية زفافكم وفقًا لرغباتكم وأولوياتكم، لحجز مجموعة من الخدمات اللتي تتناسب مع ميزانيتكم. </p>
+                        <p>استفيدوا من أداة تخطيط الميزانية الذكية التي تساعدكم على تخصيص ميزانية زفافكم وفقًا لرغباتكم
+                            وأولوياتكم، لحجز مجموعة من الخدمات اللتي تتناسب مع ميزانيتكم. </p>
                     </div>
                 </li>
                 <li class="container">
@@ -123,14 +131,16 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                     <img src="images/4.png" alt="Image 3" id="image3">
                     <div>
                         <h3>تحدث مع مورد الخدمة للمزيد من التفاصيل</h3>
-                        <p> يمكنك التواصل مع موردي الخدمات للحصول على مزيد من التفاصيل. يمكنك مناقشة متطلباتك الخاصة، والحصول على تفاصيل الأسعار وأي معلومات إضافية</p>
+                        <p> يمكنك التواصل مع موردي الخدمات للحصول على مزيد من التفاصيل. يمكنك مناقشة متطلباتك الخاصة،
+                            والحصول على تفاصيل الأسعار وأي معلومات إضافية</p>
                     </div>
                 </li>
                 <li class="container">
                     <img src="images/5.png" alt="Image 3" id="image3">
                     <div>
                         <h3>ادفع لتأكيد حجوزاتك!</h3>
-                        <p>بمجرد أن تضع الخدمات المناسبة في سلة التسوق الخاصة بك وتكون راضيًا عن اختياراتك، يمكنك المضي قدمًا وإتمام عملية الدفع عن طريق باي بال لتأكيد حجوزاتك</p>
+                        <p>بمجرد أن تضع الخدمات المناسبة في سلة التسوق الخاصة بك وتكون راضيًا عن اختياراتك، يمكنك المضي
+                            قدمًا وإتمام عملية الدفع عن طريق باي بال لتأكيد حجوزاتك</p>
                     </div>
                 </li>
             </ul>
@@ -149,7 +159,8 @@ $loggedInV = isset($_SESSION["vendor_id"]);
                 </div>
                 <div class="services__card">
                     <h2>تعزيز ملفكم الشخصي</h2>
-                    <p>استعرضوا خدماتكم وأعمالكم السابقة وشاركونا بآراء العملاء الإيجابية لتعزيز ملفكم الشخصي والمصداقية تجاه الزبائن المحتملين.</p>
+                    <p>استعرضوا خدماتكم وأعمالكم السابقة وشاركونا بآراء العملاء الإيجابية لتعزيز ملفكم الشخصي والمصداقية
+                        تجاه الزبائن المحتملين.</p>
                 </div>
             </div>
         </div>

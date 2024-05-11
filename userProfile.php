@@ -136,203 +136,197 @@ $conn->close();
 <html dir="rtl" lang="ar">
 
 <head>
-    <meta charset="UTF-8">
-    <title>حسابي في سُرور</title>
-    <link rel="stylesheet" href="style_userProfile.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <meta charset="UTF-8">
+  <title>حسابي في سُرور</title>
+  <link rel="stylesheet" href="style_userProfile.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
   <!-- Boxicons CSS -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="index.php" class="logo">
-                <img src="images/SorourIcon.png" alt="logo">
-                <h2>سُرور</h2>
-            </a>
-            <ul class="links">
-                <li>
-                    <a class="nav-link" href="about.php">عن سُرور</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="service.html">الخدمات</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        أدوات التخطيط
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
-                        <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
-                        <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
-                    </div>
-                </li>
-                <li>
-                    <a class="nav-link" href="contact.html">تواصل معنا</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="Login.html">تسجبل الدخول</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
-                </li>
-            <!-- display the item based on the user's authentication status -->
-            <?php if ($loggedIn) { ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        حسابي
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="userProfile.php">الاعدادات</a>
-                        <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-                    </div>
-                </li>
-            <?php } else { }?>
-                <li>
-                    <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="choices-container">
-        <div class="title">اعدادات الحساب</div>
-        <ul class="choices">
-            <li><a href="#" class="choice" data-choice="info">معلوماتي</a></li>
-            <li><a href="#" class="choice" data-choice="edit">تعديل الحساب</a></li>
-            <li><a href="#" class="choice" data-choice="password">تغيير كلمة المرور</a></li>
-            <li><a href="#" class="choice" data-choice="delet">حذف الحساب</a></li>
-        </ul>
-    </div>
-    <h3>مرحباً، <?php echo $firstName; ?></h3>
-    <div class="info-container">
-        <div id="user-info" class="info">
-            <h2>معلومات الحساب</h2>
-            <div id="user-info">
-                <?php if ($firstName !== "User Not Found") : ?>
-                    <p>الاسم: <?php echo $firstName, " ", $lastName; ?></p>
-                    <p>الايميل: <?php echo $userEmail; ?></p>
-                    <p>رقم الجوال: <?php echo $userPhone; ?></p>
-                <?php else : ?>
-                    <p>User information not found.</p>
-                <?php endif; ?>
-            </div>
-        </div>
-        <div id="edit-user-info" class="info">
-            <h2>تعديل البيانات</h2>
-            <form id="edit-form" method="POST">
-                <label for="new-firstname">الاسم الاول:</label>
-                <input type="text" id="new-firstname" name="new-firstname" required>
-                <label for="new-lastname">اسم العائلة:</label>
-                <input type="text" id="new-lastname" name="new-lastname" required>
-                <label for="new-phone">رقم الجوال الجديد:</label>
-                <input type="number" id="new-phone" name="new-phone" required>
-                <div id="phone-error" class="error-message"></div>
-                <div id="mess1"></div>
-                <button type="submit" name="edit-button">حفظ</button>
-            </form>
-        </div>
-        <div id="password-info" class="info">
-            <h2>تغيير كلمة المرور</h2>
-            <form id="change-password-form" method="POST">
-                <label for="current-password">كلمة المرور الحالية: </label>
-                <input type="password" id="current-password" name="current-password" required>
-                <br>
-                <label for="new-password">كلمة المرور الجديدة: </label>
-                <input type="password" id="new-password" name="new-password"required>
-                <br>
-                <label for="confirm-password">تاكيد كلمة المرور الجديدة: </label>
-                <input type="password" id="confirm-password" name="confirm-password" required>
-                <span id="password-error" class="error-message"></span>
-                <div id="mess2"></div>
-                <button type="submit" name="change_password">تغيير كلمة المرور</button>
-            </form>
-        </div>
-        <div id="delet-info" class="info">
-            <h2>حذف الحساب</h2>
-            <form id="delete-account-form" method="POST">
-                <label for="entered-email">أدخل البريد الإلكتروني لتأكيد الحذف:</label>
-                <input type="email" id="entered-email" name="entered_email" required>
-                <div id="mess"></div>
-                <button type="submit" name="delete_account">حذف الحساب</button>
-            </form>
-        </div>
-    </div>
-    <br><br><br><br>
-    <!-- Footer Section -->
-    <footer>
-      <div class="footer__container">
-        <div class="footer__links">
-          <div class="footer__link--wrapper">
-            <div class="footer__link--items">
-              <h2>عنا</h2>
-              <a href="">الاعدادات</a>
-              <a href="about.php">المزيد</a>
-            </div>
-            <div class="footer__link--items">
-              <h2>تواصل معنا</h2>
-              <a href="/">راسلنا </a>
-              <a href="/">الدعم</a>
-            </div>
-          </div>
-          <div class="footer__link--wrapper">
-            <div class="footer__link--items">
-              <h2>سجل معنا</h2>
-              <a href="SignUp.html">زائر جديد؟</a>
-              <a href="#">صاحب عمل؟</a>
-            </div>
-          </div>
-        </div>
-        <section class="social__media">
-          <div class="social__media--wrap">
-        <div class="footer__logo">
-          <a href="index.php" id="footer__logo">
-            <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
+  <header>
+    <nav class="navbar">
+      <a href="index.php" class="logo">
+        <img src="images/SorourIcon.png" alt="logo">
+        <h2>سُرور</h2>
+      </a>
+      <ul class="links">
+        <li>
+          <a class="nav-link" href="about.php">عن سُرور</a>
+        </li>
+        <li>
+          <a class="nav-link" href="service.html">الخدمات</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            أدوات التخطيط
           </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
+            <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
+            <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
+          </div>
+        </li>
+        <li>
+          <a class="nav-link" href="contact.html">تواصل معنا</a>
+        </li>
+        <li>
+          <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+        </li>
+        <li>
+          <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+        </li>
+        <!-- display the item based on the user's authentication status -->
+        <?php if ($loggedIn) { ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              حسابي
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="userProfile.php">الاعدادات</a>
+              <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+            </div>
+          </li>
+        <?php } else {
+        } ?>
+        <li>
+          <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="choices-container">
+    <div class="title">اعدادات الحساب</div>
+    <ul class="choices">
+      <li><a href="#" class="choice" data-choice="info">معلوماتي</a></li>
+      <li><a href="#" class="choice" data-choice="edit">تعديل الحساب</a></li>
+      <li><a href="#" class="choice" data-choice="password">تغيير كلمة المرور</a></li>
+      <li><a href="#" class="choice" data-choice="delet">حذف الحساب</a></li>
+    </ul>
+  </div>
+  <h3>مرحباً، <?php echo $firstName; ?></h3>
+  <div class="info-container">
+    <div id="user-info" class="info">
+      <h2>معلومات الحساب</h2>
+      <div id="user-info">
+        <?php if ($firstName !== "User Not Found"): ?>
+          <p>الاسم: <?php echo $firstName, " ", $lastName; ?></p>
+          <p>الايميل: <?php echo $userEmail; ?></p>
+          <p>رقم الجوال: <?php echo $userPhone; ?></p>
+        <?php else: ?>
+          <p>User information not found.</p>
+        <?php endif; ?>
+      </div>
+    </div>
+    <div id="edit-user-info" class="info">
+      <h2>تعديل البيانات</h2>
+      <form id="edit-form" method="POST">
+        <label for="new-firstname">الاسم الاول:</label>
+        <input type="text" id="new-firstname" name="new-firstname" required>
+        <label for="new-lastname">اسم العائلة:</label>
+        <input type="text" id="new-lastname" name="new-lastname" required>
+        <label for="new-phone">رقم الجوال الجديد:</label>
+        <input type="number" id="new-phone" name="new-phone" required>
+        <div id="phone-error" class="error-message"></div>
+        <div id="mess1"></div>
+        <button type="submit" name="edit-button">حفظ</button>
+      </form>
+    </div>
+    <div id="password-info" class="info">
+      <h2>تغيير كلمة المرور</h2>
+      <form id="change-password-form" method="POST">
+        <label for="current-password">كلمة المرور الحالية: </label>
+        <input type="password" id="current-password" name="current-password" required>
+        <br>
+        <label for="new-password">كلمة المرور الجديدة: </label>
+        <input type="password" id="new-password" name="new-password" required>
+        <br>
+        <label for="confirm-password">تاكيد كلمة المرور الجديدة: </label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <span id="password-error" class="error-message"></span>
+        <div id="mess2"></div>
+        <button type="submit" name="change_password">تغيير كلمة المرور</button>
+      </form>
+    </div>
+    <div id="delet-info" class="info">
+      <h2>حذف الحساب</h2>
+      <form id="delete-account-form" method="POST">
+        <label for="entered-email">أدخل البريد الإلكتروني لتأكيد الحذف:</label>
+        <input type="email" id="entered-email" name="entered_email" required>
+        <div id="mess"></div>
+        <button type="submit" name="delete_account">حذف الحساب</button>
+      </form>
+    </div>
+  </div>
+  <br><br><br><br>
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>عنا</h2>
+            <a href="">الاعدادات</a>
+            <a href="about.php">المزيد</a>
+          </div>
+          <div class="footer__link--items">
+            <h2>تواصل معنا</h2>
+            <a href="/">راسلنا </a>
+            <a href="/">الدعم</a>
+          </div>
         </div>
-      <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
-      <div class="social__icons">
-        <a href="/" class="social__icon--link" target="_blank"
-          ><i class="fab fa-facebook"></i
-        ></a>
-        <a href="/" class="social__icon--link"
-          ><i class="fab fa-instagram"></i
-        ></a>
-        <a href="/" class="social__icon--link"
-          ><i class="fab fa-youtube"></i
-        ></a>
-        <a href="/" class="social__icon--link"
-          ><i class="fab fa-linkedin"></i
-        ></a>
-        <a href="/" class="social__icon--link"
-          ><i class="fab fa-twitter"></i
-        ></a>
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2>سجل معنا</h2>
+            <a href="SignUp.html">زائر جديد؟</a>
+            <a href="#">صاحب عمل؟</a>
+          </div>
+        </div>
       </div>
-      </div>
+      <section class="social__media">
+        <div class="social__media--wrap">
+          <div class="footer__logo">
+            <a href="index.php" id="footer__logo">
+              <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
+            </a>
+          </div>
+          <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
+          <div class="social__icons">
+            <a href="/" class="social__icon--link" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-instagram"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-youtube"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-linkedin"></i></a>
+            <a href="/" class="social__icon--link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
       </section>
   </footer>
-    <script>
-        <?php if (isset($errorMessage)) : ?>
-            // Display the error message in the 'mess' div
-            var messDiv = document.getElementById('mess');
-            messDiv.innerHTML = '<?php echo $errorMessage; ?>';
-        <?php endif; ?>
-        <?php if (isset($errorMessage1)) : ?>
-            // Display the error message in the 'mess' div
-            var messDiv1 = document.getElementById('mess1');
-            messDiv1.innerHTML = '<?php echo $errorMessage1; ?>';
-        <?php endif; ?>
-        <?php if (isset($errorMessage2)) : ?>
-            // Display the error message in the 'mess' div
-            var messDiv2 = document.getElementById('mess2');
-            messDiv2.innerHTML = '<?php echo $errorMessage2; ?>';
-        <?php endif; ?>
-    </script>
-    <script src="userProfile.js"></script>
+  <script>
+    <?php if (isset($errorMessage)): ?>
+      // Display the error message in the 'mess' div
+      var messDiv = document.getElementById('mess');
+      messDiv.innerHTML = '<?php echo $errorMessage; ?>';
+    <?php endif; ?>
+    <?php if (isset($errorMessage1)): ?>
+      // Display the error message in the 'mess' div
+      var messDiv1 = document.getElementById('mess1');
+      messDiv1.innerHTML = '<?php echo $errorMessage1; ?>';
+    <?php endif; ?>
+    <?php if (isset($errorMessage2)): ?>
+      // Display the error message in the 'mess' div
+      var messDiv2 = document.getElementById('mess2');
+      messDiv2.innerHTML = '<?php echo $errorMessage2; ?>';
+    <?php endif; ?>
+  </script>
+  <script src="userProfile.js"></script>
 </body>
 
 </html>

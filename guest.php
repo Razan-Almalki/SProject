@@ -71,15 +71,16 @@ $pending = $rowPending['Pending'];
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
-            <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
+            <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
             <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
           </div>
         </li>
         <li>
           <a class="nav-link" href="contact.html">تواصل معنا</a>
         </li>
         <li>
-          <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+          <a class="nav-link" href="Login.html">تسجيل الدخول</a>
         </li>
         <li>
           <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
@@ -397,7 +398,7 @@ $pending = $rowPending['Pending'];
     <form id="move-group-form" action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">نقل الضيوف إلى مجموعة اخرى</h2>
-        <button class="popup__close" onclick="closeMoveGroupPopup()">&#10006;</button>
+        <button class="popup__close main-button-style" onclick="closeMoveGroupPopup()">&#10006;</button>
       </div>
 
       <div class="form__group field">
@@ -409,7 +410,7 @@ $pending = $rowPending['Pending'];
         if ($result_groups->num_rows > 0) {
           while ($row = $result_groups->fetch_assoc()) {
             $group_name = $row['Table_name'];
-            echo "<input type='radio' id='$group_name' name='new_group' value='$group_name'>";
+            echo "<input type='radio' id='$group_name' name='new_group' value='$group_name' style='width: 20px'>";
             echo "<label for='$group_name'>$group_name</label><br>";
           }
         } else {
@@ -425,7 +426,7 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button id="move-group-btn" type="submit" name="switch-group" onclick="guestName()">تحريك الضيوف</button>
+      <button id="move-group-btn" class="main-button-style" type="submit" name="switch-group" onclick="guestName()">تحريك الضيوف</button>
     </form>
   </div>
 
@@ -440,7 +441,7 @@ $pending = $rowPending['Pending'];
         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
       </div>
       <div class="popup__body">
-        <p>هل أنت متأكد أنك تريد حذف هذا الضيف؟</p>
+        <div style="margin-bottom: 20px">هل أنت متأكد أنك تريد حذف هذا الضيف؟</div>
         <button type="submit" class="main-button-style" name="delete-guest" onclick="deleteGuest()">نعم، حذف</button>
         <button type="button" class="main-button-style" onclick="closeRemoveGuestPopup()">لا، إلغاء</button>
       </div>
@@ -634,7 +635,7 @@ $pending = $rowPending['Pending'];
     <form id="rename-group-form" action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">اعادة تسمية المجموعة</h2>
-        <button class="popup__close" onclick="closeRenameDiv()">&#10006;</button>
+        <button class="popup__close main-button-style" onclick="closeRenameDiv()">&#10006;</button>
       </div>
 
       <div class="form__group field">
@@ -650,7 +651,7 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button id="rename-group-btn" type="submit" name="rename-group">إضافة</button>
+      <button id="rename-group-btn" class="main-button-style" type="submit" name="rename-group">إضافة</button>
     </form>
   </div>
 
@@ -658,16 +659,16 @@ $pending = $rowPending['Pending'];
     <form id="delete-group-form" action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">حذف المجموعة</h2>
-        <button class="popup__close" onclick="closeDeleteDiv()">&#10006;</button>
+        <button class="popup__close main-button-style" onclick="closeDeleteDiv()">&#10006;</button>
       </div>
 
       <input type="hidden" name="delete-group-name" id="delete-group-name" value="">
 
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
-      <p>هل أنت متأكد أنك تريد حذف هذا الضيف؟</p>
-      <button type="submit" name="delete-group" onclick="closeDeleteDiv()">نعم، حذف</button>
-      <button type="button" onclick="closeDeleteDiv()">لا، إلغاء</button>
+      <div style="margin-bottom: 20px">هل أنت متأكد أنك تريد حذف هذه المجموعة</div>
+      <button type="submit" class="main-button-style" name="delete-group" onclick="closeDeleteDiv()">نعم، حذف</button>
+      <button type="button" class="main-button-style" onclick="closeDeleteDiv()">لا، إلغاء</button>
     </form>
   </div>
 

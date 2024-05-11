@@ -170,7 +170,7 @@ $conn->close();
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
-                        <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
+                        <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
                         <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
                         <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
                     </div>
