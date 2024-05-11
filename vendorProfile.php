@@ -69,30 +69,30 @@ if (isset($_POST['edit-button'])) {
     // Validate data (optional)
     if (!preg_match("/^05\d{8}$/", $phone)) {
         $errorMessage1 = "الرقم المدخل غير صحيح!";
-    }else{
-
-    // Update vendor information in database
-    $sql = "UPDATE vendor SET First_name = ?, Last_name = ?, Phone = ? WHERE Vendor_ID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssss', $firstName, $lastName, $phone, $_SESSION["vendor_id"]); 
-    $stmt->execute();
-
-    if ($stmt->affected_rows === 1) {
-        // Store the error message in a variable
-        echo "<script>alert('تم تحديث بيانتك بنجاح!.')</script>";
-        $errorMessage1 = "تم تحديث بيانتك بنجاح!." . $conn->error;
     } else {
-        $errorMessage1 = "فشل تحديث البيانات." . $conn->error;
+
+        // Update vendor information in database
+        $sql = "UPDATE vendor SET First_name = ?, Last_name = ?, Phone = ? WHERE Vendor_ID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ssss', $firstName, $lastName, $phone, $_SESSION["vendor_id"]);
+        $stmt->execute();
+
+        if ($stmt->affected_rows === 1) {
+            // Store the error message in a variable
+            echo "<script>alert('تم تحديث بيانتك بنجاح!.')</script>";
+            $errorMessage1 = "تم تحديث بيانتك بنجاح!." . $conn->error;
+        } else {
+            $errorMessage1 = "فشل تحديث البيانات." . $conn->error;
+        }
+        $stmt->close();
     }
-    $stmt->close();
-}
 }
 // reset the password 
 if (isset($_POST['change_password'])) {
     $currentPassword = $_POST['current-password'];
     $newPassword = $_POST['new-password'];
     $confirmPassword = $_POST['confirm-password'];
-  
+
     // Fetch user data based on user ID (assuming you have a way to get it)
     $sql = "SELECT Pass_word FROM vendor WHERE Vendor_ID = ?";
     $stmt = $conn->prepare($sql);
@@ -100,33 +100,33 @@ if (isset($_POST['change_password'])) {
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
-  
+
     // Verify current password
     if (password_verify($currentPassword, $user['Pass_word'])) {
-      // Check if new password and confirm password match
-      if ($newPassword === $confirmPassword) {
-        // Hash the new password
-        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-  
-        // Update the user's password in the database
-        $sql = "UPDATE vendor SET Pass_word = ? WHERE Vendor_ID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('si', $hashedNewPassword, $_SESSION["vendor_id"]);
-        if ($stmt->execute()) {
-          // Password reset successful
-          echo "<script>alert('تم تغيير كلمة المرور بنجاح!')</script>";
-          $errorMessage2 = ' ' . $conn->error;
+        // Check if new password and confirm password match
+        if ($newPassword === $confirmPassword) {
+            // Hash the new password
+            $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            // Update the user's password in the database
+            $sql = "UPDATE vendor SET Pass_word = ? WHERE Vendor_ID = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('si', $hashedNewPassword, $_SESSION["vendor_id"]);
+            if ($stmt->execute()) {
+                // Password reset successful
+                echo "<script>alert('تم تغيير كلمة المرور بنجاح!')</script>";
+                $errorMessage2 = ' ' . $conn->error;
+            } else {
+                $errorMessage2 = 'فشل تغيير كلمة المرور!' . $conn->error;
+            }
+            $stmt->close();
         } else {
-          $errorMessage2 = 'فشل تغيير كلمة المرور!' . $conn->error;
+            $errorMessage2 = 'كلمة المرور الجديدة غير متطابقة!' . $conn->error;
         }
-        $stmt->close();
-      } else {
-        $errorMessage2 = 'كلمة المرور الجديدة غير متطابقة!' . $conn->error;
-      }
     } else {
-      $errorMessage2 ='كلمة المرور الحالية غير صحيحة!' . $conn->error;
+        $errorMessage2 = 'كلمة المرور الحالية غير صحيحة!' . $conn->error;
     }
-  }
+}
 
 $conn->close();
 ?>
@@ -143,10 +143,10 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/SorourIcon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-  <!-- Boxicons CSS -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style_vendorProofile.css" />
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_vendorProofile.css" />
 </head>
 
 <body>
@@ -164,13 +164,15 @@ $conn->close();
                     <a class="nav-link" href="service.html">الخدمات</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         أدوات التخطيط
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="budgetP.html">تخطيط الميزانية</a>
                         <a class="dropdown-item" href="gm.html">إدارة قائمة الضوف</a>
                         <a class="dropdown-item" href="checklist.html">إدارة المهام</a>
+                        <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
                     </div>
                 </li>
                 <li>
@@ -182,18 +184,20 @@ $conn->close();
                 <li>
                     <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
                 </li>
-            <!-- display the item based on the user's authentication status -->
-            <?php if ($loggedIn) { ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        حسابي
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
-                        <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-                    </div>
-                </li>
-            <?php } else { }?>
+                <!-- display the item based on the user's authentication status -->
+                <?php if ($loggedIn) { ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            حسابي
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+                            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+                        </div>
+                    </li>
+                <?php } else {
+                } ?>
                 <li>
                     <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
                 </li>
@@ -215,11 +219,11 @@ $conn->close();
         <div id="user-info" class="info">
             <h2>معلومات الحساب</h2>
             <div id="user-info">
-                <?php if ($firstName !== "User Not Found") : ?>
+                <?php if ($firstName !== "User Not Found"): ?>
                     <p>الاسم: <?php echo $firstName, " ", $lastName; ?></p>
                     <p>الايميل: <?php echo $userEmail; ?></p>
                     <p>رقم الجوال: <?php echo $userPhone; ?></p>
-                <?php else : ?>
+                <?php else: ?>
                     <p>User information not found.</p>
                 <?php endif; ?>
             </div>
@@ -245,7 +249,7 @@ $conn->close();
                 <input type="password" id="current-password" name="current-password" required>
                 <br>
                 <label for="new-password">كلمة المرور الجديدة: </label>
-                <input type="password" id="new-password" name="new-password"required>
+                <input type="password" id="new-password" name="new-password" required>
                 <br>
                 <label for="confirm-password">تاكيد كلمة المرور الجديدة: </label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
@@ -267,68 +271,58 @@ $conn->close();
     <br><br><br><br>
     <!-- Footer Section -->
     <footer>
-      <div class="footer__container">
-        <div class="footer__links">
-          <div class="footer__link--wrapper">
-            <div class="footer__link--items">
-              <h2>عنا</h2>
-              <a href="">الاعدادات</a>
-              <a href="about.php">المزيد</a>
+        <div class="footer__container">
+            <div class="footer__links">
+                <div class="footer__link--wrapper">
+                    <div class="footer__link--items">
+                        <h2>عنا</h2>
+                        <a href="">الاعدادات</a>
+                        <a href="about.php">المزيد</a>
+                    </div>
+                    <div class="footer__link--items">
+                        <h2>تواصل معنا</h2>
+                        <a href="/">راسلنا </a>
+                        <a href="/">الدعم</a>
+                    </div>
+                </div>
+                <div class="footer__link--wrapper">
+                    <div class="footer__link--items">
+                        <h2>سجل معنا</h2>
+                        <a href="SignUp.html">زائر جديد؟</a>
+                        <a href="SignUp_vendor.html">صاحب عمل؟</a>
+                    </div>
+                </div>
             </div>
-            <div class="footer__link--items">
-              <h2>تواصل معنا</h2>
-              <a href="/">راسلنا </a>
-              <a href="/">الدعم</a>
-            </div>
-          </div>
-          <div class="footer__link--wrapper">
-            <div class="footer__link--items">
-              <h2>سجل معنا</h2>
-              <a href="SignUp.html">زائر جديد؟</a>
-              <a href="SignUp_vendor.html">صاحب عمل؟</a>
-            </div>
-          </div>
-        </div>
-        <section class="social__media">
-          <div class="social__media--wrap">
-        <div class="footer__logo">
-          <a href="index.php" id="footer__logo">
-            <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
-          </a>
-        </div>
-      <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
-      <div class="social__icons">
-        <a href="/" class="social__icon--link" target="_blank"
-          ><i class="fab fa-facebook"></i
-        ></a>
-        <a href="/" class="social__icon--link"
-          ><i class="fab fa-instagram"></i
-        ></a>
-        <a href="/" class="social__icon--link"
-          ><i class="fab fa-youtube"></i
-        ></a>
-        <a href="/" class="social__icon--link"
-          ><i class="fab fa-linkedin"></i
-        ></a>
-        <a href="/" class="social__icon--link"
-          ><i class="fab fa-twitter"></i
-        ></a>
-      </div>
-      </div>
-      </section>
-  </footer>
+            <section class="social__media">
+                <div class="social__media--wrap">
+                    <div class="footer__logo">
+                        <a href="index.php" id="footer__logo">
+                            <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
+                        </a>
+                    </div>
+                    <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
+                    <div class="social__icons">
+                        <a href="/" class="social__icon--link" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="/" class="social__icon--link"><i class="fab fa-instagram"></i></a>
+                        <a href="/" class="social__icon--link"><i class="fab fa-youtube"></i></a>
+                        <a href="/" class="social__icon--link"><i class="fab fa-linkedin"></i></a>
+                        <a href="/" class="social__icon--link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </section>
+    </footer>
     <script>
-        <?php if (isset($errorMessage)) : ?>
+        <?php if (isset($errorMessage)): ?>
             // Display the error message in the 'mess' div
             var messDiv = document.getElementById('mess');
             messDiv.innerHTML = '<?php echo $errorMessage; ?>';
         <?php endif; ?>
-        <?php if (isset($errorMessage1)) : ?>
+        <?php if (isset($errorMessage1)): ?>
             // Display the error message in the 'mess' div
             var messDiv1 = document.getElementById('mess1');
             messDiv1.innerHTML = '<?php echo $errorMessage1; ?>';
         <?php endif; ?>
-        <?php if (isset($errorMessage2)) : ?>
+        <?php if (isset($errorMessage2)): ?>
             // Display the error message in the 'mess' div
             var messDiv2 = document.getElementById('mess2');
             messDiv2.innerHTML = '<?php echo $errorMessage2; ?>';

@@ -89,6 +89,61 @@ if ($conn->query($sql) === TRUE) {
         echo "Error creating table services: " . $conn->error . "\n";
     }
 
+    // SQL to create table review
+    $sql_review = "CREATE TABLE IF NOT EXISTS review (
+        Review_ID INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT,
+        service_id INT,
+        Rate VARCHAR(255) NOT NULL,
+        Comment VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES user(User_ID),
+        FOREIGN KEY (service_id) REFERENCES services(Service_ID)
+    )";
+    
+    if ($conn->query($sql_review) === TRUE) {
+        // Table review created successfully
+    } else {
+        echo "Error Review table: " . $conn->error . "\n";
+    }
+
+    // SQL to create table reservation
+    $sql_reservation = "CREATE TABLE IF NOT EXISTS reservation (
+        Reservation_ID INT AUTO_INCREMENT PRIMARY KEY,
+        Service_ID INT,
+        User_ID INT,
+        Reservation_date DATE NOT NULL,
+        State VARCHAR(255),
+        FOREIGN KEY (Service_ID) REFERENCES services(Service_ID),
+        FOREIGN KEY (User_ID) REFERENCES user(User_ID)
+    )";
+    
+    if ($conn->query($sql_reservation) === TRUE) {
+        // Table reservation created successfully
+    } else {
+        echo "Error Reservation table: " . $conn->error . "\n";
+    }
+    
+    // SQL to create table Cart
+    $sql_cart = "CREATE TABLE IF NOT EXISTS Cart (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        item_id INT,
+        item_name VARCHAR(255),
+        item_price DECIMAL(10, 2),
+        deposit DECIMAL(10, 2),
+        item_pic LONGBLOB,
+        date DATE, -- Add the date attribute here
+        user_id INT,
+        FOREIGN KEY (item_id) REFERENCES services(Service_ID),
+        FOREIGN KEY (user_id) REFERENCES user(User_ID)
+    )";
+    
+    if ($conn->query($sql_cart) === TRUE) {
+        // Table Cart created successfully
+    } else {
+        echo "Error Cart table: " . $conn->error . "\n";
+    }
+
     // SQL to create table guest
     $sql_guest = "CREATE TABLE IF NOT EXISTS guest (
         ID INT AUTO_INCREMENT PRIMARY KEY,

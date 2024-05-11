@@ -10,7 +10,9 @@
 
 <body>
     <div id="invitation">
-        <!-- Invitation content -->
+        <div id="invitation-card">
+            
+        </div>
     </div>
 
     <div id="form-att">

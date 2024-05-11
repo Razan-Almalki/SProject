@@ -5,16 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>guest</title>
-  <link rel="stylesheet" href="style_index.css" />
+  <link rel="stylesheet" href="waad_style.css" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
 </head>
 
 <?php
-session_start();
-// Check if user is authenticated
-$loggedIn = isset($_SESSION['user_id']);
 
+// Start session
+session_start();
+
+$loggedIn = isset($_SESSION['user_id']);
+if (!$loggedIn) {
+    header("Location: Login.html");
+    exit;
+}
 ?>
 
 <?php
@@ -100,7 +105,7 @@ $pending = $rowPending['Pending'];
     </nav>
   </header>
   <!-- Begin Content -->
-  <div id="Content">
+  <div id="content-guest-page">
 
     <!-- Begin overview -->
     <div id="overview">
@@ -144,11 +149,11 @@ $pending = $rowPending['Pending'];
             </label>
           </div>
           <div id="additional-buttons">
-            <button id="switch-group-button" type="button" onclick="openMoveGroupPopup()"> <span
+            <button id="switch-group-button" class="main-button-style" type="button" onclick="openMoveGroupPopup()"> <span
                 class="material-symbols-outlined">
                 sync_alt
               </span> تبديل مجموعة</button>
-            <button id="remove-button" type="button" onclick="openRemoveGuestPopup()"> <span
+            <button id="remove-button" class="main-button-style" type="button" onclick="openRemoveGuestPopup()"> <span
                 class="material-symbols-outlined">
                 delete
               </span> حذف</button>
@@ -170,8 +175,8 @@ $pending = $rowPending['Pending'];
               echo "<tr>";
               echo "<th style='width: 5%'></th>"; // Adjust the width as needed
               echo "<th style='width: 20%'>$table_name</th>"; // Adjust the width as needed
-              echo "<th style='width: 5%'>حالة الحضور</th>"; // Adjust the width as needed
-              echo "<th style='width: 25%'></th>";
+              echo "<th style='width: 15%'>حالة الحضور</th>"; // Adjust the width as needed
+              echo "<th style='width: 20%'></th>";
               // Check if the group name requires a dropdown menu
               if ($table_name != 'اقارب العروس' && $table_name != 'اقارب العريس' && $table_name != 'غير مصنف') {
                 echo "<th style='width: 10%; position: relative;' class='dropdown'>";
@@ -270,10 +275,10 @@ $pending = $rowPending['Pending'];
   <!-- End Footer -->
 
   <div id="popup" class="popup" style="display: none;">
-    <form action="add_guest.php" method="post">
+    <form action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">اضافة ضيف</h2>
-        <button class="popup__close" onclick="closePopup()">&#10006;</button>
+        <button class="popup__close main-button-style" onclick="closePopup()">&#10006;</button>
       </div>
       <div class="form__group field">
         <input type="input" class="form__field" placeholder="الاسم الاول" name="f_Name" id="first_name"
@@ -323,7 +328,7 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button type="submit" id="submitBtn">إضافة</button>
+      <button type="submit" class="main-button-style" id="submitBtn" name="add-guest">إضافة</button>
 
       <br>
       <div id="hint" style="color: black; display: none;">الاسم يجب أن يحتوي على كلمة واحدة فقط</div>
@@ -370,10 +375,10 @@ $pending = $rowPending['Pending'];
   </script>
 
   <div id="group-popup" class="popup" style="display: none;">
-    <form id="add-group-form" action="add_group.php" method="post">
+    <form id="add-group-form" action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">اضافة مجموعة</h2>
-        <button class="popup__close" onclick="closeGroupPopup()">&#10006;</button>
+        <button class="popup__close main-button-style" onclick="closeGroupPopup()">&#10006;</button>
       </div>
 
       <div class="form__group field">
@@ -384,12 +389,12 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button id="add-group-btn" type="submit">إضافة</button>
+      <button id="add-group-btn" class="main-button-style" type="submit" name="add-group">إضافة</button>
     </form>
   </div>
 
   <div id="move-group-popup" class="popup" style="display: none;">
-    <form id="move-group-form" action="switch_group.php" method="post">
+    <form id="move-group-form" action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">نقل الضيوف إلى مجموعة اخرى</h2>
         <button class="popup__close" onclick="closeMoveGroupPopup()">&#10006;</button>
@@ -420,15 +425,15 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button id="move-group-btn" type="submit" onclick="guestName()">تحريك الضيوف</button>
+      <button id="move-group-btn" type="submit" name="switch-group" onclick="guestName()">تحريك الضيوف</button>
     </form>
   </div>
 
   <div id="remove-guest-popup" class="popup" style="display: none;">
-    <form id="remove-guest-form" action="Delete_guest.php" method="post">
+    <form id="remove-guest-form" action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">حذف الضيف</h2>
-        <button class="popup__close" onclick="closeRemoveGuestPopup()">&#10006;</button>
+        <button class="popup__close main-button-style" onclick="closeRemoveGuestPopup()">&#10006;</button>
       </div>
       <div class="form__group field">
         <input type="hidden" id="delete_guests_names" name="delete_guests_names" value="">
@@ -436,8 +441,8 @@ $pending = $rowPending['Pending'];
       </div>
       <div class="popup__body">
         <p>هل أنت متأكد أنك تريد حذف هذا الضيف؟</p>
-        <button type="submit" onclick="deleteGuest()">نعم، حذف</button>
-        <button type="button" onclick="closeRemoveGuestPopup()">لا، إلغاء</button>
+        <button type="submit" class="main-button-style" name="delete-guest" onclick="deleteGuest()">نعم، حذف</button>
+        <button type="button" class="main-button-style" onclick="closeRemoveGuestPopup()">لا، إلغاء</button>
       </div>
     </form>
   </div>
@@ -449,7 +454,7 @@ $pending = $rowPending['Pending'];
         phoneForInvite = phoneForInvite.slice(1);
       }
       // Construct the WhatsApp invite link
-      var inviteLink = "https://api.whatsapp.com/send?phone=+966" + phoneForInvite + "&text=Welcome%20to%20souror,%20this%20is%20an%20invitation%20message.%20Please%20visit%20this%20page%20for%20confire%20your%20attendence%20use%20this%20code%20to%20search " + guestID + " http://localhost/SProject-5/Invitation.php%21";
+      var inviteLink = "https://api.whatsapp.com/send?phone=+966" + phoneForInvite + "&text=مرحبًا بك في سورو، هذه رسالة دعوة لحفل زفاف. يرجى زيارة الصفحة في اسفل الرسالة لتأكيد حضورك باستخدام هذا الرمز " + guestID + " http://localhost/SProject-5/Invitation.php%21";
 
       // Open the WhatsApp invite link in a new tab/window
       window.open(inviteLink, "_blank");
@@ -526,10 +531,10 @@ $pending = $rowPending['Pending'];
   <div id="sideDiv" class="side-div">
     <div class="popup__header">
       <h2 class="popup__title">تحديث معلومات الضيف</h2>
-      <button class="popup__close" onclick="closeSideDiv()">&#10006;</button>
+      <button class="popup__close main-button-style" onclick="closeSideDiv()">&#10006;</button>
     </div>
 
-    <form id="updateForm" action="Update_guest_info.php" method="post">
+    <form id="updateForm" action="guest_page_action.php" method="post">
       <div class="form__group field">
         <input type="input" class="form__field" placeholder="الاسم الاول" name="update_first_name"
           id="update_first_name" oninput="validateSideDivForm()" required />
@@ -580,7 +585,7 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button id="updateSubmitBtn" type="submit">تحديث</button>
+      <button id="updateSubmitBtn" class="main-button-style" type="submit" name="update-guest-info">تحديث</button>
 
       <br>
       <div id="sideDivHint" style="color: black; display: none;">الاسم يجب أن يحتوي على كلمة واحدة فقط</div>
@@ -626,7 +631,7 @@ $pending = $rowPending['Pending'];
   </script>
 
   <div id="rename-group" class="popup" style="display: none;">
-    <form id="rename-group-form" action="rename_group.php" method="post">
+    <form id="rename-group-form" action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">اعادة تسمية المجموعة</h2>
         <button class="popup__close" onclick="closeRenameDiv()">&#10006;</button>
@@ -645,12 +650,12 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <br>
-      <button id="rename-group-btn" type="submit">إضافة</button>
+      <button id="rename-group-btn" type="submit" name="rename-group">إضافة</button>
     </form>
   </div>
 
   <div id="delete-group" class="popup" style="display: none;">
-    <form id="delete-group-form" action="delete_group.php" method="post">
+    <form id="delete-group-form" action="guest_page_action.php" method="post">
       <div class="popup__header">
         <h2 class="popup__title">حذف المجموعة</h2>
         <button class="popup__close" onclick="closeDeleteDiv()">&#10006;</button>
@@ -661,7 +666,7 @@ $pending = $rowPending['Pending'];
       <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
       <p>هل أنت متأكد أنك تريد حذف هذا الضيف؟</p>
-      <button type="submit" onclick="closeDeleteDiv()">نعم، حذف</button>
+      <button type="submit" name="delete-group" onclick="closeDeleteDiv()">نعم، حذف</button>
       <button type="button" onclick="closeDeleteDiv()">لا، إلغاء</button>
     </form>
   </div>

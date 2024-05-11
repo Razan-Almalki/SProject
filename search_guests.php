@@ -24,7 +24,7 @@ if(isset($_GET['ID'])) {
         echo "<hr>";
         while($row = $result->fetch_assoc()) {
             echo "<div class='row'>";
-            echo $row['F_Name'] . " " . $row['M_Name'] . " " . $row['L_Name'] . "<input type='radio' name='guest' value='" . $row['ID'] . "'>" . "<br>";
+            echo "<input type='radio' name='guest' value='" . $row['ID'] . "'>" . $row['F_Name'] . " " . $row['M_Name'] . " " . $row['L_Name'] . "<br>";
             echo "</div>";
         }
         echo "<button class='buttons' onclick='selectGuest()'>اختر</button>";

@@ -8,6 +8,6 @@ if (session_status() == PHP_SESSION_NONE) {
 session_destroy();
 
 // Redirect the user to the login page or any other desired location
-header("Location: Login.html");
+header("Location: index.php");
 exit();
 ?>

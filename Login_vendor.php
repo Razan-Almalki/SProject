@@ -67,7 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $response = array("success" => true, "message" => "Login successful", "vendor_name" => $_SESSION["vendor_name"], "vendor_id" => $_SESSION["vendor_id"]);
         echo json_encode($response);
         exit;
-    }
-    // Close the database connection
-    $conn->close();
+    }  
 }
+// Close the database connection
+    $conn->close();
+?>
