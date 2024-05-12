@@ -163,9 +163,9 @@ if (isset($_GET['Service_ID'])) {
                                     <label for="serviceType" class="form__label">نوع الخدمة</label>
                                     <select id="serviceType" name="serviceType" class="form__field">
                                         <option selected disabled value="<?php echo $serviceTypeLabel; ?>">اختر نوع المكان</option>
-                                        <option value="venue">قاعة</option>
-                                        <option value="catering">تقديم الطعام</option>
-                                        <option value="music">موسيقى</option>
+                                        <option value="Venue">قاعة</option>
+                                        <option value="Catering">تقديم الطعام</option>
+                                        <option value="Music">موسيقى</option>
                                     </select>
                                 </div>
 

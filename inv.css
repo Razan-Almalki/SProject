@@ -113,7 +113,7 @@ input[type=text]:focus {
 .r-update {
     justify-content: space-between;
     min-width: 430px;
-    padding-left: 7%;
+    padding-left: 5%;
 }
 
 #row>p {

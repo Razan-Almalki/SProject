@@ -25,7 +25,7 @@ if ($result_guest->num_rows > 0) {
     // Fetch reservation details
     $sql_reservation = "SELECT * FROM reservation WHERE User_ID='$userId'";
     // Modify the query to include the condition for Service_type being 'venue'
-    $sql_reservation .= " AND Service_ID IN (SELECT Service_ID FROM services WHERE Service_type = 'venue')";
+    $sql_reservation .= " AND Service_ID IN (SELECT Service_ID FROM services WHERE Service_type = 'Venue')";
     
     $result_reservation = $conn->query($sql_reservation);
 

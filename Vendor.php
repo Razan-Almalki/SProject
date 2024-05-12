@@ -126,13 +126,13 @@ if (!$loggedInV) {
                     foreach ($servicesByType as $serviceType => $services) {
                         // Display the service type based on the type of service
                         switch ($serviceType) {
-                            case 'venue':
+                            case 'Venue':
                                 $serviceTypeName = "القاعات";
                                 break;
-                            case 'catering':
+                            case 'Catering':
                                 $serviceTypeName = "خدمات تقديم الطعام";
                                 break;
-                            case 'music':
+                            case 'Music':
                                 $serviceTypeName = "الخدمات الموسيقية";
                                 break;
                             default:
@@ -170,10 +170,10 @@ if (!$loggedInV) {
             <br>
             <div id="add-service-div">
                 <div id="service-form">
-                    <span id="venue-service" class="service-option" onclick="showForm('Venue')">قاعة</span>
-                    <span id="catering-service" class="service-option" onclick="showForm('Catering')">خدمات
+                    <span id="Venue-service" class="service-option" onclick="showForm('Venue')">قاعة</span>
+                    <span id="Catering-service" class="service-option" onclick="showForm('Catering')">خدمات
                         الطعام</span>
-                    <span id="music-service" class="service-option" onclick="showForm('Music')">موسيقى</span>
+                    <span id="Music-service" class="service-option" onclick="showForm('Music')">موسيقى</span>
                 </div>
 
                 <form id="serviceForm" action="update_service.php" method="POST" enctype="multipart/form-data">
@@ -4335,10 +4335,10 @@ if (!$loggedInV) {
             </div>
             <br>
             <div id="delete-service-form">
-                <span id="venue-service" class="service-option" onclick="displayService('venue')">قاعة</span>
-                <span id="catering-service" class="service-option" onclick="displayService('catering')">خدمات
+                <span id="Venue-service" class="service-option" onclick="displayService('Venue')">قاعة</span>
+                <span id="Catering-service" class="service-option" onclick="displayService('Catering')">خدمات
                     الطعام</span>
-                <span id="music-service" class="service-option" onclick="displayService('music')">موسيقى</span>
+                <span id="Music-service" class="service-option" onclick="displayService('Music')">موسيقى</span>
             </div>
             <div id="delete-service-div" class="delete-service-container" style="display: none">
                 <?php
@@ -4483,7 +4483,7 @@ if (!$loggedInV) {
             var restFields = document.getElementById("restFields");
 
             // Display or hide venue-specific fields based on service type
-            if (serviceType === 'venue') {
+            if (serviceType === 'Venue') {
                 restFields.style.display = "flex";
                 venueFields.style.display = "block";
             } else {
