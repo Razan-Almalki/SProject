@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "Qazwsx12!";
-$dbname = "sour"; // This should match the existing database or the one you want to create
+$username = "Ruba";
+$password = "Ruba20";
+$dbname = "wedding_planning"; // This should match the existing database or the one you want to create
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);

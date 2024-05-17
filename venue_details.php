@@ -9,7 +9,7 @@ $loggedIn = isset($_SESSION["user_id"]);
 if (!$loggedIn) {
     header("Location: Login.html");
     exit;
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,72 +25,75 @@ if (!$loggedIn) {
 </head>
 
 <body>
-<!-- Navbar Section -->
-<header>
-  <nav class="navbar">
-    <span class="hamburger-btn material-symbols-rounded">menu</span>
-    <a href="index.php" class="logo">
-      <img src="images/SorourIcon.png" alt="logo">
-      <h2>سُرور</h2>
-    </a>
-    <ul class="links">
-      <span class="close-btn material-symbols-rounded">close</span>
-      <li>
-        <a class="nav-link" href="about.php">عن سُرور</a>
-      </li>
-      <li>
-        <a class="nav-link" href="service.php">الخدمات</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          أدوات التخطيط
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
-          <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
-          <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-          <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
-        </div>
-      </li>
-      <li>
-        <a class="nav-link" href="cart.php">السلة</a>
-      </li>
-      <li>
-        <a class="nav-link" href="Login.html">تسجبل الدخول</a>
-      </li>
-      <li>
-        <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
-      </li>
+    <!-- Navbar Section -->
+    <header>
+        <nav class="navbar">
+            <span class="hamburger-btn material-symbols-rounded">menu</span>
+            <a href="index.php" class="logo">
+                <img src="images/SorourIcon.png" alt="logo">
+                <h2>سُرور</h2>
+            </a>
+            <ul class="links">
+                <span class="close-btn material-symbols-rounded">close</span>
+                <li>
+                    <a class="nav-link" href="about.php">عن سُرور</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="service.php">الخدمات</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        أدوات التخطيط
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
+                        <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
+                        <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
+                        <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="nav-link" href="cart.php">السلة</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
+                </li>
 
-      <?php if ($loggedIn) { ?>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            حسابي
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="userProfile.php">الاعدادات</a>
-            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-          </div>
-        </li>
-      <?php } else if ($loggedInV) { ?>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            حسابي
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
-            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-          </div>
-        </li>
-      <?php } ?>
+                <?php if ($loggedIn) { ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            حسابي
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="userProfile.php">الاعدادات</a>
+                            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+                        </div>
+                    </li>
+                <?php } else if ($loggedInV) { ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                حسابي
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+                                <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+                            </div>
+                        </li>
+                <?php } ?>
 
-      <li>
-        <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
-      </li>
-    </ul>
-  </nav>
-</header>
-  <!-- end header inner -->
+                <li>
+                    <a class="nav-link" href="SignUp_vendor.html">هل انت بائع؟</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- end header inner -->
 
     <section class="showDetailsItem-panels" id="detailsSection">
         <!-- Content will be dynamically loaded here -->
@@ -104,11 +107,6 @@ if (!$loggedIn) {
     <a id="whatsappLink" href="#" target="_blank">
         <img src="images/WhatsApp_icon.png" alt="WhatsApp Icon" width="70">
     </a>
-
-    <div class="show-rating">
-        <div class="stars"></div>
-        <p id="numOfRates"></p>
-    </div>
 
     <button class="calendarButton" onclick="fetchVenueDetailsAndAddToCart()">أضف إلى العربة</button>
 
@@ -180,8 +178,7 @@ if (!$loggedIn) {
             const img = document.createElement('img');
             img.src = data.pic ? 'data:' + data.pic_type + ';base64,' + data.pic : 'placeholder.jpg'; // Placeholder image if pic is undefined
             img.alt = 'Venue Image';
-            //img.style.maxWidth = '100%';
-            //img.style.height = 'auto';
+
             detailsSection.appendChild(img);
 
             const info = document.createElement('div');
@@ -236,8 +233,11 @@ if (!$loggedIn) {
                 .then(data => {
                     const vendorPhoneNumber = data.vendor_phone_number; // Extract vendor's phone number from response
                     if (vendorPhoneNumber) { // Check if vendor's phone number exists
+                        // If the phone number starts with "05", remove the first "0"
+                        const formattedPhoneNumber = vendorPhoneNumber.startsWith("05") ? "+966" + vendorPhoneNumber.slice(1) : "+966" + vendorPhoneNumber;
                         const whatsappLink = document.getElementById('whatsappLink'); // Get WhatsApp link element
-                        whatsappLink.href = `https://wa.me/${vendorPhoneNumber}`; // Set href attribute with vendor's phone number
+                        whatsappLink.setAttribute('href', `https://api.whatsapp.com/send?phone=${encodeURIComponent(formattedPhoneNumber)}`); // Set href attribute with formatted phone number
+
                     } else {
                         console.error('Vendor phone number not found');
                     }
@@ -659,48 +659,49 @@ if (!$loggedIn) {
 
     </script>
 
-  <!-- Footer Section -->
-  <footer>
-    <div class="footer__container">
-      <div class="footer__links">
-        <div class="footer__link--wrapper">
-          <div class="footer__link--items">
-            <h2>عنا</h2>
-            <a href="">الاعدادات</a>
-            <a href="about.php">المزيد</a>
-          </div>
-          <div class="footer__link--items">
-            <h2>تواصل معنا</h2>
-            <a href="/">راسلنا </a>
-            <a href="/">الدعم</a>
-          </div>
-        </div>
-        <div class="footer__link--wrapper">
-          <div class="footer__link--items">
-            <h2>سجل معنا</h2>
-            <a href="SignUp.html">زائر جديد؟</a>
-            <a href="SignUp_vendor.html">صاحب عمل؟</a>
-          </div>
-        </div>
-      </div>
-      <section class="social__media">
-        <div class="social__media--wrap">
-          <div class="footer__logo">
-            <a href="index.php" id="footer__logo">
-              <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
-            </a>
-          </div>
-          <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
-          <div class="social__icons">
-            <a href="/" class="social__icon--link" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="/" class="social__icon--link"><i class="fab fa-instagram"></i></a>
-            <a href="/" class="social__icon--link"><i class="fab fa-youtube"></i></a>
-            <a href="/" class="social__icon--link"><i class="fab fa-linkedin"></i></a>
-            <a href="/" class="social__icon--link"><i class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-      </section>
-  </footer>
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer__container">
+            <div class="footer__links">
+                <div class="footer__link--wrapper">
+                    <div class="footer__link--items">
+                        <h2>عنا</h2>
+                        <a href="">الاعدادات</a>
+                        <a href="about.php">المزيد</a>
+                    </div>
+                    <div class="footer__link--items">
+                        <h2>تواصل معنا</h2>
+                        <a href="/">راسلنا </a>
+                        <a href="/">الدعم</a>
+                    </div>
+                </div>
+                <div class="footer__link--wrapper">
+                    <div class="footer__link--items">
+                        <h2>سجل معنا</h2>
+                        <a href="SignUp.html">زائر جديد؟</a>
+                        <a href="SignUp_vendor.html">صاحب عمل؟</a>
+                    </div>
+                </div>
+            </div>
+            <section class="social__media">
+                <div class="social__media--wrap">
+                    <div class="footer__logo">
+                        <a href="index.php" id="footer__logo">
+                            <img src="images/SorourIcon.png" alt="sorour Logo"><span class="footer__text">سُرور</span>
+                        </a>
+                    </div>
+                    <p class="website__rights">© جميع الحقوق محفوظة. فريق سُرور</p>
+                    <div class="social__icons">
+                        <a href="/" class="social__icon--link" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="/" class="social__icon--link"><i class="fab fa-instagram"></i></a>
+                        <a href="/" class="social__icon--link"><i class="fab fa-youtube"></i></a>
+                        <a href="/" class="social__icon--link"><i class="fab fa-linkedin"></i></a>
+                        <a href="/" class="social__icon--link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </section>
+    </footer>
+
 
 </body>
 
