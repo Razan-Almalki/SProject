@@ -27,7 +27,7 @@ if (isset($_GET['Service_ID'])) {
     // Check if service exists
     if ($result->num_rows > 0) {
         $service = $result->fetch_assoc();
-?>
+        ?>
         <!DOCTYPE html>
         <html lang="ar">
 
@@ -36,7 +36,8 @@ if (isset($_GET['Service_ID'])) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>تفاصيل الخدمة</title>
             <link rel="stylesheet" href="waad_style.css">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+            <link rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
         </head>
 
         <body>
@@ -54,21 +55,22 @@ if (isset($_GET['Service_ID'])) {
                             <a class="nav-link" href="service.php">الخدمات</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 أدوات التخطيط
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
                                 <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
                                 <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-                                <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+                                <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
                             </div>
                         </li>
                         <li>
-                        <a class="nav-link" href="cart.php">السلة</a>
+                            <a class="nav-link" href="cart.php">السلة</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+                            <a class="nav-link" href="Login.html">تسجيل الدخول</a>
                         </li>
                         <li>
                             <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
@@ -76,7 +78,8 @@ if (isset($_GET['Service_ID'])) {
                         <!-- display the item based on the user's authentication status -->
                         <?php if ($loggedInV) { ?>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     حسابي
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -100,7 +103,8 @@ if (isset($_GET['Service_ID'])) {
                     <div id="image-container">
                         <div class="images">
                             <!-- Image content -->
-                            <img src="data:image/jpeg;base64,<?php echo base64_encode($service['pic']); ?>" width="100%" height="500px" alt="">
+                            <img src="data:image/jpeg;base64,<?php echo base64_encode($service['pic']); ?>" width="100%"
+                                height="500px" alt="">
                         </div>
                     </div>
 
@@ -155,7 +159,7 @@ if (isset($_GET['Service_ID'])) {
                         $tiktokLabel = $socialMediaLinks[0];
                         $instgramLabel = $socialMediaLinks[1];
                         $snapchatLabel = $socialMediaLinks[2];
-                    ?>
+                        ?>
 
                         <div class="service-info" id="info" style="display:none">
                             <form id="infoForm" action="update_service.php" method="post" enctype="multipart/form-data">
@@ -170,21 +174,29 @@ if (isset($_GET['Service_ID'])) {
                                 </div>
 
                                 <div class="form__group field" style="width: 25%">
-                                    <input type="input" class="form__field" placeholder="<?php echo $serviceNameLabel; ?>" id="serviceName" name="serviceName" value="<?php echo $service['Service_name']; ?>" required>
+                                    <input type="input" class="form__field" placeholder="<?php echo $serviceNameLabel; ?>"
+                                        id="serviceName" name="serviceName" value="<?php echo $service['Service_name']; ?>"
+                                        required>
                                     <label for="serviceName" class="form__label">اسم الخدمة</label>
                                 </div>
 
                                 <div id="socialMedia-input">
                                     <div class="form__group field" style="width: 118%">
-                                        <input type="input" class="form__field" placeholder="<?php echo $tiktokLabel; ?>" id="tiktok" name="tiktok" oninput="validateSocialMediaFormat('tiktok')" value="<?php echo $socialMediaLinks[0]; ?>">
+                                        <input type="input" class="form__field" placeholder="<?php echo $tiktokLabel; ?>"
+                                            id="tiktok" name="tiktok" oninput="validateSocialMediaFormat('tiktok')"
+                                            value="<?php echo $socialMediaLinks[0]; ?>">
                                         <label for="tiktok" class="form__label">رابط صفحتك في التيكتوك</label>
                                     </div>
                                     <div class="form__group field" style="width: 118%">
-                                        <input type="input" class="form__field" placeholder="<?php echo $instgramLabel; ?>" id="instgram" name="instgram" oninput="validateSocialMediaFormat('instgram')" value="<?php echo $socialMediaLinks[1]; ?>">
+                                        <input type="input" class="form__field" placeholder="<?php echo $instgramLabel; ?>"
+                                            id="instgram" name="instgram" oninput="validateSocialMediaFormat('instgram')"
+                                            value="<?php echo $socialMediaLinks[1]; ?>">
                                         <label for="instgram" class="form__label">رابط صفحتك في انستجرام</label>
                                     </div>
                                     <div class="form__group field" style="width: 118%">
-                                        <input type="input" class="form__field" placeholder="<?php echo $snapchatLabel; ?>" id="snapchat" name="snapchat" oninput="validateSocialMediaFormat('snapchat')" value="<?php echo $socialMediaLinks[2]; ?>">
+                                        <input type="input" class="form__field" placeholder="<?php echo $snapchatLabel; ?>"
+                                            id="snapchat" name="snapchat" oninput="validateSocialMediaFormat('snapchat')"
+                                            value="<?php echo $socialMediaLinks[2]; ?>">
                                         <label for="snapchat" class="form__label">رابط صفحتك في السناب تشات</label>
                                     </div>
                                 </div>
@@ -192,16 +204,18 @@ if (isset($_GET['Service_ID'])) {
                                 <input type="hidden" id="socialMedia" name="socialMedia" value="">
 
                                 <div class="form__group field" style="width: 25%">
-                                    <input type="input" class="form__field" placeholder="<?php echo $priceLabel; ?>" id="price" name="price" value="<?php echo $service['Price']; ?>" pattern="[0-9]*" required>
+                                    <input type="input" class="form__field" placeholder="<?php echo $priceLabel; ?>" id="price"
+                                        name="price" value="<?php echo $service['Price']; ?>" pattern="[0-9]*" required>
                                     <label for="price" class="form__label">السعر</label>
                                 </div>
 
                                 <div class="form__group field" style="width: 25%">
-                                    <input type="input" class="form__field" placeholder="<?php echo $depositLabel; ?>" id="deposit" name="deposit" value="<?php echo $service['Deposit']; ?>" pattern="[0-9]*" required>
+                                    <input type="input" class="form__field" placeholder="<?php echo $depositLabel; ?>" id="deposit"
+                                        name="deposit" value="<?php echo $service['Deposit']; ?>" pattern="[0-9]*" required>
                                     <label for="deposit" class="form__label">العربون</label>
                                 </div>
 
-                                <?php if ($service['Service_type'] == 'Venue') : ?>
+                                <?php if ($service['Service_type'] == 'Venue'): ?>
                                     <div id="venueFields" class="form__group field">
                                         <label for="theme" class="form__label">نوع المكان</label>
                                         <select id="theme" name="theme" class="form__field">
@@ -216,7 +230,8 @@ if (isset($_GET['Service_ID'])) {
 
                                 <input type="hidden" id="service-id" name="service-id" value="<?php echo $service_id; ?>">
 
-                                <button type="submit" id="submit-btn-infoForm" class="submit-btn-infoForm main-button-style" style="margin-top: 20px" name="update-info">تحديث
+                                <button type="submit" id="submit-btn-infoForm" class="submit-btn-infoForm main-button-style"
+                                    style="margin-top: 20px" name="update-info">تحديث
                                     المعلومات العامة</button>
 
 
@@ -226,7 +241,7 @@ if (isset($_GET['Service_ID'])) {
                             </form>
                         </div>
 
-                    <?php
+                        <?php
                     } else {
                         echo "No service found with ID: $service_id";
                         exit;
@@ -236,31 +251,38 @@ if (isset($_GET['Service_ID'])) {
                     <div class="service-about" id="about" style="display:none">
                         <form id="aboutForm" action="update_service.php" method="post" enctype="multipart/form-data">
                             <div class="form__group field">
-                                <input type="input" class="form__field" placeholder="<?php echo $discriptionLabel; ?>" id="description" name="description" value="<?php echo $service['Discription']; ?>">
+                                <input type="input" class="form__field" placeholder="<?php echo $discriptionLabel; ?>"
+                                    id="description" name="description" value="<?php echo $service['Discription']; ?>">
                                 <label for="description" class="form__label">وصف شامل للخدمة</label>
                             </div>
 
                             <input type="hidden" id="service-id" name="service-id" value="<?php echo $service_id; ?>">
 
-                            <button type="submit" class="submit-btn-aboutForm main-button-style" style="margin-top: 20px" name="update-about">تحديث معلومات الوصف</button>
+                            <button type="submit" class="submit-btn-aboutForm main-button-style" style="margin-top: 20px"
+                                name="update-about">تحديث معلومات الوصف</button>
                         </form>
                     </div>
 
                     <div class="service-location" id="location" style="display:none">
                         <form id="locationForm" action="update_service.php" method="post" enctype="multipart/form-data">
                             <div class="form__group field" style="width: 100%">
-                                <input type="input" class="form__field" placeholder="<?php echo $locationLabel; ?>" id="locationInput" name="location" value="<?php echo $service['Location']; ?>" required>
+                                <input type="input" class="form__field" placeholder="<?php echo $locationLabel; ?>"
+                                    id="locationInput" name="location" value="<?php echo $service['Location']; ?>" required>
                                 <label for="locationInput" class="form__label">المدينة</label>
                             </div>
 
                             <div class="form__group field" style="width: 100%">
-                                <input type="input" class="form__field" placeholder="<?php echo htmlspecialchars($mapLabel); ?>" id="mapInput" name="map" oninput="validateMapFormat()" value="<?php echo htmlspecialchars($service['Map']); ?>" required>
+                                <input type="input" class="form__field" placeholder="<?php echo htmlspecialchars($mapLabel); ?>"
+                                    id="mapInput" name="map" oninput="validateMapFormat()"
+                                    value="<?php echo htmlspecialchars($service['Map']); ?>" required>
                                 <label for="mapInput" class="form__label">الموقع</label>
                             </div>
 
                             <input type="hidden" id="service-id" name="service-id" value="<?php echo $service_id; ?>">
 
-                            <button type="submit" id="submit-btn-locationForm" class="submit-btn-locationtForm main-button-style" style="margin-top: 20px" name="update-location">تحديث
+                            <button type="submit" id="submit-btn-locationForm"
+                                class="submit-btn-locationtForm main-button-style" style="margin-top: 20px"
+                                name="update-location">تحديث
                                 معلومات الموقع</button>
 
                             <div id="mapHint" style="display: none; color: black; margin-top: 20px;">فضلا اتبع الخطوات التالية
@@ -328,7 +350,7 @@ if (isset($_GET['Service_ID'])) {
                 var socialMediaInput = document.getElementById("socialMedia");
 
                 // Listen for form submission
-                document.getElementById("infoForm").addEventListener("submit", function(event) {
+                document.getElementById("infoForm").addEventListener("submit", function (event) {
                     // Concatenate the values with empty lines if they are not empty
                     var socialMediaValue = "";
 
@@ -403,7 +425,7 @@ if (isset($_GET['Service_ID'])) {
                 function display(sectionId) {
                     // Hide all sections
                     var sections = document.querySelectorAll('.service-info, .service-about, .service-location');
-                    sections.forEach(function(section) {
+                    sections.forEach(function (section) {
                         section.style.display = 'none';
                     });
 
@@ -424,7 +446,7 @@ if (isset($_GET['Service_ID'])) {
         </body>
 
         </html>
-<?php
+        <?php
     } else {
         // If no service found with the provided Service_ID
         echo "Service not found.";

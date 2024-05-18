@@ -8,48 +8,49 @@ if ($conn->connect_error) {
 }
 
 if (isset($_POST['reset_password'])) {
-// Retrieve the user's email and new password from the submitted form
-$email = $_POST['reset-email'];
-$newPassword = $_POST['new-password'];
-$confirmedPassword = $_POST['confirm-password'];
+  // Retrieve the user's email and new password from the submitted form
+  $email = $_POST['reset-email'];
+  $newPassword = $_POST['new-password'];
+  $confirmedPassword = $_POST['confirm-password'];
 
-// Perform a database query to check if the email exists
-$query = "SELECT * FROM vendor WHERE Email = '$email'";
-$result = mysqli_query($conn, $query);
+  // Perform a database query to check if the email exists
+  $query = "SELECT * FROM vendor WHERE Email = '$email'";
+  $result = mysqli_query($conn, $query);
 
-// Check if a row is returned(Email exists)
-if (mysqli_num_rows($result) > 0) {
-  if (isValidPassword($newPassword)) {// New password meet the requirements
-    // 
-    if ($newPassword === $confirmedPassword) {
-      // Hash the new password
-      $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-      // Update the user's password in the database
-      $sql = "UPDATE vendor SET Pass_word = ? WHERE Email = ?";
-      $stmt = $conn->prepare($sql);
-      $stmt->bind_param('ss', $hashedNewPassword, $email);
-      if ($stmt->execute()) {
-        // Password reset successful
-        echo "<script>alert('تم تغيير كلمة المرور بنجاح!')</script>";
-        header("Location: Login.html");
+  // Check if a row is returned(Email exists)
+  if (mysqli_num_rows($result) > 0) {
+    if (isValidPassword($newPassword)) {// New password meet the requirements
+      // 
+      if ($newPassword === $confirmedPassword) {
+        // Hash the new password
+        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        // Update the user's password in the database
+        $sql = "UPDATE vendor SET Pass_word = ? WHERE Email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ss', $hashedNewPassword, $email);
+        if ($stmt->execute()) {
+          // Password reset successful
+          echo "<script>alert('تم تغيير كلمة المرور بنجاح!')</script>";
+          header("Location: Login.html");
           exit(); // Terminate the current script
+        }
+      }
+      // New password does not meet the requirements
+      else {
+        $errorMessage = 'كلمة المرور الجديدة غير متطابقة!';
+      }
+    } else {
+      $errorMessage = "كلمة المرور يجب أن تحتوي على حرف كبير على الأقل وأن تتكون من 6 أحرف على الأقل";
     }
+
+  } else {
+    // Email does not exist, display an error message or redirect back to the form
+    $errorMessage = "الايميل المدخل غير موجود!.";
   }
-    // New password does not meet the requirements
-    else {
-      $errorMessage = 'كلمة المرور الجديدة غير متطابقة!';
-    }
-  }else {
-    $errorMessage = "كلمة المرور يجب أن تحتوي على حرف كبير على الأقل وأن تتكون من 6 أحرف على الأقل";
-  }
-  
-} else {
-  // Email does not exist, display an error message or redirect back to the form
-  $errorMessage = "الايميل المدخل غير موجود!." ;
-}
 }
 
-function isValidPassword($password){
+function isValidPassword($password)
+{
   $passwordRegex = '/^(?=.*[A-Z]).{6,}$/';
   return preg_match($passwordRegex, $password);
 }
@@ -79,7 +80,7 @@ function isValidPassword($password){
   <header>
     <nav class="navbar">
       <span class="hamburger-btn material-symbols-rounded">menu</span>
-      <a href="index.html" class="logo">
+      <a href="index.php" class="logo">
         <img src="images/SorourIcon.png" alt="logo">
         <h2>سُرور</h2>
       </a>
@@ -92,26 +93,27 @@ function isValidPassword($password){
           <a class="nav-link" href="service.php">الخدمات</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             أدوات التخطيط
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
             <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
           </div>
         </li>
         <li>
-        <a class="nav-link" href="cart.php">السلة</a>
+          <a class="nav-link" href="cart.php">السلة</a>
         </li>
         <li>
-          <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+          <a class="nav-link" href="Login.html">تسجيل الدخول</a>
         </li>
         <li>
           <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
         </li>
-       <li>
+        <li>
           <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
         </li>
       </ul>
@@ -129,7 +131,8 @@ function isValidPassword($password){
           <span class="new-password">كلمة المرور الجديدة: </span>
           <input type="password" id="new-password" name="new-password" placeholder="ادخل كلمة المرور الجديدة " required>
           <span class="details">تاكيد كلمة المرور الجديدة:</span>
-          <input type="password" id="confirm-password" name="confirm-password" placeholder="ادخل تاكيد كلمة المرور الجديدة" required>
+          <input type="password" id="confirm-password" name="confirm-password"
+            placeholder="ادخل تاكيد كلمة المرور الجديدة" required>
           <span id="password-error" class="error-message"></span>
         </div>
         <div class="button">
@@ -184,11 +187,12 @@ function isValidPassword($password){
   </footer>
   <script src="restorePassword.js"></script>
   <script>
-        <?php if (isset($errorMessage)) : ?>
-            // Display the error message in the 'mess' div
-            var messDiv = document.getElementById('password-error');
-            messDiv.innerHTML = '<?php echo $errorMessage; ?>';
-        <?php endif; ?>
-        </script>
+    <?php if (isset($errorMessage)): ?>
+      // Display the error message in the 'mess' div
+      var messDiv = document.getElementById('password-error');
+      messDiv.innerHTML = '<?php echo $errorMessage; ?>';
+    <?php endif; ?>
+  </script>
 </body>
+
 </html>

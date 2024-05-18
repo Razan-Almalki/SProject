@@ -115,24 +115,24 @@ if (isset($_POST['delete_account'])) {
     } else {
       echo "Error checking tasks: " . $conn->error . "\n";
     }
-        // Check if there are related records in the reservation table
-        $sql_check_guest_tables = "SELECT COUNT(*) AS count FROM reservation WHERE user_id = $user_id";
-        $result_check_guest_tables = $conn->query($sql_check_guest_tables);
-        if ($result_check_guest_tables) {
-          $row = $result_check_guest_tables->fetch_assoc();
-          $guest_tables_count = $row['count'];
-          // Delete related records in the tasks table
-          if ($guest_tables_count > 0) {
-            $sql_delete_guest_tables = "DELETE FROM reservation WHERE user_id = $user_id";
-            if ($conn->query($sql_delete_guest_tables) === TRUE) {
-              // Related records deleted successfully
-            } else {
-              echo "Error deleting related records from reservation: " . $conn->error . "\n";
-            }
-          }
+    // Check if there are related records in the reservation table
+    $sql_check_guest_tables = "SELECT COUNT(*) AS count FROM reservation WHERE user_id = $user_id";
+    $result_check_guest_tables = $conn->query($sql_check_guest_tables);
+    if ($result_check_guest_tables) {
+      $row = $result_check_guest_tables->fetch_assoc();
+      $guest_tables_count = $row['count'];
+      // Delete related records in the tasks table
+      if ($guest_tables_count > 0) {
+        $sql_delete_guest_tables = "DELETE FROM reservation WHERE user_id = $user_id";
+        if ($conn->query($sql_delete_guest_tables) === TRUE) {
+          // Related records deleted successfully
         } else {
-          echo "Error checking tasks: " . $conn->error . "\n";
+          echo "Error deleting related records from reservation: " . $conn->error . "\n";
         }
+      }
+    } else {
+      echo "Error checking tasks: " . $conn->error . "\n";
+    }
     // Delete the user's account
     $deleteSql = "DELETE FROM user WHERE User_ID = '$user_id'";
     if ($conn->query($deleteSql) === TRUE) {
@@ -254,21 +254,22 @@ $conn->close();
           <a class="nav-link" href="service.php">الخدمات</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             أدوات التخطيط
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
             <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
           </div>
         </li>
         <li>
           <a class="nav-link" href="cart.php">السلة</a>
         </li>
         <li>
-          <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+          <a class="nav-link" href="Login.html">تسجيل الدخول</a>
         </li>
         <li>
           <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
@@ -276,7 +277,8 @@ $conn->close();
 
         <?php if ($loggedIn) { ?>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
               حسابي
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -285,15 +287,16 @@ $conn->close();
             </div>
           </li>
         <?php } else if ($loggedInV) { ?>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              حسابي
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
-              <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-            </div>
-          </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                حسابي
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+                <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+              </div>
+            </li>
         <?php } ?>
 
         <li>
@@ -318,11 +321,11 @@ $conn->close();
     <div id="user-info" class="info">
       <h2>معلومات الحساب</h2>
       <div id="user-info">
-        <?php if ($firstName !== "User Not Found") : ?>
+        <?php if ($firstName !== "User Not Found"): ?>
           <p>الاسم: <?php echo $firstName, " ", $lastName; ?></p>
           <p>الايميل: <?php echo $userEmail; ?></p>
           <p>رقم الجوال: <?php echo $userPhone; ?></p>
-        <?php else : ?>
+        <?php else: ?>
           <p>User information not found.</p>
         <?php endif; ?>
       </div>
@@ -411,17 +414,17 @@ $conn->close();
       </section>
   </footer>
   <script>
-    <?php if (isset($errorMessage)) : ?>
+    <?php if (isset($errorMessage)): ?>
       // Display the error message in the 'mess' div
       var messDiv = document.getElementById('mess');
       messDiv.innerHTML = '<?php echo $errorMessage; ?>';
     <?php endif; ?>
-    <?php if (isset($errorMessage1)) : ?>
+    <?php if (isset($errorMessage1)): ?>
       // Display the error message in the 'mess' div
       var messDiv1 = document.getElementById('mess1');
       messDiv1.innerHTML = '<?php echo $errorMessage1; ?>';
     <?php endif; ?>
-    <?php if (isset($errorMessage2)) : ?>
+    <?php if (isset($errorMessage2)): ?>
       // Display the error message in the 'mess' div
       var messDiv2 = document.getElementById('mess2');
       messDiv2.innerHTML = '<?php echo $errorMessage2; ?>';

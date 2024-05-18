@@ -50,14 +50,14 @@ if (!$loggedIn) {
                         <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
                         <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
                         <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-                        <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+                        <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
                     </div>
                 </li>
                 <li>
                     <a class="nav-link" href="cart.php">السلة</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+                    <a class="nav-link" href="Login.html">تسجيل الدخول</a>
                 </li>
                 <li>
                     <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
@@ -191,7 +191,7 @@ if (!$loggedIn) {
             const pDescription = document.createElement('span');
             pDescription.classList.add('description'); // Add a class to the span
             pDescription.textContent = 'الوصف: ' + (data.description ? data.description : 'N/A');
-            
+
 
             const pPrice = document.createElement('span');
             pPrice.classList.add('price'); // Add a class to the span

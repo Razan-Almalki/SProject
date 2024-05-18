@@ -321,14 +321,14 @@ button {
           <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
           <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
           <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-          <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+          <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
         </div>
       </li>
       <li>
         <a class="nav-link" href="cart.php">السلة</a>
       </li>
       <li>
-        <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+        <a class="nav-link" href="Login.html">تسجيل الدخول</a>
       </li>
       <li>
         <a class="nav-link" href="SignUp.html">إنشاء حساب</a>

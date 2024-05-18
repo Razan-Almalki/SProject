@@ -25,7 +25,7 @@ $loggedInV = isset($_SESSION["vendor_id"]);
   <header>
     <nav class="navbar">
       <span class="hamburger-btn material-symbols-rounded">menu</span>
-      <a href="index.html" class="logo">
+      <a href="index.php" class="logo">
         <img src="images/SorourIcon.png" alt="logo">
         <h2>سُرور</h2>
       </a>
@@ -38,47 +38,50 @@ $loggedInV = isset($_SESSION["vendor_id"]);
           <a class="nav-link" href="service.php">الخدمات</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             أدوات التخطيط
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
+            <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
             <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
           </div>
         </li>
         <li>
-        <a class="nav-link" href="cart.php">السلة</a>
+          <a class="nav-link" href="cart.php">السلة</a>
         </li>
         <li>
-          <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+          <a class="nav-link" href="Login.html">تسجيل الدخول</a>
         </li>
         <li>
           <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
         </li>
         <!-- display the item based on the user's authentication status -->
         <?php if ($loggedIn) { ?>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            حسابي
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="userProfile.php">الاعدادات</a>
-            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-          </div>
-        </li>
-      <?php } else if ($loggedInV) { ?>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            حسابي
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
-            <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-          </div>
-        </li>
-      <?php } ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              حسابي
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="userProfile.php">الاعدادات</a>
+              <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+            </div>
+          </li>
+        <?php } else if ($loggedInV) { ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                حسابي
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+                <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+              </div>
+            </li>
+        <?php } ?>
         <li>
           <a class="nav-link" href="SignUp.html">هل انت بائع؟</a>
         </li>

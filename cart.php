@@ -351,21 +351,22 @@ if (!$loggedIn) {
           <a class="nav-link" href="service.php">الخدمات</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             أدوات التخطيط
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
             <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
           </div>
         </li>
         <li>
           <a class="nav-link" href="cart.php">السلة</a>
         </li>
         <li>
-          <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+          <a class="nav-link" href="Login.html">تسجيل الدخول</a>
         </li>
         <li>
           <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
@@ -373,7 +374,8 @@ if (!$loggedIn) {
 
         <?php if ($loggedIn) { ?>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
               حسابي
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -382,15 +384,16 @@ if (!$loggedIn) {
             </div>
           </li>
         <?php } else if ($loggedInV) { ?>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              حسابي
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
-              <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
-            </div>
-          </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                حسابي
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="vendorProfile.php">الاعدادات</a>
+                <a class="dropdown-item" href="LogOut.php">تسجيل الخروج</a>
+              </div>
+            </li>
         <?php } ?>
 
         <li>
@@ -445,7 +448,7 @@ if (!$loggedIn) {
       </section>
   </footer>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       fetchCartItems();
     });
 

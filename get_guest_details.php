@@ -13,7 +13,7 @@ if ($result->num_rows > 0) {
     echo "<div id='guest-name'>" . $row['F_Name'] . " " . $row['M_Name'] . " " . $row['L_Name'] . "</div>";
     echo "<div id='attendance-options'>";
     echo "<input type='hidden' id='guest_id' value='" . $row['ID'] . "'>";
-    echo "<input type='radio' id='attend' name='attendance' value='حضور'><label for='attendance' style='margin-left: 25px;>حضور</label>";
+    echo "<input type='radio' id='attend' name='attendance' value='حضور'><label for='attendance' style='margin-left: 25px;'>حضور</label>";
     echo "<input type='radio' id='decline' name='attendance' value='معتذر' style='margin-right: 25px;'><label for='attendance'>اعتذار</label>";
     echo "</div>";
     echo "</div>";

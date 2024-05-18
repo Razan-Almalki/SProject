@@ -71,7 +71,7 @@ $pending = $rowPending['Pending'];
             <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
             <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
             <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-            <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+            <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
           </div>
         </li>
         <li>

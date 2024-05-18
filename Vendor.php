@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خدمات مقدم الخدمة</title>
     <link rel="stylesheet" href="waad_style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
 </head>
 
 <?php
@@ -37,21 +38,22 @@ if (!$loggedInV) {
                     <a class="nav-link" href="service.php">الخدمات</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         أدوات التخطيط
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="busplitFINAL.php">تخطيط الميزانية</a>
                         <a class="dropdown-item" href="guest.php">إدارة قائمة الضوف</a>
                         <a class="dropdown-item" href="checklist.php">إدارة المهام</a>
-                        <a class="dropdown-item" href="Vendor.php">الخدمة مقدم</a>
+                        <a class="dropdown-item" href="Vendor.php">مقدم الخدمة</a>
                     </div>
                 </li>
                 <li>
-                <a class="nav-link" href="cart.php">السلة</a>
+                    <a class="nav-link" href="cart.php">السلة</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="Login.html">تسجبل الدخول</a>
+                    <a class="nav-link" href="Login.html">تسجيل الدخول</a>
                 </li>
                 <li>
                     <a class="nav-link" href="SignUp.html">إنشاء حساب</a>
@@ -59,7 +61,8 @@ if (!$loggedInV) {
                 <!-- display the item based on the user's authentication status -->
                 <?php if ($loggedInV) { ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             حسابي
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -95,7 +98,8 @@ if (!$loggedInV) {
                 include "connection.php";
 
                 // Query to retrieve services based on vendor ID
-                $sql = "SELECT * FROM services WHERE vendor_id=" . $_SESSION["vendor_id"];;
+                $sql = "SELECT * FROM services WHERE vendor_id=" . $_SESSION["vendor_id"];
+                ;
                 $result = $conn->query($sql);
 
                 // Associative array to store services categorized by service type
@@ -180,21 +184,25 @@ if (!$loggedInV) {
                     <div id="restFields" style="display: none;">
                         <!-- Common fields -->
                         <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="اسم الخدمة" id="serviceName" name="serviceName" required>
+                            <input type="input" class="form__field" placeholder="اسم الخدمة" id="serviceName"
+                                name="serviceName" required>
                             <label for="serviceName" class="form__label">اسم الخدمة</label>
                         </div>
 
                         <div id="socialMedia-input">
                             <div class="form__group field" style="width: 118%">
-                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي" id="tiktok" name="tiktok" oninput="validateSocialMediaFormat('tiktok')">
+                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي"
+                                    id="tiktok" name="tiktok" oninput="validateSocialMediaFormat('tiktok')">
                                 <label for="tiktok" class="form__label">رابط التيكتوك</label>
                             </div>
                             <div class="form__group field" style="width: 118%">
-                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي" id="instgram" name="instgram" oninput="validateSocialMediaFormat('instgram')">
+                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي"
+                                    id="instgram" name="instgram" oninput="validateSocialMediaFormat('instgram')">
                                 <label for="instgram" class="form__label">رابط الانستجرام</label>
                             </div>
                             <div class="form__group field" style="width: 118%">
-                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي" id="snapchat" name="snapchat" oninput="validateSocialMediaFormat('snapchat')">
+                                <input type="input" class="form__field" placeholder="روابط وسائل التواصل الاجتماعي"
+                                    id="snapchat" name="snapchat" oninput="validateSocialMediaFormat('snapchat')">
                                 <label for="snapchat" class="form__label">رابط السناب تشات</label>
                             </div>
                         </div>
@@ -202,17 +210,20 @@ if (!$loggedInV) {
                         <input type="hidden" id="socialMedia" name="socialMedia" value="">
 
                         <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="وصف الخدمة" id="description" name="description" required>
+                            <input type="input" class="form__field" placeholder="وصف الخدمة" id="description"
+                                name="description" required>
                             <label for="description" class="form__label">وصف شامل للخدمة</label>
                         </div>
 
                         <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="السعر" id="price" name="price" pattern="[0-9]*" required>
+                            <input type="input" class="form__field" placeholder="السعر" id="price" name="price"
+                                pattern="[0-9]*" required>
                             <label for="price" class="form__label">السعر</label>
                         </div>
 
                         <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="الوديعة" id="deposit" name="deposit" pattern="[0-9]*" required>
+                            <input type="input" class="form__field" placeholder="الوديعة" id="deposit" name="deposit"
+                                pattern="[0-9]*" required>
                             <label for="deposit" class="form__label">العربون</label>
                         </div>
 
@@ -4224,7 +4235,8 @@ if (!$loggedInV) {
                         </div>
 
                         <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="الموقع" id="map" name="map" oninput="validateMapFormat()" required>
+                            <input type="input" class="form__field" placeholder="الموقع" id="map" name="map"
+                                oninput="validateMapFormat()" required>
                             <label for="map" class="form__label">الموقع</label>
                         </div>
 
@@ -4248,7 +4260,8 @@ if (!$loggedInV) {
 
                     <input type="hidden" id="vendorId" name="vendorId" value="<?php echo $_SESSION["vendor_id"]; ?>">
 
-                    <button type="submit" id="insert-service" class="main-button-style" name="insert-service" style="margin-top: 20px;">إضافة</button>
+                    <button type="submit" id="insert-service" class="main-button-style" name="insert-service"
+                        style="margin-top: 20px;">إضافة</button>
 
                     <br>
                     <div id="mapHint" style="display: none; color: black; margin-top: 20px;">فضلا اتبع الخطوات التالية
@@ -4317,7 +4330,7 @@ if (!$loggedInV) {
                 var serviceIds = [];
 
                 // Extract IDs of checked services
-                checkedServices.forEach(function(service) {
+                checkedServices.forEach(function (service) {
                     serviceIds.push(service.value);
                 });
 
@@ -4380,7 +4393,8 @@ if (!$loggedInV) {
             <form id="delete-service-form" action="update_service.php" method="post">
                 <input type="hidden" id="service-ids" name="service-ids" value="">
                 <input type="hidden" id="vendorId" name="vendorId" value="<?php echo $_SESSION["vendor_id"]; ?>">
-                <button type="submit" class="main-button-style" onclick="deleteSelectedServices()" name="delete-service">حذف</button>
+                <button type="submit" class="main-button-style" onclick="deleteSelectedServices()"
+                    name="delete-service">حذف</button>
             </form>
         </div>
 
@@ -4391,7 +4405,7 @@ if (!$loggedInV) {
                 document.getElementById('delete-service-div').style.display = "block";
 
                 // Iterate over each service
-                services.forEach(function(service) {
+                services.forEach(function (service) {
                     if (service.classList.contains(serviceType)) {
                         service.style.display = 'flex';
                     } else {
@@ -4400,7 +4414,7 @@ if (!$loggedInV) {
                 });
 
                 var serviceSpans = document.querySelectorAll("#delete-service-form span");
-                serviceSpans.forEach(function(span) {
+                serviceSpans.forEach(function (span) {
                     if (span.id === serviceType + "-service") {
                         span.style.fontWeight = "bolder";
                         span.style.fontSize = "22px";
@@ -4493,7 +4507,7 @@ if (!$loggedInV) {
 
             // Change the background color of the clicked span
             var serviceSpans = document.querySelectorAll("#service-form span");
-            serviceSpans.forEach(function(span) {
+            serviceSpans.forEach(function (span) {
                 if (span.id === serviceType + "-service") {
                     span.style.fontWeight = "bolder";
                     span.style.fontSize = "22px";
@@ -4519,7 +4533,7 @@ if (!$loggedInV) {
         var socialMediaInput = document.getElementById("socialMedia");
 
         // Listen for form submission
-        document.getElementById("serviceForm").addEventListener("submit", function(event) {
+        document.getElementById("serviceForm").addEventListener("submit", function (event) {
             // Concatenate the values with empty lines if they are not empty
             var socialMediaValue = "";
 
