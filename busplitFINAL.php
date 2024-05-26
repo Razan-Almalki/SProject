@@ -464,7 +464,7 @@ footer {
             "model":"gpt-3.5-turbo",
             "messages":[{"role": "system", "content": prompt}, {"role": "user", "content": value}],
         };
-        let headers ={Authorization:"Bearer key",};
+        let headers ={Authorization:"Bearer sk-proj-k5Oc2wqqLOB3RahqJpI7T3BlbkFJbz2IlzQJf0hToDlZ1WUj",};
         axios.post("https://api.openai.com/v1/chat/completions", body, {headers:headers})
         .then((Response)=>{
             let reply = Response.data.choices[0].message.content;
